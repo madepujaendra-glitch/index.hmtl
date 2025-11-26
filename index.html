@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>imadevideo - AI-Driven Video Editor & Cinematic Storyteller</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #C3FF00;
+            --bg: #050505;
+            --text: #FFFFFF;
+            --muted: #9A9A9A;
+            --card-bg: #0a0a0a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(5, 5, 5, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1.2rem 5%;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(195, 255, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-transform: lowercase;
+            letter-spacing: -1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 30px;
+            height: 3px;
+            background: var(--primary);
+            transition: 0.3s;
+            border-radius: 3px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 5% 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(195, 255, 0, 0.15) 0%, transparent 70%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.15; }
+            50% { transform: scale(1.2); opacity: 0.25; }
+        }
+
+        .hero-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 4.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            letter-spacing: -2px;
+            background: linear-gradient(135deg, var(--text) 0%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-content .subtitle {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .hero-content p {
+            color: var(--muted);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            padding: 1.1rem 3rem;
+            background: var(--primary);
+            color: var(--bg);
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 50px;
+            font-size: 1.05rem;
+            transition: all 0.3s;
+            box-shadow: 0 10px 40px rgba(195, 255, 0, 0.3);
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 60px rgba(195, 255, 0, 0.5);
+        }
+
+        .hero-image {
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+            border: 3px solid rgba(195, 255, 0, 0.3);
+            transition: all 0.5s ease;
+        }
+
+        .hero-image img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 40px 100px rgba(195, 255, 0, 0.3);
+            border-color: var(--primary);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 5rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            text-align: center;
+            letter-spacing: -1px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--muted);
+            font-size: 1.1rem;
+            margin-bottom: 4rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* About Section */
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .about-content p {
+            color: var(--muted);
+            font-size: 1.1rem;
+            line-height: 1.9;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Skills Section */
+        #skills {
+            background: var(--card-bg);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .skill-column {
+            background: rgba(195, 255, 0, 0.03);
+            padding: 2.5rem;
+            border-radius: 20px;
+            border: 1px solid rgba(195, 255, 0, 0.1);
+            transition: all 0.3s;
+        }
+
+        .skill-column:hover {
+            border-color: var(--primary);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(195, 255, 0, 0.15);
+        }
+
+        .skill-column h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--primary);
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-column ul {
+            list-style: none;
+        }
+
+        .skill-column li {
+            color: var(--muted);
+            padding: 0.6rem 0;
+            border-bottom: 1px solid rgba(195, 255, 0, 0.05);
+            transition: all 0.3s;
+        }
+
+        .skill-column li:hover {
+            color: var(--text);
+            padding-left: 10px;
+        }
+
+        .downloads {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-download {
+            padding: 1rem 2.5rem;
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s;
+        }
+
+        .btn-download:hover {
+            background: var(--primary);
+            color: var(--bg);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(195, 255, 0, 0.3);
+        }
+
+        /* Showcase Section */
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .showcase-item {
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(195, 255, 0, 0.1);
+            transition: all 0.3s;
+        }
+
+        .showcase-item:hover {
+            border-color: var(--primary);
+            transform: translateY(-10px);
+            box-shadow: 0 25px 60px rgba(195, 255, 0, 0.2);
+        }
+
+        .showcase-item iframe {
+            width: 100%;
+            height: 350px;
+            border: none;
+        }
+
+        .showcase-info {
+            padding: 2rem;
+        }
+
+        .showcase-info .client {
+            color: var(--primary);
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .showcase-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Portfolio Categories */
+        #portfolio {
+            background: var(--card-bg);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .portfolio-card {
+            background: linear-gradient(135deg, rgba(195, 255, 0, 0.05) 0%, rgba(10, 10, 10, 0.8) 100%);
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(195, 255, 0, 0.1);
+            text-align: center;
+            transition: all 0.4s;
+            cursor: pointer;
+            text-decoration: none;
+            color: var(--text);
+            display: block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .portfolio-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(195, 255, 0, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .portfolio-card:hover::before {
+            left: 100%;
+        }
+
+        .portfolio-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 30px 70px rgba(195, 255, 0, 0.25);
+        }
+
+        .portfolio-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .portfolio-card p {
+            color: var(--muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .portfolio-card .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Contact Section */
+        .contact-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-content p {
+            color: var(--muted);
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-btn {
+            padding: 1.2rem 3rem;
+            background: var(--primary);
+            color: var(--bg);
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 50px;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .contact-btn.secondary {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(195, 255, 0, 0.4);
+        }
+
+        .contact-btn.secondary:hover {
+            background: var(--primary);
+            color: var(--bg);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 5%;
+            background: var(--card-bg);
+            border-top: 1px solid rgba(195, 255, 0, 0.1);
+        }
+
+        footer p {
+            color: var(--muted);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .modal.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            max-width: 1200px;
+            width: 100%;
+            position: relative;
+            animation: scaleUp 0.3s ease;
+        }
+
+        @keyframes scaleUp {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            background: var(--primary);
+            color: var(--bg);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .modal-close:hover {
+            transform: rotate(90deg) scale(1.1);
+            box-shadow: 0 0 30px var(--primary);
+        }
+
+        .modal-content iframe,
+        .modal-content img,
+        .modal-content video {
+            width: 100%;
+            height: 80vh;
+            border-radius: 15px;
+            border: 2px solid var(--primary);
+            box-shadow: 0 0 50px rgba(195, 255, 0, 0.3);
+        }
+
+        .modal-info {
+            margin-top: 1.5rem;
+            text-align: center;
+        }
+
+        .modal-info h3 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .showcase-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(5, 5, 5, 0.98);
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1.5rem;
+                transform: translateX(-100%);
+                transition: transform 0.3s;
+            }
+
+            .nav-links.active {
+                transform: translateX(0);
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-links {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">imadevideo</div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#showcase">Showcase</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-container">
+            <div class="hero-content reveal">
+                <h1>imadevideo</h1>
+                <p class="subtitle">AI-Driven Video Editor & Cinematic Storyteller</p>
+                <p>A modern cinematic editing portfolio showcasing my work with creators, brands, and award-winning productions. Welcome to my editing portfolio — a curated space where I share the reels, campaigns, cinematic videos, and award-winning projects I've crafted. As a video editor specializing in short-form content and AI-driven workflows, I turn raw footage into clean, engaging, and story-driven visuals.</p>
+                <a href="#showcase" class="hero-cta">Explore My Work</a>
+            </div>
+            <div class="hero-image reveal">
+                <img src="assets/images/hero.jpg" alt="I Made Puja Endra" class="hero-img">
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2 class="section-title reveal">About Me</h2>
+        <div class="about-content reveal">
+            <p>I am I Made Puja Endra — known online as 'imadevideo'. I specialize in video editing for creators, brands, and educational platforms. My craft focuses on cinematic visuals, strong pacing, clean storytelling, and AI-assisted workflow to deliver content faster and smarter.</p>
+            <p>I've collaborated with creators like RuangSepri, TechpreneurBoi, Victoria Wong, ContentCreator.Club, and brands such as Rumah BUMN Jambi, Simon & Sons, and more.</p>
+            <p>My editing style blends clarity, pace, and storytelling — suitable for short-form content, brand campaigns, cinematic videos, and educational materials.</p>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2 class="section-title reveal">Skills & Experience</h2>
+        <div class="skills-grid">
+            <div class="skill-column reveal">
+                <h3>Editing Software</h3>
+                <ul>
+                    <li>CapCut PC</li>
+                    <li>Adobe Premiere Pro</li>
+                    <li>After Effects</li>
+                </ul>
+            </div>
+            <div class="skill-column reveal">
+                <h3>Design Tools</h3>
+                <ul>
+                    <li>Canva</li>
+                    <li>Photoshop</li>
+                    <li>Dreamina AI</li>
+                </ul>
+            </div>
+            <div class="skill-column reveal">
+                <h3>What I Do</h3>
+                <ul>
+                    <li>Reels & short-form editing</li>
+                    <li>Cinematic and story-driven cuts</li>
+                    <li>Color grading & visual polishing</li>
+                    <li>AI-assisted workflow</li>
+                    <li>Brand & creator content</li>
+                </ul>
+            </div>
+        </div>
+        <div class="downloads reveal">
+            <a href="https://drive.google.com/file/d/1EaOUrJRtO6AiCIsX9EULS6yjwWW_1IV1/view?usp=sharing" target="_blank" class="btn-download">📄 Download CV</a>
+            <a href="https://drive.google.com/file/d/1wWHQLdoxjBV419_Np-p-5y4P_gmdND0H/view?usp=sharing" target="_blank" class="btn-download">📋 Download Resume</a>
+        </div>
+    </section>
+
+    <!-- Showcase Section -->
+    <section id="showcase">
+        <h2 class="section-title reveal">Featured Showcase</h2>
+        <p class="section-subtitle reveal">
+            Highlighting my best work with leading creators and brands
+        </p>
+        <div class="showcase-grid">
+            <!-- Ruangsepri -->
+            <div class="showcase-item reveal">
+                <iframe 
+                    src="https://drive.google.com/file/d/1EYDMJjfcbVilZajdPyQJVxF1od4J9Zev/preview" 
+                    allow="autoplay; fullscreen" 
+                    loading="lazy">
+                </iframe>
+                <div class="showcase-info">
+                    <div class="client">RuangSepri</div>
+                    <h3>Educational Reel Editing</h3>
+                    <p>Short-form educational content with clean pacing and clear visual structure.</p>
+                </div>
+            </div>
+            <!-- contentcreator.club -->
+            <div class="showcase-item reveal">
+                <iframe 
+                    src="https://drive.google.com/file/d/1FdSJJ7vBJs4ibIS75cmNfPt9WvJM5Hki/preview" 
+                    allow="autoplay; fullscreen" 
+                    loading="lazy">
+                </iframe>
+                <div class="showcase-info">
+                    <div class="client">contentcreator.club</div>
+                    <h3>Creator-Focused Reel</h3>
+                    <p>Dynamic, creator-first edit optimized for hooks and retention.</p>
+                </div>
+            </div>
+            <!-- victoriawong68 -->
+            <div class="showcase-item reveal">
+                <iframe 
+                    src="https://drive.google.com/file/d/1YyHNLfDBWgNVjwRo5tPU9B2SOK0TIRWQ/preview" 
+                    allow="autoplay; fullscreen" 
+                    loading="lazy">
+                </iframe>
+                <div class="showcase-info">
+                    <div class="client">victoriawong68</div>
+                    <h3>Educational Branding Reel</h3>
+                    <p>Clean, premium-style edit for educational personal branding content.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Categories -->
+    <section id="portfolio">
+        <h2 class="section-title reveal">Full Portfolio</h2>
+        <p class="section-subtitle reveal">Explore my complete collection of projects across different categories</p>
+        <div class="portfolio-grid">
+            <a href="#" class="portfolio-card reveal" onclick="alert('Navigate to: /portfolio/reels.html'); return false;">
+                <div class="icon">🎬</div>
+                <h3>Reels Content Editing Project</h3>
+                <p>A full collection of short-form editing projects for brands & creators</p>
+            </a>
+            <a href="#" class="portfolio-card reveal" onclick="alert('Navigate to: /portfolio/creative.html'); return false;">
+                <div class="icon">🏆</div>
+                <h3>1st Place Creative Video</h3>
+                <p>Award-winning creative video productions</p>
+            </a>
+            <a href="#" class="portfolio-card reveal" onclick="alert('Navigate to: /portfolio/bestfilm.html'); return false;">
+                <div class="icon">🎥</div>
+                <h3>Best Film Production Award</h3>
+                <p>Recognized excellence in filmmaking</p>
+            </a>
+            <a href="#" class="portfolio-card reveal" onclick="alert('Navigate to: /portfolio/cinematic.html'); return false;">
+                <div class="icon">🎞️</div>
+                <h3>Cinematic Video</h3>
+                <p>Story-driven cinematic productions</p>
+            </a>
+            <a href="#" class="portfolio-card reveal" onclick="alert('Navigate to: /portfolio/company.html'); return false;">
+                <div class="icon">🏢</div>
+                <h3>Company Profile Video</h3>
+                <p>Professional brand storytelling</p>
+            </a>
+            <a href="#" class="portfolio-card reveal" onclick="alert('Navigate to: /portfolio/documentary.html'); return false;">
+                <div class="icon">📹</div>
+                <h3>Documentary Video</h3>
+                <p>Real stories, powerful narratives</p>
+            </a>
+            <a href="#" class="portfolio-card reveal" onclick="alert('Navigate to: /portfolio/academic.html'); return false;">
+                <div class="icon">🎓</div>
+                <h3>Academic Award Certificate</h3>
+                <p>Educational achievements and recognitions</p>
+            </a>
+            <a href="#" class="portfolio-card reveal" onclick="alert('Navigate to: /portfolio/news.html'); return false;">
+                <div class="icon">📰</div>
+                <h3>News Video</h3>
+                <p>News coverage and journalism projects</p>
+            </a>
+            <a href="#" class="portfolio-card reveal" onclick="alert('Navigate to: /portfolio/videographer.html'); return false;">
+                <div class="icon">📸</div>
+                <h3>Videographer</h3>
+                <p>Event coverage and videography services</p>
+            </a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2 class="section-title reveal">Let's Work Together</h2>
+        <div class="contact-content reveal">
+            <p>Ready to create something amazing? Let's collaborate and bring your vision to life.</p>
+            <div class="contact-links">
+                <a href="https://wa.me/6281243532553" target="_blank" class="contact-btn">💬 WhatsApp</a>
+                <a href="mailto:madepujaendra@gmail.com" class="contact-btn secondary">📧 Email</a>
+                <a href="https://instagram.com/imadevideo" target="_blank" class="contact-btn secondary">📷 Instagram</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 imadevideo - I Made Puja Endra</p>
+        <p>AI-Driven Video Editor & Cinematic Storyteller</p>
+    </footer>
+
+    <!-- Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">×</button>
+            <div id="modalBody"></div>
+            <div class="modal-info" id="modalInfo"></div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Scroll Reveal Animation
+        function reveal() {
+            const reveals = document.querySelectorAll('.reveal');
+            reveals.forEach(element => {
+                const windowHeight = window.innerHeight;
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    element.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', reveal);
+        reveal(); // Initial check
+
+        // Modal Functions
+        function openModal(content, info) {
+            const modal = document.getElementById('modal');
+            const modalBody = document.getElementById('modalBody');
+            const modalInfo = document.getElementById('modalInfo');
+            
+            modalBody.innerHTML = content;
+            modalInfo.innerHTML = info || '';
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('modal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal on background click
+        document.getElementById('modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Close modal on ESC key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Google Drive API Integration
+        const API_KEY = 'YOUR_GOOGLE_API_KEY'; // Replace with your API key
+
+        // Portfolio Drive Folders Configuration
+        const portfolioFolders = {
+            reels: {
+                category: "Reels Content Editing Project",
+                folders: {
+                    "@aicreatorlabs.id": "1jxsYAbn14FqMjtVqJF6JAD_mJcAe8Wfy",
+                    "@createcontent.club": "1ewwgZVNUBGNMrRWKKLHZm2V7V2Vz0f1N",
+                    "@ferdianlie_ss": "1szJjEgZjLv4KoHlMJCqZ-aohSAuSCLJJ",
+                    "@imadevideo": "19Wiq-V-Jjsrcf8AyNANp66eCajoPLbsb",
+                    "@ruangsepri": "1KRKKDZ3y2FeyFU8eEumIL0LDea2cOpCm",
+                    "@rumahbumnjambi": "1XJsH7pnFypVJZz_YT4q_9ggu8B-NtfpG",
+                    "@simon_sons": "1694ZAjv0H75g2dEfy_uvin7tg1ACYu2J",
+                    "@techpreneurboi": "13m2cLLOW02Irik0UG7OKoeya7D1_ulyn",
+                    "@victoriawong68": "1v4BRWEa5K07diHy1v1cBAWjT8JK_qd-T"
+                }
+            },
+            creative: {
+                certificate: "1UeQW2IVIp7SBILVrLX8EjAOkXlnNqHVq",
+                video: "1FY7bHSeCgDttKfXQNFHRDymrnhpU0Tyu"
+            },
+            bestfilm: "11f5Oa8MIq5mrFU3_qxLaE3gGVnVj8C3c",
+            cinematic: "1-hm1iBLPnW0Uh045z-5s922fR99Jg9KX",
+            company: "1zubPlV0JR7sXFKm1f23kKRteKEHD0rT2",
+            documentary: "1lQfraJ2X0hf99E_9trLVWO5Ws66kZL5G",
+            academic: "13AzucIUYHF2RGct9zz8XVZFdstsbGs0k",
+            news: "15fFhvLq_MEyvnE1Hv_IW1oWQ_m2NJKjt",
+            videographer: "10o_XKYlLNSiDZEks3s9qLTdGiUf-43bG"
+        };
+
+        // Fetch files from Google Drive folder
+        async function fetchDriveFolder(folderId) {
+            if (API_KEY === 'YOUR_GOOGLE_API_KEY') {
+                console.warn('Google Drive API key not configured');
+                return null;
+            }
+
+            try {
+                const url = `https://www.googleapis.com/drive/v3/files?q='${folderId}'+in+parents&key=${API_KEY}&fields=files(id,name,webViewLink,thumbnailLink,mimeType,videoMediaMetadata,imageMediaMetadata)&pageSize=100`;
+                const response = await fetch(url);
+                
+                if (!response.ok) {
+                    throw new Error(`API Error: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                return data.files || [];
+            } catch (error) {
+                console.error('Error fetching Drive folder:', error);
+                return null;
+            }
+        }
+
+        // Render gallery grid
+        function renderGallery(files, containerId) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+
+            container.innerHTML = '';
+
+            if (!files || files.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: var(--muted); padding: 3rem;">No files found.</p>';
+                return;
+            }
+
+            files.forEach(file => {
+                const card = document.createElement('div');
+                card.classList.add('portfolio-card');
+                card.style.cursor = 'pointer';
+                
+                let icon = '📄';
+                if (file.mimeType.includes('video')) icon = '🎬';
+                else if (file.mimeType.includes('image')) icon = '🖼️';
+                
+                card.innerHTML = `
+                    <div class="icon">${icon}</div>
+                    <h3>${file.name}</h3>
+                    <p>${file.mimeType.split('/')[0].toUpperCase()}</p>
+                `;
+                
+                card.addEventListener('click', () => {
+                    let content = '';
+                    
+                    if (file.mimeType.includes('video')) {
+                        content = `<iframe src="https://drive.google.com/file/d/${file.id}/preview" allowfullscreen></iframe>`;
+                    } else if (file.mimeType.includes('image')) {
+                        const imgUrl = file.thumbnailLink ? file.thumbnailLink.replace('=s220', '=s1600') : `https://drive.google.com/thumbnail?id=${file.id}&sz=w1600`;
+                        content = `<img src="${imgUrl}" alt="${file.name}" style="width: 100%; height: auto; max-height: 80vh; object-fit: contain;"/>`;
+                    } else {
+                        content = `<div style="text-align: center; padding: 3rem;"><p style="color: var(--primary); font-size: 1.5rem;">📄 ${file.name}</p><p style="color: var(--muted); margin-top: 1rem;">Click below to view in Google Drive</p><a href="${file.webViewLink}" target="_blank" class="hero-cta" style="display: inline-block; margin-top: 2rem;">Open in Drive</a></div>`;
+                    }
+                    
+                    const info = `<h3>${file.name}</h3>`;
+                    openModal(content, info);
+                });
+                
+                container.appendChild(card);
+            });
+        }
+
+        // Example: Load showcase items with hover glow effect
+        document.querySelectorAll('.showcase-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.boxShadow = '0 0 40px rgba(195, 255, 0, 0.4)';
+            });
+            item.addEventListener('mouseleave', function() {
+                this.style.boxShadow = '';
+            });
+        });
+
+        // Grid hover glow effect for portfolio cards
+        document.querySelectorAll('.portfolio-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.boxShadow = '0 30px 70px rgba(195, 255, 0, 0.35)';
+            });
+            card.addEventListener('mouseleave', function() {
+                this.style.boxShadow = '';
+            });
+        });
+
+        // Console info for developers
+        console.log('%c🎬 imadevideo Portfolio', 'color: #C3FF00; font-size: 20px; font-weight: bold;');
+        console.log('%cAI-Driven Video Editor & Cinematic Storyteller', 'color: #9A9A9A; font-size: 14px;');
+        console.log('%c\nGoogle Drive API Integration Ready!', 'color: #C3FF00; font-size: 12px;');
+        console.log('%cReplace API_KEY in script to enable auto-loading from Drive folders.', 'color: #9A9A9A; font-size: 11px;');
+        console.log('%c\nPortfolio Folders:', 'color: #C3FF00; font-size: 12px;');
+        console.log(portfolioFolders);
+
+        // Page load animation
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                document.body.style.transition = 'opacity 0.5s';
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+    </script>
+</body>
+</html>
