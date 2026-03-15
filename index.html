@@ -7,9 +7,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
   <style>
-    /* ─────────────────────────────────────────────────
-       DESIGN TOKENS
-    ───────────────────────────────────────────────── */
     :root {
       --primary:  #C3FF00;
       --bg:       #050505;
@@ -33,9 +30,7 @@
       overflow-x: hidden;
     }
 
-    /* ─────────────────────────────────────────────────
-       NAVIGATION
-    ───────────────────────────────────────────────── */
+    /* ── NAV ─────────────────────────────────────── */
     nav {
       position: fixed;
       inset: 0 0 auto 0;
@@ -142,9 +137,7 @@
       line-height: 1;
     }
 
-    /* ─────────────────────────────────────────────────
-       HERO
-    ───────────────────────────────────────────────── */
+    /* ── HERO ─────────────────────────────────────── */
     .hero {
       min-height: 100vh;
       padding: 8rem 5% 5rem;
@@ -225,13 +218,9 @@
       border: 1px solid rgba(195,255,0,0.12);
       box-shadow: 0 30px 80px rgba(0,0,0,0.5);
     }
-    .hero-video iframe {
-      display: block; width: 100%; aspect-ratio: 16/9; border: none;
-    }
+    .hero-video iframe { display: block; width: 100%; aspect-ratio: 16/9; border: none; }
 
-    /* ─────────────────────────────────────────────────
-       SECTION SHELL
-    ───────────────────────────────────────────────── */
+    /* ── SECTION SHELL ───────────────────────────── */
     .section { padding: 6rem 5%; max-width: 1400px; margin: 0 auto; }
     .section-title {
       font-family: 'Montserrat', sans-serif;
@@ -249,9 +238,7 @@
       margin: 0 auto 3.5rem;
     }
 
-    /* ─────────────────────────────────────────────────
-       ABOUT
-    ───────────────────────────────────────────────── */
+    /* ── ABOUT ───────────────────────────────────── */
     .about-card {
       max-width: 820px;
       margin: 0 auto;
@@ -269,9 +256,7 @@
     .about-card p { color: var(--muted); font-size: 1.02rem; line-height: 1.95; margin-bottom: 1.1rem; }
     .about-card p:last-child { margin-bottom: 0; }
 
-    /* ─────────────────────────────────────────────────
-       CAROUSEL
-    ───────────────────────────────────────────────── */
+    /* ── CAROUSEL ────────────────────────────────── */
     #showcase { background: var(--bg-mid); padding: 6rem 0 4rem; }
     .showcase-header {
       max-width: 1400px;
@@ -280,7 +265,6 @@
       text-align: center;
       margin-bottom: 4rem;
     }
-
     .carousel-block { margin-bottom: 1rem; }
     .carousel-label-row { text-align: center; margin-bottom: 1.2rem; }
     .carousel-label-pill {
@@ -295,6 +279,7 @@
       padding: 0.35rem 1.1rem;
     }
 
+    /* Stage clips the track */
     .carousel-stage {
       position: relative;
       width: 100%;
@@ -304,7 +289,7 @@
     }
     .carousel-stage.is-dragging { cursor: grabbing; }
 
-    /* Track — the ONLY thing JS moves */
+    /* Track — the ONLY thing that moves */
     .carousel-track {
       display: flex;
       align-items: center;
@@ -314,7 +299,7 @@
       -webkit-user-select: none;
     }
 
-    /* Card — INACTIVE */
+    /* Card inactive */
     .carousel-item {
       flex: 0 0 var(--item-w);
       width: var(--item-w);
@@ -331,7 +316,7 @@
         filter     0.5s var(--ease),
         box-shadow 0.5s var(--ease);
     }
-    /* Card — ACTIVE */
+    /* Card active */
     .carousel-item.is-active {
       transform: scale(1.05);
       opacity: 1;
@@ -347,7 +332,7 @@
     .item-thumb { width: 100%; aspect-ratio: 9/16; background: #000; overflow: hidden; }
     .item-thumb iframe {
       display: block; width: 100%; height: 100%; border: none;
-      pointer-events: none; /* let drag events pass through */
+      pointer-events: none;
     }
     .item-info { padding: 1.1rem 1.3rem 1.3rem; }
     .item-client { font-size: 0.68rem; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--primary); margin-bottom: 0.3rem; }
@@ -356,7 +341,7 @@
 
     /* Edge fades */
     .stage-fade { position: absolute; top: 0; bottom: 0; width: clamp(90px, 26vw, 320px); pointer-events: none; z-index: 5; }
-    .stage-fade-left  { left: 0;  background: linear-gradient(to right, var(--bg-mid) 0%, rgba(8,8,16,0.9) 40%, rgba(8,8,16,0.3) 75%, transparent 100%); }
+    .stage-fade-left  { left:  0; background: linear-gradient(to right, var(--bg-mid) 0%, rgba(8,8,16,0.9) 40%, rgba(8,8,16,0.3) 75%, transparent 100%); }
     .stage-fade-right { right: 0; background: linear-gradient(to left,  var(--bg-mid) 0%, rgba(8,8,16,0.9) 40%, rgba(8,8,16,0.3) 75%, transparent 100%); }
 
     /* Controls */
@@ -383,14 +368,9 @@
       transition: all 0.35s var(--ease);
     }
     .c-dot.is-active { background: var(--primary); width: 22px; }
-    .c-counter {
-      font-size: 0.72rem; font-weight: 600; color: var(--muted);
-      letter-spacing: 1px; font-variant-numeric: tabular-nums; min-width: 44px;
-    }
+    .c-counter { font-size: 0.72rem; font-weight: 600; color: var(--muted); letter-spacing: 1px; font-variant-numeric: tabular-nums; min-width: 44px; }
 
-    /* ─────────────────────────────────────────────────
-       SKILLS
-    ───────────────────────────────────────────────── */
+    /* ── SKILLS ──────────────────────────────────── */
     .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.8rem; }
     .skill-card {
       background: rgba(12,12,20,0.55);
@@ -404,9 +384,7 @@
     .skill-card li { color: var(--muted); font-size: 0.88rem; padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
     .skill-card li:last-child { border-bottom: none; }
 
-    /* ─────────────────────────────────────────────────
-       PORTFOLIO
-    ───────────────────────────────────────────────── */
+    /* ── PORTFOLIO ───────────────────────────────── */
     .portfolio-section { background: var(--bg-mid); padding: 6rem 5%; }
     .portfolio-inner { max-width: 1400px; margin: 0 auto; }
     .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 1.4rem; }
@@ -423,9 +401,7 @@
     .portfolio-info h3 { font-size: 1.05rem; margin-bottom: 0.4rem; }
     .portfolio-info p  { color: var(--muted); font-size: 0.82rem; }
 
-    /* ─────────────────────────────────────────────────
-       CONTACT
-    ───────────────────────────────────────────────── */
+    /* ── CONTACT ─────────────────────────────────── */
     .contact-body { text-align: center; max-width: 640px; margin: 0 auto; }
     .contact-body p { color: var(--muted); margin-bottom: 2rem; }
     .contact-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 1.2rem; }
@@ -438,21 +414,15 @@
     }
     .contact-link:hover { background: rgba(195,255,0,0.08); border-color: var(--primary); transform: translateY(-4px); box-shadow: 0 8px 24px rgba(195,255,0,0.18); }
 
-    /* ─────────────────────────────────────────────────
-       FOOTER
-    ───────────────────────────────────────────────── */
+    /* ── FOOTER ──────────────────────────────────── */
     footer { text-align: center; padding: 2.8rem 5%; background: var(--card); border-top: 1px solid rgba(195,255,0,0.05); }
     footer p { color: var(--muted); font-size: 0.84rem; line-height: 2; }
 
-    /* ─────────────────────────────────────────────────
-       REVEAL
-    ───────────────────────────────────────────────── */
+    /* ── REVEAL ──────────────────────────────────── */
     .reveal { opacity: 0; transform: translateY(36px); transition: opacity 0.75s var(--ease), transform 0.75s var(--ease); }
     .reveal.visible { opacity: 1; transform: none; }
 
-    /* ─────────────────────────────────────────────────
-       RESPONSIVE
-    ───────────────────────────────────────────────── */
+    /* ── RESPONSIVE ──────────────────────────────── */
     @media (max-width: 1024px) {
       .hero-inner { grid-template-columns: 1fr; }
       .skills-grid { grid-template-columns: 1fr; }
@@ -486,7 +456,6 @@
       </button>
     </div>
   </nav>
-
   <div class="nav-mobile" id="nav-mobile">
     <button class="nav-mobile-close" id="nav-close" aria-label="Close">&#215;</button>
     <a href="#hero"      onclick="closeMobileMenu()">Home</a>
@@ -534,118 +503,103 @@
   <div id="showcase">
     <div class="showcase-header">
       <h2 class="section-title reveal">Project Showcase</h2>
-      <p class="section-sub reveal">Drag left/right on the videos, or tap the arrows</p>
+      <p class="section-sub reveal">Drag the videos left or right, or use the arrows</p>
     </div>
 
-    <!-- Row 1 — Short-form -->
+    <!-- Row 1 -->
     <div class="carousel-block">
       <div class="carousel-label-row"><span class="carousel-label-pill">short-form content</span></div>
       <div class="carousel-stage" data-carousel="main">
         <div class="stage-fade stage-fade-left" aria-hidden="true"></div>
         <div class="stage-fade stage-fade-right" aria-hidden="true"></div>
         <div class="carousel-track" id="track-main">
-
           <div class="carousel-item">
             <div class="item-thumb"><iframe src="https://www.youtube.com/embed/rNZyRjAqnEc?autoplay=1&mute=1&loop=1&playlist=rNZyRjAqnEc&controls=0" allow="autoplay" allowfullscreen loading="lazy" title="ruangsepri"></iframe></div>
             <div class="item-info"><div class="item-client">@ruangsepri</div><h3 class="item-title">AI-Driven Content Creator</h3><p class="item-desc">Educational content with dynamic pacing.</p></div>
           </div>
-
           <div class="carousel-item">
-            <div class="item-thumb"><iframe src="https://www.youtube.com/embed/1c1neNWR3Y8?autoplay=1&mute=1&loop=1&playlist=1c1neNWR3Y8&controls=0" allow="autoplay" allowfullscreen loading="lazy" title="createcontent.club"></iframe></div>
+            <div class="item-thumb"><iframe src="https://www.youtube.com/embed/1c1neNWR3Y8?autoplay=1&mute=1&loop=1&playlist=1c1neNWR3Y8&controls=0" allow="autoplay" allowfullscreen loading="lazy" title="createcontent"></iframe></div>
             <div class="item-info"><div class="item-client">@createcontent.club</div><h3 class="item-title">Businesses Scale with Content</h3><p class="item-desc">High-energy edit for creator community.</p></div>
           </div>
-
           <div class="carousel-item">
             <div class="item-thumb"><iframe src="https://www.youtube.com/embed/LvjzKyPSyQg?autoplay=1&mute=1&loop=1&playlist=LvjzKyPSyQg&controls=0" allow="autoplay" allowfullscreen loading="lazy" title="victoriawong68"></iframe></div>
             <div class="item-info"><div class="item-client">@victoriawong68</div><h3 class="item-title">Build Personal Brand</h3><p class="item-desc">Professional branding with clean aesthetics.</p></div>
           </div>
-
           <div class="carousel-item">
             <div class="item-thumb"><iframe src="https://www.youtube.com/embed/zMEycC6PtFo?autoplay=1&mute=1&loop=1&playlist=zMEycC6PtFo&controls=0" allow="autoplay" allowfullscreen loading="lazy" title="techpreneurboi"></iframe></div>
             <div class="item-info"><div class="item-client">@techpreneurboi</div><h3 class="item-title">Automation Expert</h3><p class="item-desc">Fast-paced tech content optimized for retention.</p></div>
           </div>
-
         </div>
       </div>
       <div class="carousel-ui">
-        <button class="c-arrow" data-carousel="main" data-dir="-1" aria-label="Previous">&#8592;</button>
+        <button class="c-arrow" data-carousel="main" data-dir="-1">&#8592;</button>
         <div class="c-dots" id="dots-main"></div>
-        <button class="c-arrow" data-carousel="main" data-dir="1" aria-label="Next">&#8594;</button>
+        <button class="c-arrow" data-carousel="main" data-dir="1">&#8594;</button>
         <span class="c-counter" id="counter-main">01 / 04</span>
       </div>
     </div>
 
-    <!-- Row 2 — Motion Graphic -->
+    <!-- Row 2 -->
     <div class="carousel-block">
       <div class="carousel-label-row"><span class="carousel-label-pill">motion graphic</span></div>
       <div class="carousel-stage" data-carousel="motion">
         <div class="stage-fade stage-fade-left" aria-hidden="true"></div>
         <div class="stage-fade stage-fade-right" aria-hidden="true"></div>
         <div class="carousel-track" id="track-motion">
-
           <div class="carousel-item">
-            <div class="item-thumb"><iframe src="https://www.youtube.com/embed/LvDhNgPAZPs?autoplay=1&mute=1&loop=1&playlist=LvDhNgPAZPs&controls=0" allow="autoplay" allowfullscreen loading="lazy" title="podcast 1"></iframe></div>
+            <div class="item-thumb"><iframe src="https://www.youtube.com/embed/LvDhNgPAZPs?autoplay=1&mute=1&loop=1&playlist=LvDhNgPAZPs&controls=0" allow="autoplay" allowfullscreen loading="lazy" title="podcast1"></iframe></div>
             <div class="item-info"><div class="item-client">@aicreatorlabs.id</div><h3 class="item-title">Podcast</h3><p class="item-desc">Dynamic motion graphics for podcast content.</p></div>
           </div>
-
           <div class="carousel-item">
-            <div class="item-thumb"><iframe src="https://www.youtube.com/embed/4PY48e91FU4?autoplay=1&mute=1&loop=1&playlist=4PY48e91FU4&controls=0" allow="autoplay" allowfullscreen loading="lazy" title="podcast 2"></iframe></div>
+            <div class="item-thumb"><iframe src="https://www.youtube.com/embed/4PY48e91FU4?autoplay=1&mute=1&loop=1&playlist=4PY48e91FU4&controls=0" allow="autoplay" allowfullscreen loading="lazy" title="podcast2"></iframe></div>
             <div class="item-info"><div class="item-client">@aicreatorlabs.id</div><h3 class="item-title">Podcast</h3><p class="item-desc">Engaging visual storytelling for audio content.</p></div>
           </div>
-
           <div class="carousel-item">
-            <div class="item-thumb"><iframe src="https://www.youtube.com/embed/lKmNIRaVSKE?autoplay=1&mute=1&loop=1&playlist=lKmNIRaVSKE&controls=0" allow="autoplay" allowfullscreen loading="lazy" title="ads content"></iframe></div>
+            <div class="item-thumb"><iframe src="https://www.youtube.com/embed/lKmNIRaVSKE?autoplay=1&mute=1&loop=1&playlist=lKmNIRaVSKE&controls=0" allow="autoplay" allowfullscreen loading="lazy" title="ads"></iframe></div>
             <div class="item-info"><div class="item-client">@ruangsepri</div><h3 class="item-title">Ads Content</h3><p class="item-desc">Attention-grabbing motion for advertising.</p></div>
           </div>
-
           <div class="carousel-item">
-            <div class="item-thumb"><iframe src="https://www.youtube.com/embed/qif5BiRmJAA?autoplay=1&mute=1&loop=1&playlist=qif5BiRmJAA&controls=0" allow="autoplay" allowfullscreen loading="lazy" title="talking head"></iframe></div>
+            <div class="item-thumb"><iframe src="https://www.youtube.com/embed/qif5BiRmJAA?autoplay=1&mute=1&loop=1&playlist=qif5BiRmJAA&controls=0" allow="autoplay" allowfullscreen loading="lazy" title="talkinghead"></iframe></div>
             <div class="item-info"><div class="item-client">@ruangsepri</div><h3 class="item-title">Talking Head</h3><p class="item-desc">Polished talking head with motion graphics.</p></div>
           </div>
-
         </div>
       </div>
       <div class="carousel-ui">
-        <button class="c-arrow" data-carousel="motion" data-dir="-1" aria-label="Previous">&#8592;</button>
+        <button class="c-arrow" data-carousel="motion" data-dir="-1">&#8592;</button>
         <div class="c-dots" id="dots-motion"></div>
-        <button class="c-arrow" data-carousel="motion" data-dir="1" aria-label="Next">&#8594;</button>
+        <button class="c-arrow" data-carousel="motion" data-dir="1">&#8594;</button>
         <span class="c-counter" id="counter-motion">01 / 04</span>
       </div>
     </div>
 
-    <!-- Row 3 — Video Ads -->
+    <!-- Row 3 -->
     <div class="carousel-block">
       <div class="carousel-label-row"><span class="carousel-label-pill">video ads</span></div>
       <div class="carousel-stage" data-carousel="ads">
         <div class="stage-fade stage-fade-left" aria-hidden="true"></div>
         <div class="stage-fade stage-fade-right" aria-hidden="true"></div>
         <div class="carousel-track" id="track-ads">
-
           <div class="carousel-item">
-            <div class="item-thumb"><iframe src="https://www.youtube.com/embed/PCUFb-glJyM?autoplay=1&mute=1&loop=1&playlist=PCUFb-glJyM&controls=0" allow="autoplay" allowfullscreen loading="lazy" title="ad 1"></iframe></div>
+            <div class="item-thumb"><iframe src="https://www.youtube.com/embed/PCUFb-glJyM?autoplay=1&mute=1&loop=1&playlist=PCUFb-glJyM&controls=0" allow="autoplay" allowfullscreen loading="lazy" title="ad1"></iframe></div>
             <div class="item-info"><div class="item-client">Video Ads</div><h3 class="item-title">Ad Creative</h3><p class="item-desc">High-conversion short-form ad content.</p></div>
           </div>
-
           <div class="carousel-item">
-            <div class="item-thumb"><iframe src="https://www.youtube.com/embed/r9wL_3BWFbU?autoplay=1&mute=1&loop=1&playlist=r9wL_3BWFbU&controls=0" allow="autoplay" allowfullscreen loading="lazy" title="ad 2"></iframe></div>
+            <div class="item-thumb"><iframe src="https://www.youtube.com/embed/r9wL_3BWFbU?autoplay=1&mute=1&loop=1&playlist=r9wL_3BWFbU&controls=0" allow="autoplay" allowfullscreen loading="lazy" title="ad2"></iframe></div>
             <div class="item-info"><div class="item-client">Video Ads</div><h3 class="item-title">Ad Creative</h3><p class="item-desc">Compelling storytelling for brand awareness.</p></div>
           </div>
-
           <div class="carousel-item">
-            <div class="item-thumb"><iframe src="https://www.youtube.com/embed/29XywKfIhzU?autoplay=1&mute=1&loop=1&playlist=29XywKfIhzU&controls=0" allow="autoplay" allowfullscreen loading="lazy" title="ad 3"></iframe></div>
+            <div class="item-thumb"><iframe src="https://www.youtube.com/embed/29XywKfIhzU?autoplay=1&mute=1&loop=1&playlist=29XywKfIhzU&controls=0" allow="autoplay" allowfullscreen loading="lazy" title="ad3"></iframe></div>
             <div class="item-info"><div class="item-client">Video Ads</div><h3 class="item-title">Ad Creative</h3><p class="item-desc">Dynamic visual hook optimized for engagement.</p></div>
           </div>
-
         </div>
       </div>
       <div class="carousel-ui">
-        <button class="c-arrow" data-carousel="ads" data-dir="-1" aria-label="Previous">&#8592;</button>
+        <button class="c-arrow" data-carousel="ads" data-dir="-1">&#8592;</button>
         <div class="c-dots" id="dots-ads"></div>
-        <button class="c-arrow" data-carousel="ads" data-dir="1" aria-label="Next">&#8594;</button>
+        <button class="c-arrow" data-carousel="ads" data-dir="1">&#8594;</button>
         <span class="c-counter" id="counter-ads">01 / 03</span>
       </div>
     </div>
-
   </div><!-- /#showcase -->
 
   <!-- SKILLS -->
@@ -679,47 +633,38 @@
       <h2 class="section-title reveal">Full Portfolio</h2>
       <p class="section-sub reveal">Explore my complete collection across all categories</p>
       <div class="portfolio-grid">
-
         <a href="https://drive.google.com/drive/folders/1o5he3i43HemiBZ_Ca1R-KvqgP1O161Tz?usp=sharing" target="_blank" class="portfolio-card reveal">
           <div class="portfolio-thumb" style="background-image:linear-gradient(rgba(0,0,0,0.2),rgba(12,12,20,0.95)),url('https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?w=800')"></div>
           <div class="portfolio-info"><h3>Reels Content Editing</h3><p>Full collection of short-form editing projects.</p></div>
         </a>
-
         <a href="https://drive.google.com/drive/folders/1vM12mUcVI84mk8kFkxMgoxaRjVQwBkvE?usp=sharing" target="_blank" class="portfolio-card reveal">
           <div class="portfolio-thumb" style="background-image:linear-gradient(rgba(0,0,0,0.2),rgba(12,12,20,0.95)),url('https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800')"></div>
           <div class="portfolio-info"><h3>Long-form Video</h3><p>Full-length edits, documentaries, and deep-form content.</p></div>
         </a>
-
         <a href="https://drive.google.com/drive/folders/1SUs8FpWyKMan2lNLkXFMQfeX9qtPfw40?usp=sharing" target="_blank" class="portfolio-card reveal">
           <div class="portfolio-thumb" style="background-image:linear-gradient(rgba(0,0,0,0.2),rgba(12,12,20,0.95)),url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800')"></div>
           <div class="portfolio-info"><h3>1st Place Creative Video</h3><p>Award-winning creative video project.</p></div>
         </a>
-
         <a href="https://drive.google.com/drive/folders/11f5Oa8MIq5mrFU3_qxLaE3gGVnVj8C3c?usp=sharing" target="_blank" class="portfolio-card reveal">
           <div class="portfolio-thumb" style="background-image:linear-gradient(rgba(0,0,0,0.2),rgba(12,12,20,0.95)),url('https://images.unsplash.com/photo-1485846234645-a62644f84728?w=800')"></div>
           <div class="portfolio-info"><h3>Best Film Production Award</h3><p>Film production recognized with Best Film award.</p></div>
         </a>
-
         <a href="https://drive.google.com/drive/folders/1-hm1iBLPnW0Uh045z-5s922fR99Jg9KX?usp=sharing" target="_blank" class="portfolio-card reveal">
           <div class="portfolio-thumb" style="background-image:linear-gradient(rgba(0,0,0,0.2),rgba(12,12,20,0.95)),url('https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=800')"></div>
           <div class="portfolio-info"><h3>Cinematic Video</h3><p>Cinematic edits with storytelling and mood grading.</p></div>
         </a>
-
         <a href="https://drive.google.com/drive/folders/1zubPlV0JR7sXFKm1f23kKRteKEHD0rT2?usp=sharing" target="_blank" class="portfolio-card reveal">
           <div class="portfolio-thumb" style="background-image:linear-gradient(rgba(0,0,0,0.2),rgba(12,12,20,0.95)),url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=800')"></div>
           <div class="portfolio-info"><h3>Company Profile Video</h3><p>Profile videos for brands and businesses.</p></div>
         </a>
-
         <a href="https://drive.google.com/drive/folders/1lQfraJ2X0hf99E_9trLVWO5Ws66kZL5G?usp=sharing" target="_blank" class="portfolio-card reveal">
           <div class="portfolio-thumb" style="background-image:linear-gradient(rgba(0,0,0,0.2),rgba(12,12,20,0.95)),url('https://images.unsplash.com/photo-1579532537598-459ecdaf39cc?w=800')"></div>
           <div class="portfolio-info"><h3>Documentary Video</h3><p>Documentary-style storytelling with real narratives.</p></div>
         </a>
-
         <a href="https://drive.google.com/drive/folders/10o_XKYlLNSiDZEks3s9qLTdGiUf-43bG?usp=sharing" target="_blank" class="portfolio-card reveal">
           <div class="portfolio-thumb" style="background-image:linear-gradient(rgba(0,0,0,0.2),rgba(12,12,20,0.95)),url('https://images.unsplash.com/photo-1452780212940-6f5c0d14d848?w=800')"></div>
           <div class="portfolio-info"><h3>Videographer</h3><p>On-location shoots, event coverage, and raw cinematography.</p></div>
         </a>
-
       </div>
     </div>
   </div>
@@ -745,366 +690,327 @@
 
 
   <script>
-    /* ══════════════════════════════════════════════════════════════
-       LERPCAROUSEL  —  fixed-center spotlight carousel
-       ──────────────────────────────────────────────────────────────
-       HOW THE CAROUSEL MOVES:
-       • targetX  = the translateX we WANT the track to have
-       • currentX = the translateX the track has RIGHT NOW
-       • Every rAF frame: currentX += (targetX − currentX) × LERP
-       • Lerp provides smooth deceleration with no extra libraries.
+  /* ════════════════════════════════════════════════════════════
+     LERPCAROUSEL v5
 
-       WHEEL INPUT — WHY IT WAS GOING CRAZY BEFORE:
-       The old code used a velocity ACCUMULATOR (_tpVelX).
-       Each wheel event added to _tpVelX, and the RAF loop
-       applied it across many frames while decaying it.
-       Problem: trackpads fire 20–40 events per gesture.
-       _tpVelX rapidly built up to 20×delta = huge overshoot,
-       jumping targetX all the way to the first or last card.
+     WHAT CHANGED FROM v4 — THE SCROLL FIX:
+     ─────────────────────────────────────────────────────────
+     v4 had an axis threshold of 1.2 that was too strict.
+     Trackpad horizontal swipes on desktop often produce mixed
+     deltaX/deltaY (e.g. deltaX=8, deltaY=5). With THRESHOLD=1.2,
+     |8| > |5|×1.2 = 6 → true, so Case A should fire.
+     But if deltaX=7, deltaY=6 → 7 > 7.2 → false → falls to Case B
+     → carousel does nothing → feels "macet".
 
-       THE FIX — direct delta application (no accumulation):
-         this.targetX = this._clamp(this.targetX - e.deltaX)
-       deltaX moves targetX by exactly the finger distance.
-       Lerp still provides smooth animation.
-       No accumulation = no overshoot = always in sync.
+     THE NEW APPROACH — no axis ratio threshold:
+     Simply check if |deltaX| > 3px (any meaningful sideways motion).
+     If yes → carousel moves. If deltaX is essentially zero → page scroll.
+     This is what every major site (Spotify, Apple, etc.) does.
 
-       AXIS DETECTION — why vertical scroll no longer moves carousel:
-       Every wheel event has BOTH deltaX and deltaY.
-       We compare their magnitudes:
-         |deltaX| > |deltaY| × 1.2  → horizontal gesture → carousel
-         |deltaY| > |deltaX| × 1.2  → vertical gesture  → page scrolls
-         deltaX ≈ 0, large deltaY   → PC mouse wheel    → one card per notch
-    ══════════════════════════════════════════════════════════════ */
+     LERP raised from 0.13 → 0.25 so the track visually follows
+     the finger much more closely. At 0.13 the track lagged ~8 frames
+     behind the finger, which felt like resistance/stuckness.
 
-    class LerpCarousel {
+     Snap timer raised to 250ms so fast swipes complete before snapping.
 
-      constructor(stageEl) {
-        this.stage  = stageEl;
-        this.track  = stageEl.querySelector('.carousel-track');
-        this.items  = Array.from(this.track.querySelectorAll('.carousel-item'));
-        this.n      = this.items.length;
+     ARROW BUTTONS work on all desktop inputs (mouse click).
+     DRAG works for mouse-down + drag.
+     TOUCH works for mobile with axis locking.
+  ════════════════════════════════════════════════════════════ */
 
-        const id = stageEl.dataset.carousel;
-        this.dotsEl    = document.getElementById('dots-'    + id);
-        this.counterEl = document.getElementById('counter-' + id);
+  class LerpCarousel {
 
-        /* Geometry — filled by _measure() */
-        this.ITEM_W = 0;
-        this.GAP    = 0;
-        this.STRIDE = 0;
+    constructor(stageEl) {
+      this.stage  = stageEl;
+      this.track  = stageEl.querySelector('.carousel-track');
+      this.items  = Array.from(this.track.querySelectorAll('.carousel-item'));
+      this.n      = this.items.length;
 
-        /* Lerp speed. 0.13 = snappy but still smooth. */
-        this.LERP = 0.13;
+      const id = stageEl.dataset.carousel;
+      this.dotsEl    = document.getElementById('dots-'    + id);
+      this.counterEl = document.getElementById('counter-' + id);
 
-        /* Animation state */
-        this.currentX    = 0;
-        this.targetX     = 0;
-        this.activeIndex = 0;
-        this._lastActive = -1;
+      /* Geometry */
+      this.ITEM_W = 0;
+      this.GAP    = 0;
+      this.STRIDE = 0;
 
-        /* Drag state */
-        this._dragging   = false;
-        this._dragStartX = 0;
-        this._dragStartT = 0;
-        this._prevMX     = 0;
-        this._velX       = 0;
+      /*  LERP 0.25 — snappy, track follows finger closely.
+          At 60fps: after 5 frames = 76% there, after 10 frames = 94%.
+          Feels nearly instant with smooth deceleration.           */
+      this.LERP = 0.25;
 
-        /* Wheel / trackpad */
-        this._snapTimer      = null;  /* fires _snapNearest() after idle */
-        this._mouseWheelLock = false; /* one notch at a time for PC mouse */
+      /* State */
+      this.currentX    = 0;
+      this.targetX     = 0;
+      this.activeIndex = 0;
+      this._lastActive = -1;
 
-        /* Touch */
-        this._tStartX  = 0;
-        this._tStartY  = 0;
-        this._tLastX   = 0;
-        this._tVel     = 0;
-        this._tAxis    = null; /* 'h' | 'v' | null — locked on first move */
-        this._tDragT   = 0;
+      /* Drag */
+      this._dragging   = false;
+      this._dragStartX = 0;
+      this._dragStartT = 0;
+      this._prevMX     = 0;
+      this._velX       = 0;
 
-        this._buildDots();
-        this._bindEvents();
+      /* Wheel */
+      this._snapTimer      = null;
+      this._mwLock         = false; /* mouse-wheel one-step lock */
 
-        /* Wait one paint so layout is fully settled */
-        requestAnimationFrame(() => {
-          this._measure();
-          this.currentX = this._xForIndex(0);
-          this.targetX  = this.currentX;
-          this._applyTransform();
-          this._syncUI(0);
-          this._startLoop();
-        });
+      /* Touch */
+      this._tStartX = 0;
+      this._tStartY = 0;
+      this._tLastX  = 0;
+      this._tVel    = 0;
+      this._tAxis   = null;
+      this._tDragT  = 0;
+
+      this._buildDots();
+      this._bindEvents();
+
+      requestAnimationFrame(() => {
+        this._measure();
+        this.currentX = this._xForIndex(0);
+        this.targetX  = this.currentX;
+        this._applyTransform();
+        this._syncUI(0);
+        this._startLoop();
+      });
+    }
+
+    _measure() {
+      this.ITEM_W = this.items[0].offsetWidth;
+      this.GAP    = parseFloat(getComputedStyle(this.track).gap) || 28;
+      this.STRIDE = this.ITEM_W + this.GAP;
+    }
+
+    _xForIndex(i) {
+      return (this.stage.offsetWidth / 2) - (this.ITEM_W / 2) - (i * this.STRIDE);
+    }
+
+    _clamp(x) {
+      return Math.max(this._xForIndex(this.n - 1), Math.min(this._xForIndex(0), x));
+    }
+
+    _nearestIndex(x) {
+      const raw = ((this.stage.offsetWidth / 2) - (this.ITEM_W / 2) - x) / this.STRIDE;
+      return Math.max(0, Math.min(this.n - 1, Math.round(raw)));
+    }
+
+    goTo(i, instant = false) {
+      const idx    = Math.max(0, Math.min(this.n - 1, i));
+      this.targetX = this._xForIndex(idx);
+      if (instant) { this.currentX = this.targetX; this._applyTransform(); }
+    }
+
+    navigate(dir) { this.goTo(this.activeIndex + dir); }
+
+    _applyTransform() {
+      this.track.style.transform = `translateX(${this.currentX}px)`;
+    }
+
+    _syncUI(idx) {
+      this.activeIndex = idx;
+      this.items.forEach((el, i) => el.classList.toggle('is-active', i === idx));
+      if (this.dots) {
+        this.dots.forEach((d, i) => d.classList.toggle('is-active', i === idx));
       }
-
-      /* Read real pixel widths from the rendered DOM */
-      _measure() {
-        this.ITEM_W = this.items[0].offsetWidth;
-        this.GAP    = parseFloat(getComputedStyle(this.track).gap) || 28;
-        this.STRIDE = this.ITEM_W + this.GAP;
+      if (this.counterEl) {
+        this.counterEl.textContent =
+          String(idx + 1).padStart(2, '0') + ' / ' +
+          String(this.n).padStart(2, '0');
       }
+    }
 
-      /* translateX that puts item[i] exactly at stage center */
-      _xForIndex(i) {
-        return (this.stage.offsetWidth / 2) - (this.ITEM_W / 2) - (i * this.STRIDE);
-      }
+    _snapNearest() {
+      this.targetX = this._xForIndex(this._nearestIndex(this.targetX));
+    }
 
-      /* Clamp within [last-item … first-item] */
-      _clamp(x) {
-        return Math.max(this._xForIndex(this.n - 1), Math.min(this._xForIndex(0), x));
-      }
-
-      /* Which card index is closest to center at position x? */
-      _nearestIndex(x) {
-        const raw = ((this.stage.offsetWidth / 2) - (this.ITEM_W / 2) - x) / this.STRIDE;
-        return Math.max(0, Math.min(this.n - 1, Math.round(raw)));
-      }
-
-      /* Animate to card i. instant=true skips lerp (resize/init). */
-      goTo(i, instant = false) {
-        const idx    = Math.max(0, Math.min(this.n - 1, i));
-        this.targetX = this._xForIndex(idx);
-        if (instant) { this.currentX = this.targetX; this._applyTransform(); }
-      }
-
-      navigate(dir) { this.goTo(this.activeIndex + dir); }
-
-      /* GPU-composited transform — zero layout reflow */
-      _applyTransform() {
-        this.track.style.transform = `translateX(${this.currentX}px)`;
-      }
-
-      /* Update .is-active, dots, counter — only when index changes */
-      _syncUI(idx) {
-        this.activeIndex = idx;
-        this.items.forEach((el, i) => el.classList.toggle('is-active', i === idx));
-        if (this.dots) {
-          this.dots.forEach((d, i) => d.classList.toggle('is-active', i === idx));
+    _startLoop() {
+      const tick = () => {
+        this.currentX += (this.targetX - this.currentX) * this.LERP;
+        if (Math.abs(this.targetX - this.currentX) < 0.05) {
+          this.currentX = this.targetX;
         }
-        if (this.counterEl) {
-          this.counterEl.textContent =
-            String(idx + 1).padStart(2, '0') + ' / ' +
-            String(this.n).padStart(2, '0');
+        this._applyTransform();
+
+        const live = this._nearestIndex(this.currentX);
+        if (live !== this._lastActive) {
+          this._lastActive = live;
+          this._syncUI(live);
         }
-      }
 
-      /* Snap targetX to the nearest card's exact center position */
-      _snapNearest() {
-        this.targetX = this._xForIndex(this._nearestIndex(this.targetX));
-      }
-
-      /* Main animation loop — runs every frame forever */
-      _startLoop() {
-        const tick = () => {
-          /* Lerp currentX toward targetX */
-          this.currentX += (this.targetX - this.currentX) * this.LERP;
-
-          /* Snap to exact pixel when close enough (prevents shimmer) */
-          if (Math.abs(this.targetX - this.currentX) < 0.06) {
-            this.currentX = this.targetX;
-          }
-
-          this._applyTransform();
-
-          /* Update active card from the live currentX position */
-          const live = this._nearestIndex(this.currentX);
-          if (live !== this._lastActive) {
-            this._lastActive = live;
-            this._syncUI(live);
-          }
-
-          requestAnimationFrame(tick);
-        };
         requestAnimationFrame(tick);
-      }
+      };
+      requestAnimationFrame(tick);
+    }
 
-      _buildDots() {
-        if (!this.dotsEl) return;
-        this.dots = this.items.map((_, i) => {
-          const btn = document.createElement('button');
-          btn.className = 'c-dot' + (i === 0 ? ' is-active' : '');
-          btn.setAttribute('aria-label', `Go to item ${i + 1}`);
-          btn.addEventListener('click', () => this.goTo(i));
-          this.dotsEl.appendChild(btn);
-          return btn;
-        });
-      }
+    _buildDots() {
+      if (!this.dotsEl) return;
+      this.dots = this.items.map((_, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'c-dot' + (i === 0 ? ' is-active' : '');
+        btn.setAttribute('aria-label', `Go to item ${i + 1}`);
+        btn.addEventListener('click', () => this.goTo(i));
+        this.dotsEl.appendChild(btn);
+        return btn;
+      });
+    }
 
-      _bindEvents() {
-        const stage = this.stage;
+    _bindEvents() {
+      const stage = this.stage;
 
-        /* ── WHEEL ───────────────────────────────────────────────
-           Axis detection + direct delta application.
+      /* ── WHEEL ──────────────────────────────────────────────────
+         RULE: if |deltaX| > 3px  →  horizontal gesture  →  carousel.
+               if |deltaX| <= 3px  →  vertical/mouse wheel  →  page or step.
 
-           THE FIX: we no longer accumulate velocity.
-           We just do:  targetX -= deltaX  each event.
-           Lerp handles smooth animation. No accumulation,
-           no overshoot, always in sync with finger movement.
-        ─────────────────────────────────────────────────────── */
-        stage.addEventListener('wheel', (e) => {
-          const absX = Math.abs(e.deltaX);
-          const absY = Math.abs(e.deltaY);
-          const THRESHOLD = 1.2; /* deltaX must be 20% bigger than deltaY */
+         No ratio threshold. Simple, reliable, works on all trackpads.
 
-          /* ── CASE A: Trackpad horizontal swipe ──
-             deltaX dominates → move carousel, block page scroll */
-          if (absX > absY * THRESHOLD) {
+         Why 3px? Trackpads at rest produce deltaX = 0 exactly.
+         Any intentional sideways swipe immediately exceeds 3px.
+         Accidental micro-drift is < 3px and gets ignored.
+      ─────────────────────────────────────────────────────────── */
+      stage.addEventListener('wheel', (e) => {
+        const absX = Math.abs(e.deltaX);
+
+        /* ── HORIZONTAL: trackpad swipe left/right ── */
+        if (absX > 3) {
+          e.preventDefault();
+          /* Direct 1:1 application — lerp animates it smoothly */
+          this.targetX = this._clamp(this.targetX - e.deltaX);
+          clearTimeout(this._snapTimer);
+          this._snapTimer = setTimeout(() => this._snapNearest(), 250);
+          return;
+        }
+
+        /* ── VERTICAL: page scrolls, OR mouse wheel steps carousel ─
+           deltaX is essentially zero here, so this is either:
+           (a) a vertical trackpad swipe → let page scroll (do nothing)
+           (b) a PC mouse wheel → step one card per notch
+
+           We detect (b) by large deltaY: mouse wheels fire ~100px/notch.
+           Trackpad vertical scrolls are < 50px per event.              */
+        if (Math.abs(e.deltaY) > 50 && absX <= 3) {
+          /* PC mouse wheel — step one card, block page scroll */
+          if (!this._mwLock) {
             e.preventDefault();
-            /* Apply deltaX DIRECTLY — 1:1 with finger movement */
-            this.targetX = this._clamp(this.targetX - e.deltaX);
-            /* Snap to nearest card after 150ms of idle */
-            clearTimeout(this._snapTimer);
-            this._snapTimer = setTimeout(() => this._snapNearest(), 150);
-            return;
-          }
-
-          /* ── CASE B: Vertical scroll ──
-             deltaY dominates → ignore carousel, let page scroll freely */
-          if (absY > absX * THRESHOLD && absX < 5) {
-            /* NO preventDefault — browser handles page scroll */
-            return;
-          }
-
-          /* ── CASE C: PC mouse wheel ──
-             No horizontal delta (deltaX = 0), large vertical delta.
-             Treat as: one notch = one card step.
-             Debounced by 320ms so rapid scrolling steps cleanly. */
-          if (!this._mouseWheelLock) {
-            e.preventDefault();
-            this._mouseWheelLock = true;
+            this._mwLock = true;
             this.goTo(this.activeIndex + (e.deltaY > 0 ? 1 : -1));
-            setTimeout(() => { this._mouseWheelLock = false; }, 320);
+            setTimeout(() => { this._mwLock = false; }, 380);
           } else {
-            e.preventDefault(); /* block page scroll during lock window */
+            e.preventDefault(); /* hold during lock window */
           }
-
-        }, { passive: false });
-
-        /* ── DRAG (mouse) ──────────────────────────────────────── */
-        stage.addEventListener('mousedown', (e) => {
-          this._dragging   = true;
-          this._dragStartX = e.clientX;
-          this._dragStartT = this.targetX;
-          this._prevMX     = e.clientX;
-          this._velX       = 0;
-          stage.classList.add('is-dragging');
-          e.preventDefault();
-        });
-
-        /* Window listeners so drag works even if cursor leaves stage */
-        window.addEventListener('mousemove', (e) => {
-          if (!this._dragging) return;
-          const dx     = e.clientX - this._dragStartX;
-          this._velX   = e.clientX - this._prevMX;
-          this._prevMX = e.clientX;
-          this.targetX = this._clamp(this._dragStartT + dx * 1.1);
-        });
-
-        window.addEventListener('mouseup', () => {
-          if (!this._dragging) return;
-          this._dragging = false;
-          stage.classList.remove('is-dragging');
-          /* Small momentum throw then snap */
-          this.targetX = this._clamp(this.targetX + this._velX * 4);
-          requestAnimationFrame(() => this._snapNearest());
-        });
-
-        /* ── TOUCH ─────────────────────────────────────────────── */
-        stage.addEventListener('touchstart', (e) => {
-          this._tStartX = e.touches[0].clientX;
-          this._tStartY = e.touches[0].clientY;
-          this._tLastX  = this._tStartX;
-          this._tVel    = 0;
-          this._tAxis   = null; /* axis not yet determined */
-          this._tDragT  = this.targetX;
-        }, { passive: true });
-
-        stage.addEventListener('touchmove', (e) => {
-          const cx = e.touches[0].clientX;
-          const cy = e.touches[0].clientY;
-
-          /* Lock scroll axis on the first significant finger movement */
-          if (!this._tAxis) {
-            const dx = Math.abs(cx - this._tStartX);
-            const dy = Math.abs(cy - this._tStartY);
-            if (dx < 5 && dy < 5) return; /* not enough movement yet */
-            this._tAxis = dx > dy ? 'h' : 'v';
-          }
-
-          /* Vertical axis → let page scroll naturally */
-          if (this._tAxis === 'v') return;
-
-          /* Horizontal axis → carousel moves */
-          e.preventDefault();
-          this._tVel   = cx - this._tLastX;
-          this._tLastX = cx;
-          this.targetX = this._clamp(this._tDragT + (cx - this._tStartX));
-        }, { passive: false });
-
-        stage.addEventListener('touchend', () => {
-          if (this._tAxis !== 'h') return;
-          /* Small momentum throw then snap */
-          this.targetX = this._clamp(this.targetX + this._tVel * 3);
-          requestAnimationFrame(() => this._snapNearest());
-        }, { passive: true });
-
-        /* ── RESIZE ─────────────────────────────────────────────── */
-        window.addEventListener('resize', () => {
-          this._measure();
-          this.goTo(this.activeIndex, true /* instant, no lerp */);
-        });
-      }
-    }
-
-    /* ══════════════════════════════════════════════════════════════
-       BOOTSTRAP
-    ══════════════════════════════════════════════════════════════ */
-    const carousels = {};
-    document.querySelectorAll('.carousel-stage').forEach(stage => {
-      carousels[stage.dataset.carousel] = new LerpCarousel(stage);
-    });
-
-    document.querySelectorAll('.c-arrow').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const car = carousels[btn.dataset.carousel];
-        if (car) car.navigate(parseInt(btn.dataset.dir, 10));
-      });
-    });
-
-    /* ══════════════════════════════════════════════════════════════
-       REVEAL ON SCROLL
-    ══════════════════════════════════════════════════════════════ */
-    const revealObs = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          revealObs.unobserve(entry.target);
+          return;
         }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
-    /* ══════════════════════════════════════════════════════════════
-       SMOOTH ANCHOR SCROLL
-    ══════════════════════════════════════════════════════════════ */
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', e => {
-        const target = document.querySelector(a.getAttribute('href'));
-        if (target) {
-          e.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        /* ── PURE VERTICAL TRACKPAD: do nothing, let browser scroll ── */
+        /* (no preventDefault, page scrolls normally) */
+
+      }, { passive: false });
+
+      /* ── DRAG (mouse) ─────────────────────────────────────────── */
+      stage.addEventListener('mousedown', (e) => {
+        this._dragging   = true;
+        this._dragStartX = e.clientX;
+        this._dragStartT = this.targetX;
+        this._prevMX     = e.clientX;
+        this._velX       = 0;
+        stage.classList.add('is-dragging');
+        e.preventDefault();
+      });
+
+      window.addEventListener('mousemove', (e) => {
+        if (!this._dragging) return;
+        const dx     = e.clientX - this._dragStartX;
+        this._velX   = e.clientX - this._prevMX;
+        this._prevMX = e.clientX;
+        this.targetX = this._clamp(this._dragStartT + dx * 1.1);
+      });
+
+      window.addEventListener('mouseup', () => {
+        if (!this._dragging) return;
+        this._dragging = false;
+        stage.classList.remove('is-dragging');
+        this.targetX = this._clamp(this.targetX + this._velX * 4);
+        requestAnimationFrame(() => this._snapNearest());
+      });
+
+      /* ── TOUCH ────────────────────────────────────────────────── */
+      stage.addEventListener('touchstart', (e) => {
+        this._tStartX = e.touches[0].clientX;
+        this._tStartY = e.touches[0].clientY;
+        this._tLastX  = this._tStartX;
+        this._tVel    = 0;
+        this._tAxis   = null;
+        this._tDragT  = this.targetX;
+      }, { passive: true });
+
+      stage.addEventListener('touchmove', (e) => {
+        const cx = e.touches[0].clientX;
+        const cy = e.touches[0].clientY;
+        if (!this._tAxis) {
+          const dx = Math.abs(cx - this._tStartX);
+          const dy = Math.abs(cy - this._tStartY);
+          if (dx < 5 && dy < 5) return;
+          this._tAxis = dx > dy ? 'h' : 'v';
         }
-      });
-    });
+        if (this._tAxis === 'v') return;
+        e.preventDefault();
+        this._tVel   = cx - this._tLastX;
+        this._tLastX = cx;
+        this.targetX = this._clamp(this._tDragT + (cx - this._tStartX));
+      }, { passive: false });
 
-    /* ══════════════════════════════════════════════════════════════
-       MOBILE MENU
-    ══════════════════════════════════════════════════════════════ */
-    function closeMobileMenu() {
-      document.getElementById('nav-mobile').classList.remove('open');
+      stage.addEventListener('touchend', () => {
+        if (this._tAxis !== 'h') return;
+        this.targetX = this._clamp(this.targetX + this._tVel * 3);
+        requestAnimationFrame(() => this._snapNearest());
+      }, { passive: true });
+
+      /* ── RESIZE ───────────────────────────────────────────────── */
+      window.addEventListener('resize', () => {
+        this._measure();
+        this.goTo(this.activeIndex, true);
+      });
     }
-    document.getElementById('hamburger').addEventListener('click', () => {
-      document.getElementById('nav-mobile').classList.add('open');
+  }
+
+  /* Bootstrap */
+  const carousels = {};
+  document.querySelectorAll('.carousel-stage').forEach(stage => {
+    carousels[stage.dataset.carousel] = new LerpCarousel(stage);
+  });
+  document.querySelectorAll('.c-arrow').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const car = carousels[btn.dataset.carousel];
+      if (car) car.navigate(parseInt(btn.dataset.dir, 10));
     });
-    document.getElementById('nav-close').addEventListener('click', closeMobileMenu);
+  });
+
+  /* Reveal on scroll */
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  /* Smooth anchor links */
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+
+  /* Mobile menu */
+  function closeMobileMenu() {
+    document.getElementById('nav-mobile').classList.remove('open');
+  }
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('nav-mobile').classList.add('open');
+  });
+  document.getElementById('nav-close').addEventListener('click', closeMobileMenu);
   </script>
 
 </body>
