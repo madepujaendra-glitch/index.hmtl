@@ -146,10 +146,7 @@
     .reveal.visible { opacity: 1; transform: none; }
 
     /* ── RESPONSIVE ── */
-    @media (max-width: 1024px) {
-      .hero-inner { grid-template-columns: 1fr; }
-      .skills-grid { grid-template-columns: 1fr; }
-    }
+    @media (max-width: 1024px) { .hero-inner { grid-template-columns: 1fr; } .skills-grid { grid-template-columns: 1fr; } }
     @media (max-width: 768px) {
       :root { --item-w: 220px; --item-gap: 20px; }
       .portfolio-grid { grid-template-columns: 1fr; }
@@ -229,7 +226,7 @@
     <p class="section-sub reveal">Drag the videos left or right, or use the arrows</p>
   </div>
 
-  <!-- Row 1 — Short-form -->
+  <!-- Row 1 -->
   <div class="carousel-block">
     <div class="carousel-label-row"><span class="carousel-label-pill">short-form content</span></div>
     <div class="carousel-stage" data-carousel="main">
@@ -262,7 +259,7 @@
     </div>
   </div>
 
-  <!-- Row 2 — Motion Graphic -->
+  <!-- Row 2 -->
   <div class="carousel-block">
     <div class="carousel-label-row"><span class="carousel-label-pill">motion graphic</span></div>
     <div class="carousel-stage" data-carousel="motion">
@@ -295,7 +292,7 @@
     </div>
   </div>
 
-  <!-- Row 3 — Video Ads -->
+  <!-- Row 3 -->
   <div class="carousel-block">
     <div class="carousel-label-row"><span class="carousel-label-pill">video ads</span></div>
     <div class="carousel-stage" data-carousel="ads">
@@ -323,7 +320,7 @@
       <span class="c-counter" id="counter-ads">01 / 03</span>
     </div>
   </div>
-</div><!-- /#showcase -->
+</div>
 
 <!-- SKILLS -->
 <div class="section" id="skills">
@@ -412,19 +409,36 @@
 </footer>
 
 <script>
-/* ══════════════════════════════════════════════════════
-   LERPCAROUSEL — smooth fixed-center spotlight carousel
+/* ══════════════════════════════════════════════════════════════
+   LERPCAROUSEL — v6
 
-   SCROLL LOGIC:
-   ├── |deltaX| > 3px  → horizontal trackpad → carousel moves (1:1 with finger)
-   ├── |deltaY| > 50px, |deltaX| ≤ 3px → PC mouse wheel → one card per notch
-   └── everything else → vertical trackpad → page scrolls freely
+   ROOT CAUSE OF "MACET" — NOW FIXED:
+   ─────────────────────────────────────────────────────────────
+   Previous versions updated only targetX during wheel events,
+   then let LERP slowly chase it. With LERP=0.11, currentX is
+   ~35 frames behind targetX. So during a trackpad swipe:
+     Frame 1:  finger moves 10px  → targetX moves 10px
+     Frame 1:  currentX moves 1.1px (LERP 0.11 × 10)
+     Frame 2:  finger moves 10px  → targetX moves 10px
+     Frame 2:  currentX moves ~2px
+     ...track visually lags far behind finger → feels "macet"
 
-   SMOOTHNESS TUNING:
-   ├── LERP 0.11 → ~35 frames to reach target = long silky deceleration tail
-   ├── Drag throw ×7, touch throw ×6 → generous momentum on release
-   └── Card CSS: cubic-bezier(0.16,1,0.3,1) = spring easing on scale/opacity
-══════════════════════════════════════════════════════ */
+   THE FIX — two-phase design:
+   ┌─ PHASE 1: ACTIVE INPUT (wheel/drag/touch in progress)
+   │  currentX moves INSTANTLY with the finger (no lag at all).
+   │  Both currentX and targetX update together.
+   │  Result: track is exactly 1:1 with finger movement.
+   │
+   └─ PHASE 2: SETTLING (input stopped, snapping to card center)
+      Only targetX is set (to nearest card center).
+      currentX lerps smoothly toward it with LERP=0.12.
+      Result: smooth spring deceleration into snapped position.
+
+   This gives you:
+   • Zero lag while swiping (phase 1)
+   • Smooth snap animation when you stop (phase 2)
+   • No jitter, no overshoot, no macet
+══════════════════════════════════════════════════════════════ */
 class LerpCarousel {
   constructor(stageEl) {
     this.stage  = stageEl;
@@ -432,24 +446,32 @@ class LerpCarousel {
     this.items  = Array.from(this.track.querySelectorAll('.carousel-item'));
     this.n      = this.items.length;
 
-    const id = stageEl.dataset.carousel;
+    const id       = stageEl.dataset.carousel;
     this.dotsEl    = document.getElementById('dots-'    + id);
     this.counterEl = document.getElementById('counter-' + id);
 
+    // geometry
     this.ITEM_W = 0; this.GAP = 0; this.STRIDE = 0;
 
-    // 0.11 = smooth long glide (~35 frames to reach target at 60fps)
-    this.LERP = 0.11;
+    // LERP only used during snap phase (phase 2)
+    this.LERP = 0.12;
 
-    this.currentX = 0; this.targetX = 0;
-    this.activeIndex = 0; this._lastActive = -1;
+    // position state
+    this.currentX    = 0;
+    this.targetX     = 0;
+    this.activeIndex = 0;
+    this._lastActive = -1;
 
     // drag
-    this._dragging = false; this._dragStartX = 0;
-    this._dragStartT = 0; this._prevMX = 0; this._velX = 0;
+    this._dragging   = false;
+    this._dragStartX = 0;
+    this._dragStartT = 0;
+    this._prevMX     = 0;
+    this._velX       = 0;
 
     // wheel
-    this._snapTimer = null; this._mwLock = false;
+    this._snapTimer = null;
+    this._mwLock    = false;
 
     // touch
     this._tStartX = 0; this._tStartY = 0;
@@ -488,16 +510,31 @@ class LerpCarousel {
     return Math.max(0, Math.min(this.n - 1, Math.round(raw)));
   }
 
+  // Move to card i with lerp (animated snap). instant=true for resize/init.
   goTo(i, instant = false) {
-    const idx = Math.max(0, Math.min(this.n - 1, i));
+    const idx    = Math.max(0, Math.min(this.n - 1, i));
     this.targetX = this._xForIndex(idx);
     if (instant) { this.currentX = this.targetX; this._applyTransform(); }
   }
 
   navigate(dir) { this.goTo(this.activeIndex + dir); }
 
+  // PHASE 1 helper — moves BOTH currentX and targetX instantly.
+  // Used during active input so there is zero visual lag.
+  _moveDirect(x) {
+    this.currentX = x;
+    this.targetX  = x;
+    this._applyTransform();
+    this._updateActiveFromCurrent();
+  }
+
   _applyTransform() {
     this.track.style.transform = `translateX(${this.currentX}px)`;
+  }
+
+  _updateActiveFromCurrent() {
+    const live = this._nearestIndex(this.currentX);
+    if (live !== this._lastActive) { this._lastActive = live; this._syncUI(live); }
   }
 
   _syncUI(idx) {
@@ -510,17 +547,24 @@ class LerpCarousel {
     }
   }
 
+  // Snap to nearest card center — triggers phase 2 (lerp takes over)
   _snapNearest() {
-    this.targetX = this._xForIndex(this._nearestIndex(this.targetX));
+    this.targetX = this._xForIndex(this._nearestIndex(this.currentX));
   }
 
+  // RAF loop — only does work when currentX ≠ targetX (phase 2)
   _startLoop() {
     const tick = () => {
-      this.currentX += (this.targetX - this.currentX) * this.LERP;
-      if (Math.abs(this.targetX - this.currentX) < 0.02) this.currentX = this.targetX;
-      this._applyTransform();
-      const live = this._nearestIndex(this.currentX);
-      if (live !== this._lastActive) { this._lastActive = live; this._syncUI(live); }
+      const diff = this.targetX - this.currentX;
+      if (Math.abs(diff) > 0.05) {
+        this.currentX += diff * this.LERP;
+        this._applyTransform();
+        this._updateActiveFromCurrent();
+      } else if (diff !== 0) {
+        this.currentX = this.targetX;
+        this._applyTransform();
+        this._updateActiveFromCurrent();
+      }
       requestAnimationFrame(tick);
     };
     requestAnimationFrame(tick);
@@ -541,69 +585,83 @@ class LerpCarousel {
   _bindEvents() {
     const stage = this.stage;
 
-    // ── WHEEL ─────────────────────────────────────────────────────
+    /* ── WHEEL ──────────────────────────────────────────────────────
+       Horizontal trackpad swipe (|deltaX| > 3):
+         → _moveDirect(): instant, zero lag (phase 1)
+         → schedule _snapNearest() after 200ms idle (phase 2)
+
+       PC mouse wheel (|deltaX| ≤ 3, |deltaY| > 50):
+         → goTo(±1): lerp animation to next card (phase 2)
+
+       Pure vertical trackpad:
+         → nothing, browser scrolls page freely
+    ─────────────────────────────────────────────────────────────── */
     stage.addEventListener('wheel', (e) => {
       const absX = Math.abs(e.deltaX);
       const absY = Math.abs(e.deltaY);
 
-      // Horizontal trackpad swipe (|deltaX| > 3px) → move carousel
       if (absX > 3) {
+        // HORIZONTAL SWIPE — instant, 1:1 with finger
         e.preventDefault();
-        this.targetX = this._clamp(this.targetX - e.deltaX);
+        const next = this._clamp(this.currentX - e.deltaX);
+        this._moveDirect(next);
         clearTimeout(this._snapTimer);
-        this._snapTimer = setTimeout(() => this._snapNearest(), 300);
+        this._snapTimer = setTimeout(() => this._snapNearest(), 200);
         return;
       }
 
-      // PC mouse wheel (large deltaY, no deltaX) → one card per notch
       if (absY > 50 && absX <= 3) {
+        // PC MOUSE WHEEL — step one card per notch
         if (!this._mwLock) {
           e.preventDefault();
           this._mwLock = true;
           this.goTo(this.activeIndex + (e.deltaY > 0 ? 1 : -1));
-          setTimeout(() => { this._mwLock = false; }, 420);
+          setTimeout(() => { this._mwLock = false; }, 400);
         } else {
           e.preventDefault();
         }
         return;
       }
-      // Pure vertical trackpad → let browser scroll the page (no preventDefault)
+      // Pure vertical trackpad → let browser handle page scroll
     }, { passive: false });
 
-    // ── DRAG ──────────────────────────────────────────────────────
+    /* ── DRAG ─────────────────────────────────────────────────────── */
     stage.addEventListener('mousedown', (e) => {
-      this._dragging = true;
+      this._dragging   = true;
       this._dragStartX = e.clientX;
-      this._dragStartT = this.targetX;
-      this._prevMX = e.clientX;
-      this._velX = 0;
+      this._dragStartT = this.currentX; // anchor from CURRENT position
+      this._prevMX     = e.clientX;
+      this._velX       = 0;
       stage.classList.add('is-dragging');
       e.preventDefault();
     });
+
     window.addEventListener('mousemove', (e) => {
       if (!this._dragging) return;
       const dx = e.clientX - this._dragStartX;
-      this._velX   = e.clientX - this._prevMX;
+      this._velX = e.clientX - this._prevMX;
       this._prevMX = e.clientX;
-      this.targetX = this._clamp(this._dragStartT + dx);
+      // Phase 1: instant 1:1 with mouse
+      this._moveDirect(this._clamp(this._dragStartT + dx));
     });
+
     window.addEventListener('mouseup', () => {
       if (!this._dragging) return;
       this._dragging = false;
       stage.classList.remove('is-dragging');
-      // Momentum throw — ×7 for a generous glide on release
-      this.targetX = this._clamp(this.targetX + this._velX * 7);
+      // Small momentum throw then snap (phase 2)
+      this.targetX = this._clamp(this.currentX + this._velX * 6);
       requestAnimationFrame(() => this._snapNearest());
     });
 
-    // ── TOUCH ─────────────────────────────────────────────────────
+    /* ── TOUCH ────────────────────────────────────────────────────── */
     stage.addEventListener('touchstart', (e) => {
       this._tStartX = e.touches[0].clientX;
       this._tStartY = e.touches[0].clientY;
       this._tLastX  = this._tStartX;
       this._tVel    = 0;
       this._tAxis   = null;
-      this._tDragT  = this.targetX;
+      this._tDragT  = this.currentX; // anchor from CURRENT
     }, { passive: true });
 
     stage.addEventListener('touchmove', (e) => {
@@ -617,19 +675,20 @@ class LerpCarousel {
       }
       if (this._tAxis === 'v') return;
       e.preventDefault();
-      this._tVel   = cx - this._tLastX;
+      this._tVel  = cx - this._tLastX;
       this._tLastX = cx;
-      this.targetX = this._clamp(this._tDragT + (cx - this._tStartX));
+      // Phase 1: instant 1:1 with finger
+      this._moveDirect(this._clamp(this._tDragT + (cx - this._tStartX)));
     }, { passive: false });
 
     stage.addEventListener('touchend', () => {
       if (this._tAxis !== 'h') return;
-      // Momentum throw — ×6 for mobile
-      this.targetX = this._clamp(this.targetX + this._tVel * 6);
+      // Momentum throw then snap (phase 2)
+      this.targetX = this._clamp(this.currentX + this._tVel * 5);
       requestAnimationFrame(() => this._snapNearest());
     }, { passive: true });
 
-    // ── RESIZE ────────────────────────────────────────────────────
+    /* ── RESIZE ───────────────────────────────────────────────────── */
     window.addEventListener('resize', () => {
       this._measure();
       this.goTo(this.activeIndex, true);
@@ -637,7 +696,7 @@ class LerpCarousel {
   }
 }
 
-// Bootstrap
+// Bootstrap carousels
 const carousels = {};
 document.querySelectorAll('.carousel-stage').forEach(stage => {
   carousels[stage.dataset.carousel] = new LerpCarousel(stage);
