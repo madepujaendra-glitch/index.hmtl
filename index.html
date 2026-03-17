@@ -279,13 +279,13 @@
     }
     .cert-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,0.4), 0 0 15px rgba(195,255,0,0.06); }
     .cert-img {
-      width: 100%; aspect-ratio: 16/9;
+      width: 100%;
       background: #fff;
       display: flex; align-items: center; justify-content: center;
       font-size: 0.7rem; color: var(--muted); text-align: center; padding: 0;
       overflow: hidden;
     }
-    .cert-img img { width: 100%; height: 100%; object-fit: contain; background: #fff; }
+    .cert-img img { width: 100%; height: auto; display: block; background: #fff; }
     .cert-label { padding: 0.7rem 0.9rem; font-size: 0.75rem; color: var(--muted); line-height: 1.4; }
 
     /* ── ABOUT: Client relations photos ─────────────── */
@@ -333,11 +333,11 @@
     .award-title-text { font-family: 'Montserrat', sans-serif; font-size: 1.5rem; font-weight: 800; letter-spacing: -0.5px; line-height: 1.2; }
     .award-desc { color: var(--muted); font-size: 0.88rem; line-height: 1.75; }
     .award-cert {
-      width: 100%; aspect-ratio: 16/9; border-radius: 12px;
+      width: 100%; border-radius: 12px;
       background: #fff;
       overflow: hidden;
     }
-    .award-cert img { width: 100%; height: 100%; object-fit: contain; background: #fff; }
+    .award-cert img { width: 100%; height: auto; display: block; background: #fff; }
 
     /* BTS & Company Profile wide rows */
     .wide-row {
