@@ -339,7 +339,7 @@
       font-size: 0.75rem; color: var(--muted); text-align: center; padding: 1rem;
       border: 1px dashed rgba(195,255,0,0.15); overflow: hidden;
     }
-    .award-cert img { width: 100%; height: 100%; object-fit: cover; border-radius: 10px; }
+    .award-cert img { width: 100%; height: 100%; object-fit: contain; background: #fff; border-radius: 10px; }
 
     /* BTS & Company Profile wide rows */
     .wide-row {
@@ -380,15 +380,13 @@
     .ig-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
     .ig-handle { font-size: 0.88rem; font-weight: 700; color: var(--text); }
     .ig-followers { font-size: 0.75rem; color: var(--primary); margin-top: 0.1rem; }
-    .ig-videos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+    .ig-videos { width: 100%; overflow: hidden; }
     .ig-thumb {
-      aspect-ratio: 1;
-      background: rgba(195,255,0,0.04);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.55rem; color: var(--muted); text-align: center;
+      width: 100%; aspect-ratio: 9/16;
+      background: #000;
       overflow: hidden;
     }
-    .ig-thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .ig-thumb iframe { display: block; width: 100%; height: 100%; border: none; pointer-events: none; }
     .ig-link {
       display: block; text-align: center; padding: 0.8rem;
       font-size: 0.75rem; font-weight: 600; color: var(--primary);
@@ -651,9 +649,7 @@
         </div>
       </div>
       <div class="ig-videos">
-        <div class="ig-thumb"><!-- <img src="URL_THUMB_1.jpg"> -->🎬</div>
-        <div class="ig-thumb"><!-- <img src="URL_THUMB_2.jpg"> -->🎬</div>
-        <div class="ig-thumb"><!-- <img src="URL_THUMB_3.jpg"> -->🎬</div>
+        <div class="ig-thumb"><iframe src="https://www.youtube.com/embed/rNZyRjAqnEc?autoplay=1&mute=1&loop=1&playlist=rNZyRjAqnEc&controls=0" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
       </div>
       <a href="https://instagram.com/ruangsepri" target="_blank" class="ig-link">View on Instagram →</a>
     </div>
@@ -669,9 +665,7 @@
         </div>
       </div>
       <div class="ig-videos">
-        <div class="ig-thumb"><!-- <img src="URL_THUMB_1.jpg"> -->🎬</div>
-        <div class="ig-thumb"><!-- <img src="URL_THUMB_2.jpg"> -->🎬</div>
-        <div class="ig-thumb"><!-- <img src="URL_THUMB_3.jpg"> -->🎬</div>
+        <div class="ig-thumb"><iframe src="https://www.youtube.com/embed/zMEycC6PtFo?autoplay=1&mute=1&loop=1&playlist=zMEycC6PtFo&controls=0" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
       </div>
       <a href="https://instagram.com/techpreneurboi" target="_blank" class="ig-link">View on Instagram →</a>
     </div>
@@ -687,9 +681,7 @@
         </div>
       </div>
       <div class="ig-videos">
-        <div class="ig-thumb"><!-- <img src="URL_THUMB_1.jpg"> -->🎬</div>
-        <div class="ig-thumb"><!-- <img src="URL_THUMB_2.jpg"> -->🎬</div>
-        <div class="ig-thumb"><!-- <img src="URL_THUMB_3.jpg"> -->🎬</div>
+        <div class="ig-thumb"><iframe src="https://www.youtube.com/embed/LvjzKyPSyQg?autoplay=1&mute=1&loop=1&playlist=LvjzKyPSyQg&controls=0" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
       </div>
       <a href="https://instagram.com/victoriawong68" target="_blank" class="ig-link">View on Instagram →</a>
     </div>
@@ -705,9 +697,7 @@
         </div>
       </div>
       <div class="ig-videos">
-        <div class="ig-thumb"><!-- <img src="URL_THUMB_1.jpg"> -->🎬</div>
-        <div class="ig-thumb"><!-- <img src="URL_THUMB_2.jpg"> -->🎬</div>
-        <div class="ig-thumb"><!-- <img src="URL_THUMB_3.jpg"> -->🎬</div>
+        <div class="ig-thumb"><iframe src="https://www.youtube.com/embed/1c1neNWR3Y8?autoplay=1&mute=1&loop=1&playlist=1c1neNWR3Y8&controls=0" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
       </div>
       <a href="https://instagram.com/createcontentclub" target="_blank" class="ig-link">View on Instagram →</a>
     </div>
@@ -723,11 +713,29 @@
         </div>
       </div>
       <div class="ig-videos">
-        <div class="ig-thumb"><!-- <img src="URL_THUMB_1.jpg"> -->🎬</div>
-        <div class="ig-thumb"><!-- <img src="URL_THUMB_2.jpg"> -->🎬</div>
-        <div class="ig-thumb"><!-- <img src="URL_THUMB_3.jpg"> -->🎬</div>
+        <div class="ig-thumb"><iframe src="https://www.youtube.com/embed/opAnJJo5L_0?autoplay=1&mute=1&loop=1&playlist=opAnJJo5L_0&controls=0" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
       </div>
       <a href="https://instagram.com/aicreatorlabs.id" target="_blank" class="ig-link">View on Instagram →</a>
+    </div>
+
+    <div class="ig-card">
+      <div class="ig-header">
+        <div class="ig-avatar">
+          <!-- ★ REPLACE: upload foto profil @abedsteady ke Cloudinary -->
+          👤
+        </div>
+        <div>
+          <div class="ig-handle">@abedsteady</div>
+          <div class="ig-followers">41.6K Followers ✓</div>
+        </div>
+      </div>
+      <div class="ig-videos">
+        <div class="ig-thumb" style="display:flex; align-items:center; justify-content:center; background:rgba(195,255,0,0.04); font-size:0.65rem; color:var(--muted); text-align:center;">
+          <!-- ★ REPLACE: isi YouTube ID video @abedsteady -->
+          🎬 Video coming soon
+        </div>
+      </div>
+      <a href="https://instagram.com/abedsteady" target="_blank" class="ig-link">View on Instagram →</a>
     </div>
 
   </div>
@@ -890,12 +898,7 @@
       </div>
       <!-- Certificate image -->
       <div class="award-cert">
-        <!-- ★ REPLACE: uncomment baris img di bawah dan isi URL sertifikatmu -->
-        <!-- <img src="URL_SERTIFIKAT_1ST_PLACE.jpg" alt="1st Place Certificate"> -->
-        🏆 Upload foto sertifikat di sini<br>
-        <small style="margin-top:0.4rem; display:block; opacity:0.6;">
-          Uncomment &lt;img&gt; tag di atas &amp; paste URL foto
-        </small>
+        <img src="https://res.cloudinary.com/drfokzzbf/image/upload/v1773750787/Juara_1_Creative_Video_-_I_Made_Puja_Endra_2_page-0001_x0lftc.jpg" alt="1st Place Certificate">
       </div>
     </div>
   </div>
@@ -1004,7 +1007,7 @@
           </div>
           <div>
             <div class="testi-name">@ruangsepri</div>
-            <div class="testi-role">AI Content Creator · 500K+ Followers</div>
+            <div class="testi-role">AI Content Creator · 192K Followers</div>
           </div>
         </div>
       </div>
@@ -1022,7 +1025,7 @@
           </div>
           <div>
             <div class="testi-name">@techpreneurboi</div>
-            <div class="testi-role">Tech Entrepreneur · Automation Expert</div>
+            <div class="testi-role">AI Agent &amp; Automation Expert · 35.2K Followers</div>
           </div>
         </div>
       </div>
@@ -1040,7 +1043,7 @@
           </div>
           <div>
             <div class="testi-name">@victoriawong68</div>
-            <div class="testi-role">Personal Brand · Business Coach</div>
+            <div class="testi-role">Digital Creator · 493K Followers ✓</div>
           </div>
         </div>
       </div>
@@ -1058,7 +1061,44 @@
           </div>
           <div>
             <div class="testi-name">@createcontent.club</div>
-            <div class="testi-role">Creator Community · Content Educator</div>
+            <div class="testi-role">Creator Community · 456K Followers</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-text">
+          "I was looking for someone who could keep up with the pace of my content
+          and actually understand what I'm building. Imade does both — clean edits,
+          fast turnaround, and he always brings good energy to the collaboration."
+        </div>
+        <div class="testi-author">
+          <div class="testi-avatar">
+            <!-- ★ REPLACE: upload foto profil @abedsteady ke Cloudinary -->
+            👤
+          </div>
+          <div>
+            <div class="testi-name">@abedsteady</div>
+            <div class="testi-role">AI Educator &amp; Mentor · 41.6K Followers ✓</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-text">
+          "Imade gets the brand instantly. No lengthy briefings needed — he just
+          delivers. The AI-driven workflow is impressive and the results always
+          look polished and on-brand."
+        </div>
+        <div class="testi-author">
+          <div class="testi-avatar">
+            <img src="https://res.cloudinary.com/drfokzzbf/image/upload/v1773749702/profilaicreatorlabs.id_nu6p8h.jpg" alt="aicreatorlabs.id">
+          </div>
+          <div>
+            <div class="testi-name">@aicreatorlabs.id</div>
+            <div class="testi-role">AI Creator Labs · 40.5K Followers</div>
           </div>
         </div>
       </div>
