@@ -279,13 +279,12 @@
     }
     .cert-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,0.4), 0 0 15px rgba(195,255,0,0.06); }
     .cert-img {
-      width: 100%;
+      width: 100%; height: 200px;
       background: #fff;
       display: flex; align-items: center; justify-content: center;
-      font-size: 0.7rem; color: var(--muted); text-align: center; padding: 0;
       overflow: hidden;
     }
-    .cert-img img { width: 100%; height: auto; display: block; }
+    .cert-img img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; display: block; }
     .cert-label { padding: 0.7rem 0.9rem; font-size: 0.75rem; color: var(--muted); line-height: 1.4; }
 
     /* ── ABOUT: Client relations photos ─────────────── */
