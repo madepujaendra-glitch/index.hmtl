@@ -125,7 +125,9 @@
       scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
-      padding: 2.5rem calc(50% - var(--item-w) / 2);
+      padding-top: 2.5rem; padding-bottom: 2.5rem;
+      padding-left: calc(50% - var(--item-w) / 2);
+      padding-right: calc(50% - var(--item-w) / 2);
       scroll-padding-inline: calc(50% - var(--item-w) / 2);
       overscroll-behavior-x: contain;
       -webkit-scroll-snap-type: x mandatory;
@@ -533,7 +535,9 @@
 
     /* Clients */
     .sec-carousel-scroll.clients-scroll {
-      padding: 1.5rem calc(50% - var(--clients-w) / 2);
+      padding-top: 1.5rem; padding-bottom: 1.5rem;
+      padding-left: calc(50% - var(--clients-w) / 2);
+      padding-right: calc(50% - var(--clients-w) / 2);
       scroll-padding-inline: calc(50% - var(--clients-w) / 2);
       gap: 20px;
     }
@@ -544,7 +548,9 @@
 
     /* Portfolio */
     .sec-carousel-scroll.portfolio-scroll {
-      padding: 1.5rem calc(50% - var(--portfolio-w) / 2);
+      padding-top: 1.5rem; padding-bottom: 1.5rem;
+      padding-left: calc(50% - var(--portfolio-w) / 2);
+      padding-right: calc(50% - var(--portfolio-w) / 2);
       scroll-padding-inline: calc(50% - var(--portfolio-w) / 2);
       gap: 20px;
     }
@@ -555,7 +561,9 @@
 
     /* Testimonials */
     .sec-carousel-scroll.testi-scroll {
-      padding: 1.5rem calc(50% - var(--testi-w) / 2);
+      padding-top: 1.5rem; padding-bottom: 1.5rem;
+      padding-left: calc(50% - var(--testi-w) / 2);
+      padding-right: calc(50% - var(--testi-w) / 2);
       scroll-padding-inline: calc(50% - var(--testi-w) / 2);
       gap: 20px;
     }
@@ -578,6 +586,46 @@
     /* Use bg-mid for sections with dark mid bg */
     .sec-carousel-wrap.mid::before { background: linear-gradient(to right, var(--bg-mid) 0%, rgba(8,8,16,0.7) 50%, transparent 100%); }
     .sec-carousel-wrap.mid::after  { background: linear-gradient(to left,  var(--bg-mid) 0%, rgba(8,8,16,0.7) 50%, transparent 100%); }
+
+    /* ── SECTION CAROUSEL SPOTLIGHT EFFECT ─────────────────────
+       Same inactive/active treatment as .carousel-item
+    ──────────────────────────────────────────────────────────── */
+    .sec-carousel-scroll .ig-card,
+    .sec-carousel-scroll .portfolio-card,
+    .sec-carousel-scroll .testi-card {
+      scroll-snap-align: center;
+      transform: scale(0.78);
+      opacity: 0.2;
+      filter: blur(3px) brightness(0.25) saturate(0.2);
+      transition:
+        transform  0.5s cubic-bezier(0.16, 1, 0.3, 1),
+        opacity    0.5s cubic-bezier(0.16, 1, 0.3, 1),
+        filter     0.5s cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      /* Remove hover transform while in carousel */
+    }
+    .sec-carousel-scroll .ig-card.is-active,
+    .sec-carousel-scroll .portfolio-card.is-active,
+    .sec-carousel-scroll .testi-card.is-active {
+      transform: scale(1.05);
+      opacity: 1;
+      filter: brightness(1.04) saturate(1.05) blur(0);
+      box-shadow:
+        0 28px 80px rgba(0,0,0,0.65),
+        0 0  50px rgba(195,255,0,0.10),
+        0 0 100px rgba(195,255,0,0.05);
+    }
+    /* Neutralise hover effects inside carousel */
+    .sec-carousel-scroll .ig-card:hover,
+    .sec-carousel-scroll .portfolio-card:hover,
+    .sec-carousel-scroll .testi-card:hover {
+      transform: scale(0.78);
+    }
+    .sec-carousel-scroll .ig-card.is-active:hover,
+    .sec-carousel-scroll .portfolio-card.is-active:hover,
+    .sec-carousel-scroll .testi-card.is-active:hover {
+      transform: scale(1.05);
+    }
   </style>
 </head>
 <body>
@@ -876,7 +924,7 @@
       <a href="https://instagram.com/aicreatorlabs.id" target="_blank" class="ig-link">View on Instagram →</a>
     </div>
 
-    <div class="ig-card">
+    <div class="ig-card" data-idx="5">
       <div class="ig-header">
         <div class="ig-avatar">
           <img src="https://res.cloudinary.com/drfokzzbf/image/upload/v1773771273/472416709_1083279420216121_6462226940629783718_n_ankpjd.jpg" alt="abedsteady">
@@ -1426,7 +1474,6 @@ class NativeCarousel {
 class SecCarousel {
   constructor(scrollEl) {
     this.el    = scrollEl;
-    // Pick all direct children that have data-idx OR all direct children
     this.items = [...scrollEl.querySelectorAll('[data-idx]')];
     if (!this.items.length) this.items = [...scrollEl.children];
     this.n     = this.items.length;
@@ -1438,7 +1485,11 @@ class SecCarousel {
 
     this._buildDots();
     this._observe();
-    if (this.items[0]) this._syncUI(0);
+    /* Set first card active immediately */
+    if (this.items[0]) {
+      this.items[0].classList.add('is-active');
+      this._syncUI(0);
+    }
   }
 
   _buildDots() {
@@ -1458,7 +1509,11 @@ class SecCarousel {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           const idx = this.items.indexOf(entry.target);
-          if (idx !== -1) this._syncUI(idx);
+          if (idx === -1) return;
+          /* Toggle is-active — same as NativeCarousel */
+          this.items.forEach(el => el.classList.remove('is-active'));
+          entry.target.classList.add('is-active');
+          this._syncUI(idx);
         }
       });
     }, { root: this.el, threshold: 0.6 });
