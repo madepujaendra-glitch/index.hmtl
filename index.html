@@ -1312,18 +1312,9 @@
 </footer>
 
 <script>
-/* ═══════════════════════════════════════════════════════════════
-   CAROUSEL — native scroll-snap controller
 
-   The browser does ALL the scrolling physics. We only:
-   1. Detect which card is centered (IntersectionObserver)
-   2. Apply .is-active class for visual highlight
-   3. Handle arrow buttons (scrollIntoView with smooth behavior)
-   4. Build dots and counter
-
-   No custom momentum. No LERP. No velocity. No timers.
-   100% native browser scroll = buttery smooth on every device.
-═══════════════════════════════════════════════════════════════ */
+/* ════ CAROUSEL CLASSES (always defined) ═══════════════════ */
+/* ════ CAROUSEL CLASSES ════════════════════════════════════ */
 class NativeCarousel {
   constructor(scrollEl) {
     /* On desktop — skip carousel, show as grid */
@@ -1403,9 +1394,7 @@ class NativeCarousel {
   navigate(dir) { this.goTo(this.activeIdx + dir); }
 }
 
-/* Only run carousels on mobile — desktop shows grid */
-if (window.innerWidth <= 768) {
-/* Bootstrap section carousels (clients, portfolio, testi) */
+
 class SecCarousel {
   constructor(scrollEl) {
     /* On desktop — skip carousel, show as grid */
@@ -1477,53 +1466,7 @@ class SecCarousel {
   navigate(dir) { this.goTo(this.activeIdx + dir); }
 }
 
-const secCarousels = {};
-document.querySelectorAll('.sec-carousel-scroll, .wide-carousel-scroll, .skill-carousel-scroll').forEach(el => {
-  secCarousels[el.id] = new SecCarousel(el);
-});
-document.querySelectorAll('.c-arrow[data-sec-scroll]').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const car = secCarousels[btn.dataset.secScroll];
-    if (car) car.navigate(parseInt(btn.dataset.dir, 10));
-  });
-});
-
-/* Bootstrap */
-const carousels = {};
-document.querySelectorAll('.carousel-scroll').forEach(el => {
-  carousels[el.id] = new NativeCarousel(el);
-});
-
-document.querySelectorAll('.c-arrow').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const car = carousels[btn.dataset.scroll];
-    if (car) car.navigate(parseInt(btn.dataset.dir, 10));
-  });
-});
-
-/* Reveal on scroll */
-const obs = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
-}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-
-/* Smooth anchor links */
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    const t = document.querySelector(a.getAttribute('href'));
-    if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
-  });
-});
-
-/* Floating contact */
-(function() {
-  var btn = document.getElementById('float-contact');
-  var contact = document.getElementById('contact');
-  if (!btn || !contact) return;
-  new IntersectionObserver(function(e) { btn.classList.toggle('hidden', e[0].isIntersecting); }, { threshold: 0.15 }).observe(contact);
-})();
-
-/* Mobile menu */
+/* ════ UTILITY ═════════════════════════════════════════════ */
 function loadYT(el) {
   var vid = el.dataset.vid;
   var iframe = document.createElement('iframe');
@@ -1536,11 +1479,71 @@ function loadYT(el) {
   el.onclick = null;
 }
 
-function closeMobileMenu() { document.getElementById('nav-mobile').classList.remove('open'); }
+function closeMobileMenu() {
+  document.getElementById('nav-mobile').classList.remove('open');
+}
+
+/* ════ CAROUSEL INIT — mobile only (≤768px) ════════════════ */
+if (window.innerWidth <= 768) {
+  /* Section carousels */
+  const secCarousels = {};
+  document.querySelectorAll('.sec-carousel-scroll, .wide-carousel-scroll, .skill-carousel-scroll').forEach(el => {
+    secCarousels[el.id] = new SecCarousel(el);
+  });
+  document.querySelectorAll('.c-arrow[data-sec-scroll]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const car = secCarousels[btn.dataset.secScroll];
+      if (car) car.navigate(parseInt(btn.dataset.dir, 10));
+    });
+  });
+
+  /* Showcase carousels */
+  const carousels = {};
+  document.querySelectorAll('.carousel-scroll').forEach(el => {
+    carousels[el.id] = new NativeCarousel(el);
+  });
+  document.querySelectorAll('.c-arrow[data-scroll]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const car = carousels[btn.dataset.scroll];
+      if (car) car.navigate(parseInt(btn.dataset.dir, 10));
+    });
+  });
 } /* end mobile-only carousel init */
 
-document.getElementById('hamburger').addEventListener('click', () => { document.getElementById('nav-mobile').classList.toggle('open'); });
+/* ════ REVEAL ON SCROLL ════════════════════════════════════ */
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+/* ════ SMOOTH ANCHORS ═══════════════════════════════════════ */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  });
+});
+
+/* ════ FLOATING CONTACT BUTTON ═════════════════════════════ */
+(function() {
+  var btn = document.getElementById('float-contact');
+  var contact = document.getElementById('contact');
+  if (!btn || !contact) return;
+  new IntersectionObserver(function(e) {
+    btn.classList.toggle('hidden', e[0].isIntersecting);
+  }, { threshold: 0.1 }).observe(contact);
+})();
+
+/* ════ NAV ══════════════════════════════════════════════════ */
+document.getElementById('hamburger').addEventListener('click', () => {
+  document.getElementById('nav-mobile').classList.toggle('open');
+});
 document.getElementById('nav-close').addEventListener('click', closeMobileMenu);
+
 </script>
+
+
 </body>
 </html>
