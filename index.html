@@ -1326,6 +1326,11 @@
 ═══════════════════════════════════════════════════════════════ */
 class NativeCarousel {
   constructor(scrollEl) {
+    /* On desktop — skip carousel, show as grid */
+    if (window.innerWidth > 768) {
+      this.items = []; this.n = 0; this.activeIdx = 0; this.el = scrollEl;
+      return;
+    }
     this.el    = scrollEl;
     this.items = [...scrollEl.querySelectorAll('.carousel-item')];
     this.n     = this.items.length;
@@ -1398,9 +1403,16 @@ class NativeCarousel {
   navigate(dir) { this.goTo(this.activeIdx + dir); }
 }
 
+/* Only run carousels on mobile — desktop shows grid */
+if (window.innerWidth <= 768) {
 /* Bootstrap section carousels (clients, portfolio, testi) */
 class SecCarousel {
   constructor(scrollEl) {
+    /* On desktop — skip carousel, show as grid */
+    if (window.innerWidth > 768) {
+      this.items = []; this.n = 0; this.activeIdx = 0; this.el = scrollEl;
+      return;
+    }
     this.el    = scrollEl;
     this.items = [...scrollEl.querySelectorAll('[data-idx]')];
     if (!this.items.length) this.items = [...scrollEl.children];
@@ -1525,6 +1537,8 @@ function loadYT(el) {
 }
 
 function closeMobileMenu() { document.getElementById('nav-mobile').classList.remove('open'); }
+} /* end mobile-only carousel init */
+
 document.getElementById('hamburger').addEventListener('click', () => { document.getElementById('nav-mobile').classList.toggle('open'); });
 document.getElementById('nav-close').addEventListener('click', closeMobileMenu);
 </script>
