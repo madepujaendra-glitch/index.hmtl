@@ -550,6 +550,18 @@
       .carousel-ui { display: none !important; }
     }
 
+
+    /* ── iOS SAFARI SCROLL END FIX ─────────────────────────────
+       padding-right alone is ignored by iOS for snap purposes.
+       Use a generous right padding on the scroll track.
+    ────────────────────────────────────────────────────────── */
+    .sec-carousel-scroll.clients-scroll   { padding-right: calc(50% - var(--clients-w) / 2 + 1px) !important; }
+    .sec-carousel-scroll.portfolio-scroll { padding-right: calc(50% - var(--portfolio-w) / 2 + 1px) !important; }
+    .sec-carousel-scroll.testi-scroll     { padding-right: calc(50% - var(--testi-w) / 2 + 1px) !important; }
+    .skill-carousel-scroll                { padding-right: calc(50% - var(--skill-w) / 2 + 1px) !important; }
+    .wide-carousel-scroll                 { padding-right: calc(50% - var(--wide-w) / 2 + 1px) !important; }
+    .carousel-scroll                      { padding-right: calc(50% - var(--item-w) / 2 + 1px) !important; }
+
   </style>
 </head>
 <body>
@@ -782,7 +794,7 @@
           <div class="ig-thumb"><div class="yt-lazy" data-vid="rNZyRjAqnEc" onclick="loadYT(this)" style="position:relative;cursor:pointer;background:#000;width:100%;height:100%;"><img src="https://i.ytimg.com/vi/rNZyRjAqnEc/hqdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" alt="video"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;"><div style="width:52px;height:52px;background:rgba(195,255,0,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-style:solid;border-width:10px 0 10px 20px;border-color:transparent transparent transparent #050505;margin-left:4px;"></div></div></div></div></div>
         </div>
         <a href="https://instagram.com/ruangsepri" target="_blank" class="ig-link">View on Instagram →</a>
-      <div style="flex:0 0 calc(50% - var(--clients-w)/2);min-width:calc(50% - var(--clients-w)/2);height:1px;" aria-hidden="true"></div>
+      <div style="flex:0 0 calc(50% - var(--clients-w)/2 + 2px);min-width:calc(50% - var(--clients-w)/2 + 2px);height:1px;" aria-hidden="true"></div>
       </div>
 
       <div class="ig-card" data-idx="1">
@@ -891,7 +903,7 @@
         <div class="carousel-item" data-idx="0">
           <div class="item-thumb"><div class="yt-lazy" data-vid="rNZyRjAqnEc" onclick="loadYT(this)" style="position:relative;cursor:pointer;background:#000;width:100%;height:100%;"><img src="https://i.ytimg.com/vi/rNZyRjAqnEc/hqdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" alt="video"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;"><div style="width:52px;height:52px;background:rgba(195,255,0,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-style:solid;border-width:10px 0 10px 20px;border-color:transparent transparent transparent #050505;margin-left:4px;"></div></div></div></div></div>
           <div class="item-info"><div class="item-client">@ruangsepri</div><h3 class="item-title">AI-Driven Content Creator</h3><p class="item-desc">Educational content with dynamic pacing.</p></div>
-        <div style="flex:0 0 calc(50% - var(--item-w)/2);min-width:calc(50% - var(--item-w)/2);height:1px;" aria-hidden="true"></div>
+        <div style="flex:0 0 calc(50% - var(--item-w)/2 + 2px);min-width:calc(50% - var(--item-w)/2 + 2px);height:1px;" aria-hidden="true"></div>
       </div>
         <div class="carousel-item" data-idx="1">
           <div class="item-thumb"><div class="yt-lazy" data-vid="1c1neNWR3Y8" onclick="loadYT(this)" style="position:relative;cursor:pointer;background:#000;width:100%;height:100%;"><img src="https://i.ytimg.com/vi/1c1neNWR3Y8/hqdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" alt="video"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;"><div style="width:52px;height:52px;background:rgba(195,255,0,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-style:solid;border-width:10px 0 10px 20px;border-color:transparent transparent transparent #050505;margin-left:4px;"></div></div></div></div></div>
@@ -935,7 +947,7 @@
         <div class="carousel-item" data-idx="0">
           <div class="item-thumb"><div class="yt-lazy" data-vid="LvDhNgPAZPs" onclick="loadYT(this)" style="position:relative;cursor:pointer;background:#000;width:100%;height:100%;"><img src="https://i.ytimg.com/vi/LvDhNgPAZPs/hqdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" alt="video"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;"><div style="width:52px;height:52px;background:rgba(195,255,0,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-style:solid;border-width:10px 0 10px 20px;border-color:transparent transparent transparent #050505;margin-left:4px;"></div></div></div></div></div>
           <div class="item-info"><div class="item-client">@aicreatorlabs.id</div><h3 class="item-title">Podcast</h3><p class="item-desc">Dynamic motion graphics for podcast content.</p></div>
-        <div style="flex:0 0 calc(50% - var(--item-w)/2);min-width:calc(50% - var(--item-w)/2);height:1px;" aria-hidden="true"></div>
+        <div style="flex:0 0 calc(50% - var(--item-w)/2 + 2px);min-width:calc(50% - var(--item-w)/2 + 2px);height:1px;" aria-hidden="true"></div>
       </div>
         <div class="carousel-item" data-idx="1">
           <div class="item-thumb"><div class="yt-lazy" data-vid="4PY48e91FU4" onclick="loadYT(this)" style="position:relative;cursor:pointer;background:#000;width:100%;height:100%;"><img src="https://i.ytimg.com/vi/4PY48e91FU4/hqdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" alt="video"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;"><div style="width:52px;height:52px;background:rgba(195,255,0,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-style:solid;border-width:10px 0 10px 20px;border-color:transparent transparent transparent #050505;margin-left:4px;"></div></div></div></div></div>
@@ -967,7 +979,7 @@
         <div class="carousel-item" data-idx="0">
           <div class="item-thumb"><div class="yt-lazy" data-vid="PCUFb-glJyM" onclick="loadYT(this)" style="position:relative;cursor:pointer;background:#000;width:100%;height:100%;"><img src="https://i.ytimg.com/vi/PCUFb-glJyM/hqdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" alt="video"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;"><div style="width:52px;height:52px;background:rgba(195,255,0,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-style:solid;border-width:10px 0 10px 20px;border-color:transparent transparent transparent #050505;margin-left:4px;"></div></div></div></div></div>
           <div class="item-info"><div class="item-client">Video Ads</div><h3 class="item-title">Ad Creative</h3><p class="item-desc">High-conversion short-form ad content.</p></div>
-        <div style="flex:0 0 calc(50% - var(--item-w)/2);min-width:calc(50% - var(--item-w)/2);height:1px;" aria-hidden="true"></div>
+        <div style="flex:0 0 calc(50% - var(--item-w)/2 + 2px);min-width:calc(50% - var(--item-w)/2 + 2px);height:1px;" aria-hidden="true"></div>
       </div>
         <div class="carousel-item" data-idx="1">
           <div class="item-thumb"><div class="yt-lazy" data-vid="r9wL_3BWFbU" onclick="loadYT(this)" style="position:relative;cursor:pointer;background:#000;width:100%;height:100%;"><img src="https://i.ytimg.com/vi/r9wL_3BWFbU/hqdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" alt="video"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;"><div style="width:52px;height:52px;background:rgba(195,255,0,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-style:solid;border-width:10px 0 10px 20px;border-color:transparent transparent transparent #050505;margin-left:4px;"></div></div></div></div></div>
@@ -1054,7 +1066,7 @@
           <div class="wide-card-title">Podcast Episode</div>
           <div class="wide-card-desc">Long-form podcast edit, motion graphics, captions, and cinematic cuts.</div>
         </div>
-      <div style="flex:0 0 calc(50% - var(--wide-w)/2);min-width:calc(50% - var(--wide-w)/2);height:1px;" aria-hidden="true"></div>
+      <div style="flex:0 0 calc(50% - var(--wide-w)/2 + 2px);min-width:calc(50% - var(--wide-w)/2 + 2px);height:1px;" aria-hidden="true"></div>
       </div>
       <div class="wide-card" data-idx="1">
         <div class="yt-lazy" data-vid="CaceK21sxQg" onclick="loadYT(this)" style="position:relative;cursor:pointer;background:#000;width:100%;height:100%;"><img src="https://i.ytimg.com/vi/CaceK21sxQg/hqdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" alt="video"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;"><div style="width:52px;height:52px;background:rgba(195,255,0,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-style:solid;border-width:10px 0 10px 20px;border-color:transparent transparent transparent #050505;margin-left:4px;"></div></div></div></div>
@@ -1088,7 +1100,7 @@
           <div class="wide-card-title">Behind the Scene: Editing Process</div>
           <div class="wide-card-desc">A peek into the workflow and creative process behind the edits.</div>
         </div>
-      <div style="flex:0 0 calc(50% - var(--wide-w)/2);min-width:calc(50% - var(--wide-w)/2);height:1px;" aria-hidden="true"></div>
+      <div style="flex:0 0 calc(50% - var(--wide-w)/2 + 2px);min-width:calc(50% - var(--wide-w)/2 + 2px);height:1px;" aria-hidden="true"></div>
       </div>
       <div class="wide-card" data-idx="1">
         <div class="yt-lazy" data-vid="cbt-vTxaVEk" onclick="loadYT(this)" style="position:relative;cursor:pointer;background:#000;width:100%;height:100%;"><img src="https://i.ytimg.com/vi/cbt-vTxaVEk/hqdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" alt="video"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;"><div style="width:52px;height:52px;background:rgba(195,255,0,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-style:solid;border-width:10px 0 10px 20px;border-color:transparent transparent transparent #050505;margin-left:4px;"></div></div></div></div>
@@ -1131,7 +1143,7 @@
   <h2 class="section-title reveal" style="padding:0 5%;">Skills &amp; Experience</h2>
   <div class="skill-carousel-wrap">
     <div class="skill-carousel-scroll" id="scroll-skills">
-      <div class="skill-card" data-idx="0"><h3>Editing Software</h3><ul><li>CapCut PC</li><li>Adobe Premiere Pro</li><li>After Effects</li></ul><div style="flex:0 0 calc(50% - var(--skill-w)/2);min-width:calc(50% - var(--skill-w)/2);height:1px;" aria-hidden="true"></div>
+      <div class="skill-card" data-idx="0"><h3>Editing Software</h3><ul><li>CapCut PC</li><li>Adobe Premiere Pro</li><li>After Effects</li></ul><div style="flex:0 0 calc(50% - var(--skill-w)/2 + 2px);min-width:calc(50% - var(--skill-w)/2 + 2px);height:1px;" aria-hidden="true"></div>
       </div>
       <div class="skill-card" data-idx="1"><h3>Design Tools</h3><ul><li>Canva</li><li>Dreamina AI</li><li>Pipit AI</li></ul></div>
       <div class="skill-card" data-idx="2"><h3>What I Do</h3><ul><li>Short form &amp; Long form editing</li><li>Cinematic look &amp; color grading</li><li>AI assisted workflow</li><li>Motion graphics</li><li>Brand &amp; creator content</li></ul></div>
@@ -1152,7 +1164,7 @@
     <p class="section-sub reveal">Explore my complete collection across all categories</p>
     <div class="sec-carousel-wrap mid">
       <div class="sec-carousel-scroll portfolio-scroll" id="scroll-portfolio">
-        <a href="https://drive.google.com/drive/folders/1o5he3i43HemiBZ_Ca1R-KvqgP1O161Tz?usp=sharing" target="_blank" class="portfolio-card" data-idx="0"><div class="portfolio-thumb" style="background-image:linear-gradient(rgba(0,0,0,0.2),rgba(12,12,20,0.95)),url('https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?w=800')"><div style="flex:0 0 calc(50% - var(--portfolio-w)/2);min-width:calc(50% - var(--portfolio-w)/2);height:1px;" aria-hidden="true"></div>
+        <a href="https://drive.google.com/drive/folders/1o5he3i43HemiBZ_Ca1R-KvqgP1O161Tz?usp=sharing" target="_blank" class="portfolio-card" data-idx="0"><div class="portfolio-thumb" style="background-image:linear-gradient(rgba(0,0,0,0.2),rgba(12,12,20,0.95)),url('https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?w=800')"><div style="flex:0 0 calc(50% - var(--portfolio-w)/2 + 2px);min-width:calc(50% - var(--portfolio-w)/2 + 2px);height:1px;" aria-hidden="true"></div>
       </div><div class="portfolio-info"><h3>Reels Content Editing</h3><p>Full collection of short-form editing projects.</p></div></a>
         <a href="https://drive.google.com/drive/folders/1vM12mUcVI84mk8kFkxMgoxaRjVQwBkvE?usp=sharing" target="_blank" class="portfolio-card" data-idx="1"><div class="portfolio-thumb" style="background-image:linear-gradient(rgba(0,0,0,0.2),rgba(12,12,20,0.95)),url('https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800')"></div><div class="portfolio-info"><h3>Long-form Video</h3><p>Full-length edits, documentaries, and deep-form content.</p></div></a>
         <a href="https://drive.google.com/drive/folders/1SUs8FpWyKMan2lNLkXFMQfeX9qtPfw40?usp=sharing" target="_blank" class="portfolio-card" data-idx="2"><div class="portfolio-thumb" style="background-image:linear-gradient(rgba(0,0,0,0.2),rgba(12,12,20,0.95)),url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800')"></div><div class="portfolio-info"><h3>1st Place Creative Video</h3><p>Award-winning creative video project.</p></div></a>
@@ -1197,7 +1209,7 @@
             <div class="testi-role">AI Content Creator · 192K Followers</div>
           </div>
         </div>
-      <div style="flex:0 0 calc(50% - var(--testi-w)/2);min-width:calc(50% - var(--testi-w)/2);height:1px;" aria-hidden="true"></div>
+      <div style="flex:0 0 calc(50% - var(--testi-w)/2 + 2px);min-width:calc(50% - var(--testi-w)/2 + 2px);height:1px;" aria-hidden="true"></div>
       </div>
 
       <div class="testi-card" data-idx="1">
@@ -1518,6 +1530,24 @@ if (window.innerWidth <= 768) {
     });
   });
 } /* end mobile-only carousel init */
+
+/* ════ iOS SCROLL END FIX ══════════════════════════════════ */
+/* Programmatically correct scroll position for last item */
+function fixCarouselEnd(scrollEl) {
+  if (!scrollEl) return;
+  scrollEl.addEventListener('scroll', function() {
+    var el = scrollEl;
+    var maxScroll = el.scrollWidth - el.clientWidth;
+    if (el.scrollLeft >= maxScroll - 4) {
+      // Near the end — find last data-idx child and center it
+      var items = el.querySelectorAll('[data-idx], .carousel-item');
+      if (items.length) {
+        var last = items[items.length - 1];
+        last.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      }
+    }
+  }, { passive: true });
+}
 
 /* ════ REVEAL ON SCROLL ════════════════════════════════════ */
 const revealObs = new IntersectionObserver((entries) => {
