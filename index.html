@@ -511,6 +511,73 @@
       /* Portfolio section padding */
       .portfolio-section { padding: 3rem 5%; }
     }
+
+    /* ── SECTION CAROUSELS (clients, portfolio, testi) ─────────── */
+    :root {
+      --clients-w:   272px;
+      --portfolio-w: 280px;
+      --testi-w:     300px;
+    }
+
+    /* Shared scroll container — same mechanics as showcase */
+    .sec-carousel-scroll {
+      display: flex;
+      align-items: stretch;
+      overflow-x: scroll;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      overscroll-behavior-x: contain;
+    }
+    .sec-carousel-scroll::-webkit-scrollbar { display: none; }
+
+    /* Clients */
+    .sec-carousel-scroll.clients-scroll {
+      padding: 1.5rem calc(50% - var(--clients-w) / 2);
+      scroll-padding-inline: calc(50% - var(--clients-w) / 2);
+      gap: 20px;
+    }
+    .clients-scroll .ig-card {
+      flex: 0 0 var(--clients-w); width: var(--clients-w);
+      scroll-snap-align: center;
+    }
+
+    /* Portfolio */
+    .sec-carousel-scroll.portfolio-scroll {
+      padding: 1.5rem calc(50% - var(--portfolio-w) / 2);
+      scroll-padding-inline: calc(50% - var(--portfolio-w) / 2);
+      gap: 20px;
+    }
+    .portfolio-scroll .portfolio-card {
+      flex: 0 0 var(--portfolio-w); width: var(--portfolio-w);
+      scroll-snap-align: center;
+    }
+
+    /* Testimonials */
+    .sec-carousel-scroll.testi-scroll {
+      padding: 1.5rem calc(50% - var(--testi-w) / 2);
+      scroll-padding-inline: calc(50% - var(--testi-w) / 2);
+      gap: 20px;
+    }
+    .testi-scroll .testi-card {
+      flex: 0 0 var(--testi-w); width: var(--testi-w);
+      scroll-snap-align: center;
+    }
+
+    /* Edge fades for section carousels */
+    .sec-carousel-wrap {
+      position: relative; width: 100%; overflow: hidden;
+    }
+    .sec-carousel-wrap::before,
+    .sec-carousel-wrap::after {
+      content: ''; position: absolute; top: 0; bottom: 0;
+      width: clamp(60px, 18vw, 200px); pointer-events: none; z-index: 5;
+    }
+    .sec-carousel-wrap::before { left:  0; background: linear-gradient(to right, var(--bg) 0%, rgba(5,5,8,0.7) 50%, transparent 100%); }
+    .sec-carousel-wrap::after  { right: 0; background: linear-gradient(to left,  var(--bg) 0%, rgba(5,5,8,0.7) 50%, transparent 100%); }
+    /* Use bg-mid for sections with dark mid bg */
+    .sec-carousel-wrap.mid::before { background: linear-gradient(to right, var(--bg-mid) 0%, rgba(8,8,16,0.7) 50%, transparent 100%); }
+    .sec-carousel-wrap.mid::after  { background: linear-gradient(to left,  var(--bg-mid) 0%, rgba(8,8,16,0.7) 50%, transparent 100%); }
   </style>
 </head>
 <body>
@@ -724,43 +791,44 @@
 
   </div>
 
-  <!-- Client Instagram Profiles — inside About -->
+  <!-- Client Instagram Profiles — Carousel -->
   <div class="relations-title reveal" style="margin-top:3.5rem;">Creators &amp; Brands I've Collaborated With</div>
-  <div class="ig-grid reveal" id="clients" style="max-width:820px; margin:0 auto;">
+  <div class="sec-carousel-wrap" id="clients">
+    <div class="sec-carousel-scroll clients-scroll" id="scroll-clients">
 
-    <div class="ig-card">
-      <div class="ig-header">
-        <div class="ig-avatar">
-          <img src="https://res.cloudinary.com/drfokzzbf/image/upload/v1773749193/profilruangsepri_toigvr.jpg" alt="ruangsepri">
+      <div class="ig-card" data-idx="0">
+        <div class="ig-header">
+          <div class="ig-avatar">
+            <img src="https://res.cloudinary.com/drfokzzbf/image/upload/v1773749193/profilruangsepri_toigvr.jpg" alt="ruangsepri">
+          </div>
+          <div>
+            <div class="ig-handle">@ruangsepri</div>
+            <div class="ig-followers">192K Followers</div>
+          </div>
         </div>
-        <div>
-          <div class="ig-handle">@ruangsepri</div>
-          <div class="ig-followers">192K Followers</div>
+        <div class="ig-videos">
+          <div class="ig-thumb"><iframe src="https://www.youtube.com/embed/rNZyRjAqnEc?autoplay=1&mute=1&loop=1&playlist=rNZyRjAqnEc&controls=0" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
         </div>
+        <a href="https://instagram.com/ruangsepri" target="_blank" class="ig-link">View on Instagram →</a>
       </div>
-      <div class="ig-videos">
-        <div class="ig-thumb"><iframe src="https://www.youtube.com/embed/rNZyRjAqnEc?autoplay=1&mute=1&loop=1&playlist=rNZyRjAqnEc&controls=0" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
-      </div>
-      <a href="https://instagram.com/ruangsepri" target="_blank" class="ig-link">View on Instagram →</a>
-    </div>
 
-    <div class="ig-card">
-      <div class="ig-header">
-        <div class="ig-avatar">
-          <img src="https://res.cloudinary.com/drfokzzbf/image/upload/v1773749308/profiltechpreneurboi_zbrtr1.jpg" alt="techpreneurboi">
+      <div class="ig-card" data-idx="1">
+        <div class="ig-header">
+          <div class="ig-avatar">
+            <img src="https://res.cloudinary.com/drfokzzbf/image/upload/v1773749308/profiltechpreneurboi_zbrtr1.jpg" alt="techpreneurboi">
+          </div>
+          <div>
+            <div class="ig-handle">@techpreneurboi</div>
+            <div class="ig-followers">35.2K Followers</div>
+          </div>
         </div>
-        <div>
-          <div class="ig-handle">@techpreneurboi</div>
-          <div class="ig-followers">35.2K Followers</div>
+        <div class="ig-videos">
+          <div class="ig-thumb"><iframe src="https://www.youtube.com/embed/zMEycC6PtFo?autoplay=1&mute=1&loop=1&playlist=zMEycC6PtFo&controls=0" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
         </div>
+        <a href="https://instagram.com/techpreneurboi" target="_blank" class="ig-link">View on Instagram →</a>
       </div>
-      <div class="ig-videos">
-        <div class="ig-thumb"><iframe src="https://www.youtube.com/embed/zMEycC6PtFo?autoplay=1&mute=1&loop=1&playlist=zMEycC6PtFo&controls=0" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
-      </div>
-      <a href="https://instagram.com/techpreneurboi" target="_blank" class="ig-link">View on Instagram →</a>
-    </div>
 
-    <div class="ig-card">
+    <div class="ig-card" data-idx="2">
       <div class="ig-header">
         <div class="ig-avatar">
           <img src="https://res.cloudinary.com/drfokzzbf/image/upload/v1773749314/profilvictoriawong68_o9wy3y.jpg" alt="victoriawong68">
@@ -776,7 +844,7 @@
       <a href="https://instagram.com/victoriawong68" target="_blank" class="ig-link">View on Instagram →</a>
     </div>
 
-    <div class="ig-card">
+    <div class="ig-card" data-idx="3">
       <div class="ig-header">
         <div class="ig-avatar">
           <img src="https://res.cloudinary.com/drfokzzbf/image/upload/v1773749698/profilcreatecontent.club_dkwkeh.jpg" alt="createcontent.club">
@@ -792,7 +860,7 @@
       <a href="https://instagram.com/createcontentclub" target="_blank" class="ig-link">View on Instagram →</a>
     </div>
 
-    <div class="ig-card">
+    <div class="ig-card" data-idx="4">
       <div class="ig-header">
         <div class="ig-avatar">
           <img src="https://res.cloudinary.com/drfokzzbf/image/upload/v1773749702/profilaicreatorlabs.id_nu6p8h.jpg" alt="aicreatorlabs.id">
@@ -822,8 +890,15 @@
         <div class="ig-thumb"><iframe src="https://www.youtube.com/embed/AePTI039t5A?autoplay=1&mute=1&loop=1&playlist=AePTI039t5A&controls=0" allow="autoplay" allowfullscreen loading="lazy"></iframe></div>
       </div>
       <a href="https://instagram.com/abedsteady" target="_blank" class="ig-link">View on Instagram →</a>
-    </div>
+      </div><!-- /.ig-card abedsteady -->
 
+    </div><!-- /.sec-carousel-scroll clients-scroll -->
+  </div><!-- /.sec-carousel-wrap -->
+  <div class="carousel-ui" style="padding:0.5rem 0 2rem;">
+    <button class="c-arrow" data-sec-scroll="scroll-clients" data-dir="-1">&#8592;</button>
+    <div class="c-dots" id="dots-clients"></div>
+    <button class="c-arrow" data-sec-scroll="scroll-clients" data-dir="1">&#8594;</button>
+    <span class="c-counter" id="counter-clients">01 / 06</span>
   </div>
 
 </div>
@@ -1092,15 +1167,23 @@
   <div class="portfolio-inner">
     <h2 class="section-title reveal">Full Portfolio</h2>
     <p class="section-sub reveal">Explore my complete collection across all categories</p>
-    <div class="portfolio-grid">
-      <a href="https://drive.google.com/drive/folders/1o5he3i43HemiBZ_Ca1R-KvqgP1O161Tz?usp=sharing" target="_blank" class="portfolio-card reveal"><div class="portfolio-thumb" style="background-image:linear-gradient(rgba(0,0,0,0.2),rgba(12,12,20,0.95)),url('https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?w=800')"></div><div class="portfolio-info"><h3>Reels Content Editing</h3><p>Full collection of short-form editing projects.</p></div></a>
-      <a href="https://drive.google.com/drive/folders/1vM12mUcVI84mk8kFkxMgoxaRjVQwBkvE?usp=sharing" target="_blank" class="portfolio-card reveal"><div class="portfolio-thumb" style="background-image:linear-gradient(rgba(0,0,0,0.2),rgba(12,12,20,0.95)),url('https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800')"></div><div class="portfolio-info"><h3>Long-form Video</h3><p>Full-length edits, documentaries, and deep-form content.</p></div></a>
-      <a href="https://drive.google.com/drive/folders/1SUs8FpWyKMan2lNLkXFMQfeX9qtPfw40?usp=sharing" target="_blank" class="portfolio-card reveal"><div class="portfolio-thumb" style="background-image:linear-gradient(rgba(0,0,0,0.2),rgba(12,12,20,0.95)),url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800')"></div><div class="portfolio-info"><h3>1st Place Creative Video</h3><p>Award-winning creative video project.</p></div></a>
-      <a href="https://drive.google.com/drive/folders/11f5Oa8MIq5mrFU3_qxLaE3gGVnVj8C3c?usp=sharing" target="_blank" class="portfolio-card reveal"><div class="portfolio-thumb" style="background-image:linear-gradient(rgba(0,0,0,0.2),rgba(12,12,20,0.95)),url('https://images.unsplash.com/photo-1485846234645-a62644f84728?w=800')"></div><div class="portfolio-info"><h3>Best Film Production Award</h3><p>Film production recognized with Best Film award.</p></div></a>
-      <a href="https://drive.google.com/drive/folders/1-hm1iBLPnW0Uh045z-5s922fR99Jg9KX?usp=sharing" target="_blank" class="portfolio-card reveal"><div class="portfolio-thumb" style="background-image:linear-gradient(rgba(0,0,0,0.2),rgba(12,12,20,0.95)),url('https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=800')"></div><div class="portfolio-info"><h3>Cinematic Video</h3><p>Cinematic edits with storytelling and mood grading.</p></div></a>
-      <a href="https://drive.google.com/drive/folders/1zubPlV0JR7sXFKm1f23kKRteKEHD0rT2?usp=sharing" target="_blank" class="portfolio-card reveal"><div class="portfolio-thumb" style="background-image:linear-gradient(rgba(0,0,0,0.2),rgba(12,12,20,0.95)),url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=800')"></div><div class="portfolio-info"><h3>Company Profile Video</h3><p>Profile videos for brands and businesses.</p></div></a>
-      <a href="https://drive.google.com/drive/folders/1lQfraJ2X0hf99E_9trLVWO5Ws66kZL5G?usp=sharing" target="_blank" class="portfolio-card reveal"><div class="portfolio-thumb" style="background-image:linear-gradient(rgba(0,0,0,0.2),rgba(12,12,20,0.95)),url('https://images.unsplash.com/photo-1579532537598-459ecdaf39cc?w=800')"></div><div class="portfolio-info"><h3>Documentary Video</h3><p>Documentary-style storytelling with real narratives.</p></div></a>
-      <a href="https://drive.google.com/drive/folders/10o_XKYlLNSiDZEks3s9qLTdGiUf-43bG?usp=sharing" target="_blank" class="portfolio-card reveal"><div class="portfolio-thumb" style="background-image:linear-gradient(rgba(0,0,0,0.2),rgba(12,12,20,0.95)),url('https://images.unsplash.com/photo-1452780212940-6f5c0d14d848?w=800')"></div><div class="portfolio-info"><h3>Videographer</h3><p>On-location shoots, event coverage, and raw cinematography.</p></div></a>
+    <div class="sec-carousel-wrap mid">
+      <div class="sec-carousel-scroll portfolio-scroll" id="scroll-portfolio">
+        <a href="https://drive.google.com/drive/folders/1o5he3i43HemiBZ_Ca1R-KvqgP1O161Tz?usp=sharing" target="_blank" class="portfolio-card" data-idx="0"><div class="portfolio-thumb" style="background-image:linear-gradient(rgba(0,0,0,0.2),rgba(12,12,20,0.95)),url('https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?w=800')"></div><div class="portfolio-info"><h3>Reels Content Editing</h3><p>Full collection of short-form editing projects.</p></div></a>
+        <a href="https://drive.google.com/drive/folders/1vM12mUcVI84mk8kFkxMgoxaRjVQwBkvE?usp=sharing" target="_blank" class="portfolio-card" data-idx="1"><div class="portfolio-thumb" style="background-image:linear-gradient(rgba(0,0,0,0.2),rgba(12,12,20,0.95)),url('https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800')"></div><div class="portfolio-info"><h3>Long-form Video</h3><p>Full-length edits, documentaries, and deep-form content.</p></div></a>
+        <a href="https://drive.google.com/drive/folders/1SUs8FpWyKMan2lNLkXFMQfeX9qtPfw40?usp=sharing" target="_blank" class="portfolio-card" data-idx="2"><div class="portfolio-thumb" style="background-image:linear-gradient(rgba(0,0,0,0.2),rgba(12,12,20,0.95)),url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800')"></div><div class="portfolio-info"><h3>1st Place Creative Video</h3><p>Award-winning creative video project.</p></div></a>
+        <a href="https://drive.google.com/drive/folders/11f5Oa8MIq5mrFU3_qxLaE3gGVnVj8C3c?usp=sharing" target="_blank" class="portfolio-card" data-idx="3"><div class="portfolio-thumb" style="background-image:linear-gradient(rgba(0,0,0,0.2),rgba(12,12,20,0.95)),url('https://images.unsplash.com/photo-1485846234645-a62644f84728?w=800')"></div><div class="portfolio-info"><h3>Best Film Production Award</h3><p>Film production recognized with Best Film award.</p></div></a>
+        <a href="https://drive.google.com/drive/folders/1-hm1iBLPnW0Uh045z-5s922fR99Jg9KX?usp=sharing" target="_blank" class="portfolio-card" data-idx="4"><div class="portfolio-thumb" style="background-image:linear-gradient(rgba(0,0,0,0.2),rgba(12,12,20,0.95)),url('https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=800')"></div><div class="portfolio-info"><h3>Cinematic Video</h3><p>Cinematic edits with storytelling and mood grading.</p></div></a>
+        <a href="https://drive.google.com/drive/folders/1zubPlV0JR7sXFKm1f23kKRteKEHD0rT2?usp=sharing" target="_blank" class="portfolio-card" data-idx="5"><div class="portfolio-thumb" style="background-image:linear-gradient(rgba(0,0,0,0.2),rgba(12,12,20,0.95)),url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=800')"></div><div class="portfolio-info"><h3>Company Profile Video</h3><p>Profile videos for brands and businesses.</p></div></a>
+        <a href="https://drive.google.com/drive/folders/1lQfraJ2X0hf99E_9trLVWO5Ws66kZL5G?usp=sharing" target="_blank" class="portfolio-card" data-idx="6"><div class="portfolio-thumb" style="background-image:linear-gradient(rgba(0,0,0,0.2),rgba(12,12,20,0.95)),url('https://images.unsplash.com/photo-1579532537598-459ecdaf39cc?w=800')"></div><div class="portfolio-info"><h3>Documentary Video</h3><p>Documentary-style storytelling with real narratives.</p></div></a>
+        <a href="https://drive.google.com/drive/folders/10o_XKYlLNSiDZEks3s9qLTdGiUf-43bG?usp=sharing" target="_blank" class="portfolio-card" data-idx="7"><div class="portfolio-thumb" style="background-image:linear-gradient(rgba(0,0,0,0.2),rgba(12,12,20,0.95)),url('https://images.unsplash.com/photo-1452780212940-6f5c0d14d848?w=800')"></div><div class="portfolio-info"><h3>Videographer</h3><p>On-location shoots, event coverage, and raw cinematography.</p></div></a>
+      </div>
+    </div>
+    <div class="carousel-ui" style="padding:0.5rem 0 1rem;">
+      <button class="c-arrow" data-sec-scroll="scroll-portfolio" data-dir="-1">&#8592;</button>
+      <div class="c-dots" id="dots-portfolio"></div>
+      <button class="c-arrow" data-sec-scroll="scroll-portfolio" data-dir="1">&#8594;</button>
+      <span class="c-counter" id="counter-portfolio">01 / 08</span>
     </div>
   </div>
 </div>
@@ -1111,9 +1194,10 @@
     <h2 class="section-title reveal">What Clients Say</h2>
     <p class="section-sub reveal">Real words from real people I've worked with</p>
 
-    <div class="testimonials-grid">
+    <div class="sec-carousel-wrap">
+    <div class="sec-carousel-scroll testi-scroll" id="scroll-testi">
 
-      <div class="testi-card reveal">
+      <div class="testi-card" data-idx="0">
         <div class="testi-stars">★★★★★</div>
         <div class="testi-text">
           "Imade just gets it. Every edit he delivers matches exactly the vibe I'm going
@@ -1131,7 +1215,7 @@
         </div>
       </div>
 
-      <div class="testi-card reveal">
+      <div class="testi-card" data-idx="1">
         <div class="testi-stars">★★★★★</div>
         <div class="testi-text">
           "Fast, clean, and easy to work with. Since I started working with Imade,
@@ -1149,7 +1233,7 @@
         </div>
       </div>
 
-      <div class="testi-card reveal">
+      <div class="testi-card" data-idx="2">
         <div class="testi-stars">★★★★★</div>
         <div class="testi-text">
           "The edits look so clean and premium, exactly the kind of quality I was
@@ -1167,7 +1251,7 @@
         </div>
       </div>
 
-      <div class="testi-card reveal">
+      <div class="testi-card" data-idx="3">
         <div class="testi-stars">★★★★★</div>
         <div class="testi-text">
           "Super consistent, barely any revisions, always on time. We trust Imade
@@ -1185,7 +1269,7 @@
         </div>
       </div>
 
-      <div class="testi-card reveal">
+      <div class="testi-card" data-idx="4">
         <div class="testi-stars">★★★★★</div>
         <div class="testi-text">
           "I was looking for someone who could keep up with the pace of my content
@@ -1203,7 +1287,7 @@
         </div>
       </div>
 
-      <div class="testi-card reveal">
+      <div class="testi-card" data-idx="5">
         <div class="testi-stars">★★★★★</div>
         <div class="testi-text">
           "Imade gets the brand instantly. No lengthy briefings needed, he just
@@ -1221,6 +1305,13 @@
         </div>
       </div>
 
+    </div><!-- /.testi-scroll -->
+    </div><!-- /.sec-carousel-wrap -->
+    <div class="carousel-ui" style="padding:0.5rem 0 2rem;">
+      <button class="c-arrow" data-sec-scroll="scroll-testi" data-dir="-1">&#8592;</button>
+      <div class="c-dots" id="dots-testi"></div>
+      <button class="c-arrow" data-sec-scroll="scroll-testi" data-dir="1">&#8594;</button>
+      <span class="c-counter" id="counter-testi">01 / 06</span>
     </div>
   </div>
 </div>
@@ -1244,7 +1335,7 @@
   <p>AI-Driven Video Editor &amp; Cinematic Storyteller © 2025</p>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 /* ═══════════════════════════════════════════════════════════════
    CAROUSEL — native scroll-snap controller
 
@@ -1330,6 +1421,77 @@ class NativeCarousel {
 
   navigate(dir) { this.goTo(this.activeIdx + dir); }
 }
+
+/* Bootstrap section carousels (clients, portfolio, testi) */
+class SecCarousel {
+  constructor(scrollEl) {
+    this.el    = scrollEl;
+    // Pick all direct children that have data-idx OR all direct children
+    this.items = [...scrollEl.querySelectorAll('[data-idx]')];
+    if (!this.items.length) this.items = [...scrollEl.children];
+    this.n     = this.items.length;
+    this.activeIdx = 0;
+
+    const suffix = scrollEl.id.replace('scroll-', '');
+    this.dotsEl    = document.getElementById('dots-'    + suffix);
+    this.counterEl = document.getElementById('counter-' + suffix);
+
+    this._buildDots();
+    this._observe();
+    if (this.items[0]) this._syncUI(0);
+  }
+
+  _buildDots() {
+    if (!this.dotsEl) return;
+    this.dots = this.items.map((_, i) => {
+      const b = document.createElement('button');
+      b.className = 'c-dot' + (i === 0 ? ' is-active' : '');
+      b.setAttribute('aria-label', 'Item ' + (i+1));
+      b.addEventListener('click', () => this.goTo(i));
+      this.dotsEl.appendChild(b);
+      return b;
+    });
+  }
+
+  _observe() {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const idx = this.items.indexOf(entry.target);
+          if (idx !== -1) this._syncUI(idx);
+        }
+      });
+    }, { root: this.el, threshold: 0.6 });
+    this.items.forEach(item => io.observe(item));
+  }
+
+  _syncUI(idx) {
+    this.activeIdx = idx;
+    if (this.dots) this.dots.forEach((d, i) => d.classList.toggle('is-active', i === idx));
+    if (this.counterEl) {
+      this.counterEl.textContent =
+        String(idx + 1).padStart(2, '0') + ' / ' + String(this.n).padStart(2, '0');
+    }
+  }
+
+  goTo(i) {
+    const idx = Math.max(0, Math.min(this.n - 1, i));
+    this.items[idx].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  }
+
+  navigate(dir) { this.goTo(this.activeIdx + dir); }
+}
+
+const secCarousels = {};
+document.querySelectorAll('.sec-carousel-scroll').forEach(el => {
+  secCarousels[el.id] = new SecCarousel(el);
+});
+document.querySelectorAll('.c-arrow[data-sec-scroll]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const car = secCarousels[btn.dataset.secScroll];
+    if (car) car.navigate(parseInt(btn.dataset.dir, 10));
+  });
+});
 
 /* Bootstrap */
 const carousels = {};
