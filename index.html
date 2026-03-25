@@ -651,8 +651,10 @@
     .wide-carousel-wrap::after  { right: 0; background: linear-gradient(to left,  var(--bg) 0%, transparent 100%); }
 
     .wide-carousel-wrap { overflow: visible !important; }
+    .wide-carousel-wrap::before,
+    .wide-carousel-wrap::after { display: none; }
     .wide-carousel-scroll {
-      display: flex; align-items: center;
+      display: flex; align-items: flex-start;
       overflow-x: scroll; overflow-y: visible; scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch; scrollbar-width: none;
       overscroll-behavior-x: contain;
