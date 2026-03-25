@@ -637,7 +637,7 @@
     }
 
     /* ── WIDE CARD CAROUSEL (longform, BTS) ─────────────────── */
-    :root { --wide-w: 480px; --skill-w: 300px; }
+    :root { --wide-w: 400px; --skill-w: 300px; }
 
     .wide-carousel-wrap {
       position: relative; width: 100%; overflow: hidden;
@@ -666,7 +666,7 @@
 
     .wide-carousel-scroll .wide-card {
       flex: 0 0 var(--wide-w); width: var(--wide-w);
-      border: 1px solid rgba(195,255,0,0.07); border-radius: 16px; overflow: hidden;
+      border: 1px solid rgba(195,255,0,0.07); border-radius: 16px; overflow: visible;
       scroll-snap-align: center;
       scroll-snap-stop: always;
       transform: scale(0.82); opacity: 0.2;
@@ -724,6 +724,29 @@
       transform: scale(1.05); opacity: 1;
       filter: brightness(1.04) saturate(1.05) blur(0);
       box-shadow: 0 28px 80px rgba(0,0,0,0.65), 0 0 50px rgba(195,255,0,0.10);
+    }
+
+    /* Wide card active — no scale to prevent clipping, just border+glow */
+    .wide-carousel-scroll .wide-card.is-active {
+      transform: scale(1.0) !important;
+      opacity: 1 !important;
+      filter: brightness(1.04) saturate(1.05) blur(0) !important;
+      border: 1px solid rgba(195,255,0,0.5) !important;
+      box-shadow:
+        0 20px 60px rgba(0,0,0,0.6),
+        0 0 40px rgba(195,255,0,0.18),
+        0 0 80px rgba(195,255,0,0.08) !important;
+    }
+
+    /* Clip only the video part of wide-card, not the text below */
+    .wide-carousel-scroll .wide-card iframe {
+      border-radius: 12px 12px 0 0;
+      overflow: hidden;
+    }
+    .wide-carousel-scroll .wide-card .wide-card-label {
+      padding: 1rem 1.2rem 1.2rem;
+      background: rgba(12,12,20,0.55);
+      border-radius: 0 0 16px 16px;
     }
   </style>
 </head>
