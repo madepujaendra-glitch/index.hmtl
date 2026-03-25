@@ -469,8 +469,7 @@
       .ig-grid .ig-card { flex: 0 0 240px; width: 240px; scroll-snap-align: start; }
       .ig-grid::-webkit-scrollbar { display: none; }
 
-      /* Hide carousel on mobile — longform videos show instead */
-      #showcase { display: none; }
+
 
       /* Longform sections — stack single col, reduce padding */
       .section-full { padding: 2.5rem 5%; }
@@ -482,8 +481,14 @@
       .skills-grid { grid-template-columns: 1fr; gap: 1rem; }
       .skill-card { padding: 1.4rem 1.6rem; }
 
-      /* Portfolio grid — 1 col */
-      .portfolio-grid { grid-template-columns: 1fr; gap: 1rem; }
+      /* Portfolio grid — horizontal scroll on mobile */
+      .portfolio-grid {
+        display: flex; flex-wrap: nowrap; overflow-x: auto;
+        scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+        gap: 1rem; padding-bottom: 1rem;
+      }
+      .portfolio-grid .portfolio-card { flex: 0 0 260px; width: 260px; scroll-snap-align: start; }
+      .portfolio-grid::-webkit-scrollbar { display: none; }
 
       /* Testimonials — horizontal scroll like IG */
       .testimonials-grid {
