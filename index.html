@@ -454,98 +454,78 @@
     ══════════════════════════════════════════ */
     @media (min-width: 769px) {
 
-      /* ── Original showcase carousel ── */
+      /* ── Kill ALL carousel scroll behaviour on desktop ── */
       .carousel-wrap { overflow: visible !important; }
       .carousel-scroll {
         display: flex !important;
         flex-wrap: wrap !important;
         overflow: visible !important;
         scroll-snap-type: none !important;
-        padding: 1rem !important;
+        padding: 1.5rem !important;
         gap: 1rem !important;
         justify-content: center !important;
-        -webkit-overflow-scrolling: auto !important;
       }
-      .carousel-item {
-        position: static !important;
+
+      /* Every possible carousel item state — no dim, no blur, no scale */
+      .carousel-item,
+      .carousel-item.is-active,
+      .carousel-item:hover {
+        transform: none !important;
+        opacity: 1 !important;
+        filter: none !important;
+        box-shadow: none !important;
+        border-color: rgba(195,255,0,0.07) !important;
         flex: 0 0 var(--item-w) !important;
         width: var(--item-w) !important;
-        transform: none !important;
-        opacity: 1 !important;
-        filter: none !important;
-        box-shadow: none !important;
-        border: 1px solid rgba(195,255,0,0.08) !important;
-        scroll-snap-align: none !important;
-        scroll-snap-stop: unset !important;
-        transition: transform 0.3s ease, box-shadow 0.3s ease !important;
-      }
-      .carousel-item.is-active {
-        transform: none !important;
-        opacity: 1 !important;
-        filter: none !important;
-        box-shadow: none !important;
-        border: 1px solid rgba(195,255,0,0.08) !important;
+        scroll-snap-align: unset !important;
       }
       .carousel-item:hover {
-        transform: translateY(-5px) !important;
-        box-shadow: 0 12px 30px rgba(0,0,0,0.3) !important;
+        transform: translateY(-4px) !important;
         border-color: rgba(195,255,0,0.2) !important;
-        opacity: 1 !important; filter: none !important;
+        box-shadow: 0 12px 30px rgba(0,0,0,0.3) !important;
       }
-      .stage-fade-left, .stage-fade-right { display: none !important; }
+
+      /* Hide edge fades */
+      .carousel-wrap::before,
+      .carousel-wrap::after,
+      .stage-fade-left,
+      .stage-fade-right { display: none !important; }
 
       /* ── Section carousels → grid ── */
       .sec-carousel-wrap,
-      .skill-carousel-wrap,
-      .wide-carousel-wrap {
-        max-width: 1200px !important;
-        overflow: visible !important;
-      }
+      .skill-carousel-wrap { max-width: 1200px; overflow: visible !important; }
+      .wide-carousel-wrap { max-width: 1100px; overflow: visible !important; }
+
       .sec-carousel-scroll,
       .skill-carousel-scroll,
       .wide-carousel-scroll {
-        display: flex !important;
         flex-wrap: wrap !important;
         overflow: visible !important;
         scroll-snap-type: none !important;
-        padding: 1rem !important;
-        gap: 1.5rem !important;
+        padding: 1rem 0 !important;
         justify-content: center !important;
       }
 
-      /* Reset all cards in section carousels */
+      /* Every card type — reset all effects */
       .sec-carousel-scroll .ig-card,
-      .sec-carousel-scroll .portfolio-card,
-      .sec-carousel-scroll .testi-card,
-      .wide-carousel-scroll .wide-card,
-      .skill-carousel-scroll .skill-card {
-        transform: none !important;
-        opacity: 1 !important;
-        filter: none !important;
-        box-shadow: none !important;
-        border: 1px solid rgba(195,255,0,0.08) !important;
-        scroll-snap-align: none !important;
-        scroll-snap-stop: unset !important;
-        flex-shrink: 0 !important;
-      }
       .sec-carousel-scroll .ig-card.is-active,
+      .sec-carousel-scroll .portfolio-card,
       .sec-carousel-scroll .portfolio-card.is-active,
+      .sec-carousel-scroll .testi-card,
       .sec-carousel-scroll .testi-card.is-active,
+      .wide-carousel-scroll .wide-card,
       .wide-carousel-scroll .wide-card.is-active,
+      .skill-carousel-scroll .skill-card,
       .skill-carousel-scroll .skill-card.is-active {
         transform: none !important;
         opacity: 1 !important;
         filter: none !important;
+        border-color: rgba(195,255,0,0.07) !important;
+        scroll-snap-align: unset !important;
+        scroll-snap-stop: unset !important;
       }
 
-      /* Card sizes in grid */
-      .sec-carousel-scroll .ig-card { flex: 0 0 var(--clients-w) !important; }
-      .sec-carousel-scroll .portfolio-card { flex: 0 0 var(--portfolio-w) !important; }
-      .sec-carousel-scroll .testi-card { flex: 0 0 var(--testi-w) !important; }
-      .skill-carousel-scroll .skill-card { flex: 0 0 var(--skill-w) !important; }
-      .wide-carousel-scroll .wide-card { flex: 0 0 calc(50% - 2rem) !important; max-width: 500px; }
-
-      /* Hover on desktop */
+      /* Hover states on desktop */
       .sec-carousel-scroll .ig-card:hover,
       .sec-carousel-scroll .portfolio-card:hover,
       .sec-carousel-scroll .testi-card:hover,
@@ -553,10 +533,20 @@
         transform: translateY(-6px) !important;
         border-color: rgba(195,255,0,0.25) !important;
         box-shadow: 0 16px 40px rgba(0,0,0,0.3) !important;
-        opacity: 1 !important; filter: none !important;
       }
 
-      /* Hide dots/arrows on desktop */
+      /* Card widths in grid */
+      .sec-carousel-scroll .ig-card       { flex: 0 0 var(--clients-w) !important; }
+      .sec-carousel-scroll .portfolio-card { flex: 0 0 var(--portfolio-w) !important; }
+      .sec-carousel-scroll .testi-card     { flex: 0 0 var(--testi-w) !important; }
+      .skill-carousel-scroll .skill-card   { flex: 0 0 var(--skill-w) !important; }
+      .wide-carousel-scroll .wide-card     { flex: 0 0 calc(50% - 1rem) !important; max-width: 520px !important; }
+
+      /* Wide card box-shadow reset */
+      .wide-carousel-scroll .wide-card     { box-shadow: none !important; }
+      .wide-carousel-scroll .wide-card:hover { box-shadow: 0 12px 30px rgba(0,0,0,0.3) !important; border-color: rgba(195,255,0,0.2) !important; }
+
+      /* Hide carousel nav (arrows/dots) on desktop */
       .carousel-ui { display: none !important; }
     }
 
