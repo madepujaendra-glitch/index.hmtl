@@ -92,7 +92,7 @@
       align-items: center;
       gap: 24px;
       overflow-x: scroll;
-      scroll-snap-type: x mandatory;
+      scroll-snap-type: x proximity;
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
       padding-top: 2.5rem; padding-bottom: 2.5rem;
@@ -108,7 +108,7 @@
       overflow: hidden;
       border: 1px solid rgba(255,255,255,0.04);
       scroll-snap-align: center;
-      scroll-snap-stop: always;
+      scroll-snap-stop: normal;
     }
 
     .item-thumb { width: 100%; aspect-ratio: 9/16; background: #000; overflow: hidden; }
@@ -162,9 +162,10 @@
     footer { text-align: center; padding: 2.8rem 5%; background: var(--card); border-top: 1px solid rgba(195,255,0,0.05); }
     footer p { color: var(--muted); font-size: 0.84rem; line-height: 2; }
 
-    /* REVEAL */
-    .reveal { opacity: 0; transform: translateY(36px); transition: opacity 0.75s var(--ease), transform 0.75s var(--ease); }
-    .reveal.visible { opacity: 1; transform: none; }
+    /* REVEAL — default visible; JS progressively enhances with scroll animation */
+    .reveal { opacity: 1; transform: none; transition: opacity 0.75s var(--ease), transform 0.75s var(--ease); }
+    .js-reveal-ready .reveal { opacity: 0; transform: translateY(36px); }
+    .js-reveal-ready .reveal.visible { opacity: 1; transform: none; }
 
     /* ABOUT: Education */
     .edu-block { max-width: 820px; margin: 2.5rem auto 0; display: flex; align-items: flex-start; gap: 1.4rem; background: rgba(12,12,20,0.55); border-radius: 16px; padding: 1.6rem 2rem; }
@@ -207,14 +208,19 @@
     .wide-row { max-width: 1100px; margin: 0 auto; display: grid; gap: 2rem; }
     .wide-row.two-col { grid-template-columns: 1fr 1fr; }
     .wide-row.one-col { grid-template-columns: 1fr; max-width: 800px; }
-    .wide-card { border-radius: 16px; overflow: hidden; }
-    .wide-card iframe { display: block; width: 100%; aspect-ratio: 16/9; border: none; }
-    .wide-card-label { padding: 1rem 0 0.5rem; }
     .wide-card-client { font-size: 0.68rem; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--primary); margin-bottom: 0.25rem; }
     .wide-card-title { font-size: 0.95rem; font-weight: 600; color: var(--text); margin-bottom: 0.2rem; }
     .wide-card-desc { font-size: 0.78rem; color: var(--muted); }
-
-    /* CLIENT INSTAGRAM */
+    .wide-carousel-scroll {
+      display: flex; align-items: flex-start; overflow-x: scroll; overflow-y: visible;
+      scroll-snap-type: x proximity; -webkit-overflow-scrolling: touch;
+      scrollbar-width: none; overscroll-behavior-x: contain;
+      padding-top: 2rem; padding-bottom: 4rem;
+      padding-inline: calc((100% - var(--wide-w)) / 2);
+      scroll-padding-inline: calc((100% - var(--wide-w)) / 2);
+      gap: 24px;
+    }
+    .wide-carousel-scroll .wide-card { flex: 0 0 var(--wide-w); width: var(--wide-w); scroll-snap-align: center; scroll-snap-stop: normal; }
     #clients { background: var(--bg); padding: 3rem 5%; }
     .clients-inner { max-width: 1400px; margin: 0 auto; }
     .ig-card { background: rgba(12,12,20,0.6); border: 1px solid rgba(195,255,0,0.07); border-radius: 16px; overflow: hidden; transition: transform 0.3s var(--ease), box-shadow 0.3s; }
@@ -256,7 +262,7 @@
 
     .sec-carousel-scroll, .wide-carousel-scroll, .skill-carousel-scroll {
       display: flex; align-items: center; overflow-x: scroll;
-      scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+      scroll-snap-type: x proximity; -webkit-overflow-scrolling: touch;
       scrollbar-width: none; overscroll-behavior-x: contain;
       padding-top: 1rem; padding-bottom: 1rem;
       padding-inline: calc((100% - var(--skill-w)) / 2);
@@ -271,7 +277,7 @@
       scroll-padding-inline: calc((100% - var(--clients-w)) / 2);
       gap: 20px;
     }
-    .clients-scroll .ig-card { flex: 0 0 var(--clients-w); width: var(--clients-w); scroll-snap-align: center; scroll-snap-stop: always; }
+    .clients-scroll .ig-card { flex: 0 0 var(--clients-w); width: var(--clients-w); scroll-snap-align: center; scroll-snap-stop: normal; }
 
     .portfolio-scroll {
       padding-top: 1.5rem; padding-bottom: 1.5rem;
@@ -279,7 +285,7 @@
       scroll-padding-inline: calc((100% - var(--portfolio-w)) / 2);
       gap: 20px;
     }
-    .portfolio-scroll .portfolio-card { flex: 0 0 var(--portfolio-w); width: var(--portfolio-w); scroll-snap-align: center; scroll-snap-stop: always; }
+    .portfolio-scroll .portfolio-card { flex: 0 0 var(--portfolio-w); width: var(--portfolio-w); scroll-snap-align: center; scroll-snap-stop: normal; }
 
     .testi-scroll {
       padding-top: 1.5rem; padding-bottom: 1.5rem;
@@ -287,66 +293,57 @@
       scroll-padding-inline: calc((100% - var(--testi-w)) / 2);
       gap: 20px;
     }
-    .testi-scroll .testi-card { flex: 0 0 var(--testi-w); width: var(--testi-w); scroll-snap-align: center; scroll-snap-stop: always; }
-
-    .wide-carousel-scroll {
-      display: flex; align-items: flex-start; overflow-x: scroll; overflow-y: visible;
-      scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
-      scrollbar-width: none; overscroll-behavior-x: contain;
-      padding-top: 1.5rem; padding-bottom: 1.5rem;
-      padding-inline: calc((100% - var(--wide-w)) / 2);
-      scroll-padding-inline: calc((100% - var(--wide-w)) / 2);
-      gap: 24px;
-    }
-    .wide-carousel-scroll .wide-card { flex: 0 0 var(--wide-w); width: var(--wide-w); scroll-snap-align: center; scroll-snap-stop: always; }
+    .testi-scroll .testi-card { flex: 0 0 var(--testi-w); width: var(--testi-w); scroll-snap-align: center; scroll-snap-stop: normal; }
 
     .skill-carousel-scroll {
       padding: 1.5rem calc((100% - var(--skill-w)) / 2);
       scroll-padding-inline: calc((100% - var(--skill-w)) / 2);
     }
-    .skill-carousel-scroll .skill-card { flex: 0 0 var(--skill-w); width: var(--skill-w); scroll-snap-align: center; scroll-snap-stop: always; }
+    .skill-carousel-scroll .skill-card { flex: 0 0 var(--skill-w); width: var(--skill-w); scroll-snap-align: center; scroll-snap-stop: normal; }
 
-    /* ── Spotlight: MOBILE ONLY (≤1024px) ─────────────────── */
-    @media (max-width: 1024px) {
-      .sec-carousel-scroll .ig-card,
-      .sec-carousel-scroll .portfolio-card,
-      .sec-carousel-scroll .testi-card,
-      .skill-carousel-scroll .skill-card {
-        transform: scale(0.82); opacity: 0.25; filter: blur(2px) brightness(0.3);
-        transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), opacity 0.3s cubic-bezier(0.16,1,0.3,1), filter 0.3s cubic-bezier(0.16,1,0.3,1), box-shadow 0.3s cubic-bezier(0.16,1,0.3,1), border-color 0.3s cubic-bezier(0.16,1,0.3,1);
-      }
-      .sec-carousel-scroll .ig-card.is-active,
-      .sec-carousel-scroll .portfolio-card.is-active,
-      .sec-carousel-scroll .testi-card.is-active,
-      .skill-carousel-scroll .skill-card.is-active {
-        transform: scale(1.0); opacity: 1; filter: none;
-        border-color: rgba(195,255,0,0.45) !important;
-        box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 40px rgba(195,255,0,0.18), 0 0 80px rgba(195,255,0,0.08);
-      }
-      /* Wide-card: opacity+blur only, no transform so label never clips */
-      .wide-carousel-scroll .wide-card {
-        opacity: 0.3;
-        filter: blur(1.5px) brightness(0.3);
-        transition: opacity 0.3s cubic-bezier(0.16,1,0.3,1), filter 0.3s cubic-bezier(0.16,1,0.3,1), box-shadow 0.3s cubic-bezier(0.16,1,0.3,1);
-      }
-      .wide-carousel-scroll .wide-card.is-active {
-        opacity: 1;
-        filter: none;
-        box-shadow: 0 20px 60px rgba(0,0,0,0.55), 0 0 36px rgba(195,255,0,0.14);
-      }
-      /* carousel-item (9:16 showcase rows) */
-      .carousel-item {
-        transform: scale(0.78);
-        opacity: 0.2;
-        filter: blur(3px) brightness(0.25) saturate(0.2);
-        transition: transform 0.5s cubic-bezier(0.16,1,0.3,1), opacity 0.5s cubic-bezier(0.16,1,0.3,1), filter 0.5s cubic-bezier(0.16,1,0.3,1), box-shadow 0.5s cubic-bezier(0.16,1,0.3,1);
-      }
-      .carousel-item.is-active {
-        transform: scale(1.05);
-        opacity: 1;
-        filter: brightness(1.04) saturate(1.05) blur(0);
-        box-shadow: 0 28px 80px rgba(0,0,0,0.65), 0 0 50px rgba(195,255,0,0.10), 0 0 100px rgba(195,255,0,0.05);
-      }
+    /* ── Spotlight: ALL screen sizes ──────────────────────── */
+    .sec-carousel-scroll .ig-card,
+    .sec-carousel-scroll .portfolio-card,
+    .sec-carousel-scroll .testi-card,
+    .skill-carousel-scroll .skill-card {
+      transform: scale(0.82); opacity: 0.25; filter: blur(2px) brightness(0.3);
+      transition: transform 0.18s ease-out, opacity 0.18s ease-out, filter 0.18s ease-out, box-shadow 0.18s ease-out, border-color 0.18s ease-out;
+    }
+    .sec-carousel-scroll .ig-card.is-active,
+    .sec-carousel-scroll .portfolio-card.is-active,
+    .sec-carousel-scroll .testi-card.is-active,
+    .skill-carousel-scroll .skill-card.is-active {
+      transform: scale(1.0); opacity: 1; filter: none;
+      border-color: rgba(195,255,0,0.45) !important;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 40px rgba(195,255,0,0.18), 0 0 80px rgba(195,255,0,0.08);
+    }
+    /* Wide-card: split into video + label so label never gets clipped */
+    .wide-card { overflow: visible; border-radius: 0; }
+    .wide-card-video { border-radius: 16px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.4); }
+    .wide-card-label { padding: 1rem 0 0.5rem; }
+    .wide-carousel-scroll .wide-card {
+      transform: scale(0.82);
+      opacity: 0.25;
+      filter: blur(2px) brightness(0.3);
+      transform-origin: center top;
+      transition: transform 0.18s ease-out, opacity 0.18s ease-out, filter 0.18s ease-out, box-shadow 0.18s ease-out;
+    }
+    .wide-carousel-scroll .wide-card.is-active {
+      transform: scale(1.0);
+      opacity: 1; filter: none;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.55), 0 0 36px rgba(195,255,0,0.14);
+    }
+    .carousel-item {
+      transform: scale(0.78);
+      opacity: 0.2;
+      filter: blur(3px) brightness(0.25) saturate(0.2);
+      transition: transform 0.2s ease-out, opacity 0.2s ease-out, filter 0.2s ease-out, box-shadow 0.2s ease-out;
+    }
+    .carousel-item.is-active {
+      transform: scale(1.05);
+      opacity: 1;
+      filter: brightness(1.04) saturate(1.05) blur(0);
+      box-shadow: 0 28px 80px rgba(0,0,0,0.65), 0 0 50px rgba(195,255,0,0.10), 0 0 100px rgba(195,255,0,0.05);
     }
 
     @media (max-width: 1024px) {
@@ -382,42 +379,18 @@
       .float-contact a { padding: 0.6rem 1.4rem; font-size: 0.72rem; }
     }
 
-
     @media (min-width: 1025px) {
-      /* Kill carousel scroll — show as static grid */
-      .carousel-wrap { overflow: visible; }
-      .carousel-scroll {
-        display: flex; flex-wrap: wrap; overflow: visible;
-        scroll-snap-type: none; padding: 1.5rem;
-        gap: 1rem; justify-content: center;
+      /* Desktop: keep carousels scrollable, just increase item sizes */
+      :root {
+        --item-w:      290px;
+        --testi-w:     340px;
+        --wide-w:      min(520px, calc(50vw - 80px));
+        --clients-w:   290px;
+        --portfolio-w: 300px;
       }
-      .carousel-wrap::before, .carousel-wrap::after { display: none; }
-
-      .carousel-item {
-        flex: 0 0 var(--item-w); width: var(--item-w);
-        scroll-snap-align: unset; transition: transform 0.3s var(--ease), box-shadow 0.3s, border-color 0.3s;
-      }
-      .carousel-item:hover { transform: translateY(-4px); border-color: rgba(195,255,0,0.2); box-shadow: 0 12px 30px rgba(0,0,0,0.3); }
-
-      .sec-carousel-wrap, .skill-carousel-wrap { max-width: 1200px; overflow: visible; }
-      .wide-carousel-wrap { max-width: 1100px; overflow: visible; }
-      .sec-carousel-scroll, .skill-carousel-scroll, .wide-carousel-scroll {
-        flex-wrap: wrap; overflow: visible;
-        scroll-snap-type: none; padding: 1rem 0;
-        justify-content: center;
-      }
-
-      .sec-carousel-scroll .ig-card       { flex: 0 0 var(--clients-w); scroll-snap-align: unset; scroll-snap-stop: unset; transition: transform 0.3s var(--ease), box-shadow 0.3s, border-color 0.3s; }
-      .sec-carousel-scroll .portfolio-card { flex: 0 0 var(--portfolio-w); scroll-snap-align: unset; scroll-snap-stop: unset; transition: transform 0.3s var(--ease), box-shadow 0.3s, border-color 0.3s; }
-      .sec-carousel-scroll .testi-card     { flex: 0 0 var(--testi-w); scroll-snap-align: unset; scroll-snap-stop: unset; transition: transform 0.3s var(--ease), box-shadow 0.3s, border-color 0.3s; }
-      .skill-carousel-scroll .skill-card   { flex: 0 0 var(--skill-w); scroll-snap-align: unset; scroll-snap-stop: unset; }
-      .wide-carousel-scroll .wide-card     { flex: 0 0 calc(50% - 1rem); max-width: 520px; scroll-snap-align: unset; scroll-snap-stop: unset; }
-
-      .sec-carousel-scroll .ig-card:hover, .sec-carousel-scroll .portfolio-card:hover,
-      .sec-carousel-scroll .testi-card:hover { transform: translateY(-6px); border-color: rgba(195,255,0,0.25); box-shadow: 0 16px 40px rgba(0,0,0,0.3); }
-      .wide-carousel-scroll .wide-card:hover { box-shadow: 0 12px 30px rgba(0,0,0,0.3); border-color: rgba(195,255,0,0.2); }
-
-      .carousel-ui { display: none; }
+      .hero-inner { grid-template-columns: 1.15fr 1fr; }
+      .award-spotlight { grid-template-columns: 1.4fr 1fr; gap: 3rem; }
+      .wide-row.two-col { grid-template-columns: 1fr 1fr; }
     }
   </style>
 </head>
@@ -665,8 +638,8 @@
   <div style="text-align:center; margin-bottom:1rem;"><span class="carousel-label-pill">long-form education</span></div>
   <div class="wide-carousel-wrap">
     <div class="wide-carousel-scroll" id="scroll-edu">
-      <div class="wide-card" data-idx="0"><div class="yt-lazy" data-vid="MlHmBB-ezrk" onclick="loadYT(this)" style="position:relative;cursor:pointer;background:#000;width:100%;aspect-ratio:16/9;"><img src="https://i.ytimg.com/vi/MlHmBB-ezrk/hqdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" alt="video"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;"><div style="width:52px;height:52px;background:rgba(195,255,0,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-style:solid;border-width:10px 0 10px 20px;border-color:transparent transparent transparent #050505;margin-left:4px;"></div></div></div></div><div class="wide-card-label"><div class="wide-card-client">Podcast</div><div class="wide-card-title">Podcast Episode</div><div class="wide-card-desc">Long-form podcast edit, motion graphics, captions, and cinematic cuts.</div></div></div>
-      <div class="wide-card" data-idx="1"><div class="yt-lazy" data-vid="CaceK21sxQg" onclick="loadYT(this)" style="position:relative;cursor:pointer;background:#000;width:100%;aspect-ratio:16/9;"><img src="https://i.ytimg.com/vi/CaceK21sxQg/hqdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" alt="video"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;"><div style="width:52px;height:52px;background:rgba(195,255,0,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-style:solid;border-width:10px 0 10px 20px;border-color:transparent transparent transparent #050505;margin-left:4px;"></div></div></div></div><div class="wide-card-label"><div class="wide-card-client">E-Course</div><div class="wide-card-title">Educational Course Video</div><div class="wide-card-desc">Structured e-course editing, clean pacing, graphics, and engaging flow.</div></div></div>
+      <div class="wide-card" data-idx="0"><div class="wide-card-video"><div class="yt-lazy" data-vid="MlHmBB-ezrk" onclick="loadYT(this)" style="position:relative;cursor:pointer;background:#000;width:100%;aspect-ratio:16/9;"><img src="https://i.ytimg.com/vi/MlHmBB-ezrk/hqdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" alt="video"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;"><div style="width:52px;height:52px;background:rgba(195,255,0,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-style:solid;border-width:10px 0 10px 20px;border-color:transparent transparent transparent #050505;margin-left:4px;"></div></div></div></div></div><div class="wide-card-label"><div class="wide-card-client">Podcast</div><div class="wide-card-title">Podcast Episode</div><div class="wide-card-desc">Long-form podcast edit, motion graphics, captions, and cinematic cuts.</div></div></div>
+      <div class="wide-card" data-idx="1"><div class="wide-card-video"><div class="yt-lazy" data-vid="CaceK21sxQg" onclick="loadYT(this)" style="position:relative;cursor:pointer;background:#000;width:100%;aspect-ratio:16/9;"><img src="https://i.ytimg.com/vi/CaceK21sxQg/hqdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" alt="video"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;"><div style="width:52px;height:52px;background:rgba(195,255,0,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-style:solid;border-width:10px 0 10px 20px;border-color:transparent transparent transparent #050505;margin-left:4px;"></div></div></div></div></div><div class="wide-card-label"><div class="wide-card-client">E-Course</div><div class="wide-card-title">Educational Course Video</div><div class="wide-card-desc">Structured e-course editing, clean pacing, graphics, and engaging flow.</div></div></div>
     </div>
   </div>
   <div class="carousel-ui" style="padding:0.5rem 0 1rem;">
@@ -682,8 +655,8 @@
   <div style="text-align:center; margin-bottom:1rem;"><span class="carousel-label-pill">fun &amp; behind the scene</span></div>
   <div class="wide-carousel-wrap">
     <div class="wide-carousel-scroll" id="scroll-bts">
-      <div class="wide-card" data-idx="0"><div class="yt-lazy" data-vid="-k9_zr8lpjA" onclick="loadYT(this)" style="position:relative;cursor:pointer;background:#000;width:100%;aspect-ratio:16/9;"><img src="https://i.ytimg.com/vi/-k9_zr8lpjA/hqdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" alt="video"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;"><div style="width:52px;height:52px;background:rgba(195,255,0,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-style:solid;border-width:10px 0 10px 20px;border-color:transparent transparent transparent #050505;margin-left:4px;"></div></div></div></div><div class="wide-card-label"><div class="wide-card-client">@imadevideo</div><div class="wide-card-title">Behind the Scene: Editing Process</div><div class="wide-card-desc">A peek into the workflow and creative process behind the edits.</div></div></div>
-      <div class="wide-card" data-idx="1"><div class="yt-lazy" data-vid="cbt-vTxaVEk" onclick="loadYT(this)" style="position:relative;cursor:pointer;background:#000;width:100%;aspect-ratio:16/9;"><img src="https://i.ytimg.com/vi/cbt-vTxaVEk/hqdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" alt="video"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;"><div style="width:52px;height:52px;background:rgba(195,255,0,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-style:solid;border-width:10px 0 10px 20px;border-color:transparent transparent transparent #050505;margin-left:4px;"></div></div></div></div><div class="wide-card-label"><div class="wide-card-client">@imadevideo</div><div class="wide-card-title">Fun Moment: On Set</div><div class="wide-card-desc">Candid moments and fun clips from real productions.</div></div></div>
+      <div class="wide-card" data-idx="0"><div class="wide-card-video"><div class="yt-lazy" data-vid="-k9_zr8lpjA" onclick="loadYT(this)" style="position:relative;cursor:pointer;background:#000;width:100%;aspect-ratio:16/9;"><img src="https://i.ytimg.com/vi/-k9_zr8lpjA/hqdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" alt="video"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;"><div style="width:52px;height:52px;background:rgba(195,255,0,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-style:solid;border-width:10px 0 10px 20px;border-color:transparent transparent transparent #050505;margin-left:4px;"></div></div></div></div></div><div class="wide-card-label"><div class="wide-card-client">@imadevideo</div><div class="wide-card-title">Behind the Scene: Editing Process</div><div class="wide-card-desc">A peek into the workflow and creative process behind the edits.</div></div></div>
+      <div class="wide-card" data-idx="1"><div class="wide-card-video"><div class="yt-lazy" data-vid="cbt-vTxaVEk" onclick="loadYT(this)" style="position:relative;cursor:pointer;background:#000;width:100%;aspect-ratio:16/9;"><img src="https://i.ytimg.com/vi/cbt-vTxaVEk/hqdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" alt="video"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;"><div style="width:52px;height:52px;background:rgba(195,255,0,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-style:solid;border-width:10px 0 10px 20px;border-color:transparent transparent transparent #050505;margin-left:4px;"></div></div></div></div></div><div class="wide-card-label"><div class="wide-card-client">@imadevideo</div><div class="wide-card-title">Fun Moment: On Set</div><div class="wide-card-desc">Candid moments and fun clips from real productions.</div></div></div>
     </div>
   </div>
   <div class="carousel-ui" style="padding:0.5rem 0 1rem;">
@@ -698,7 +671,7 @@
 <div class="section-full reveal">
   <div style="text-align:center; margin-bottom:2rem;"><span class="carousel-label-pill">company profile</span></div>
   <div class="wide-row one-col">
-    <div class="wide-card"><div class="yt-lazy" data-vid="cFwFh896XRk" onclick="loadYT(this)" style="position:relative;cursor:pointer;background:#000;width:100%;aspect-ratio:16/9;"><img src="https://i.ytimg.com/vi/cFwFh896XRk/hqdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" alt="video"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;"><div style="width:52px;height:52px;background:rgba(195,255,0,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-style:solid;border-width:10px 0 10px 20px;border-color:transparent transparent transparent #050505;margin-left:4px;"></div></div></div></div><div class="wide-card-label" style="text-align:center;"><div class="wide-card-client">Client Brand</div><div class="wide-card-title">Company Profile Video</div><div class="wide-card-desc">Professional brand storytelling, from script to screen.</div></div></div>
+    <div class="wide-card"><div class="wide-card-video"><div class="yt-lazy" data-vid="cFwFh896XRk" onclick="loadYT(this)" style="position:relative;cursor:pointer;background:#000;width:100%;aspect-ratio:16/9;"><img src="https://i.ytimg.com/vi/cFwFh896XRk/hqdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" alt="video"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;"><div style="width:52px;height:52px;background:rgba(195,255,0,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-style:solid;border-width:10px 0 10px 20px;border-color:transparent transparent transparent #050505;margin-left:4px;"></div></div></div></div></div><div class="wide-card-label" style="text-align:center;"><div class="wide-card-client">Client Brand</div><div class="wide-card-title">Company Profile Video</div><div class="wide-card-desc">Professional brand storytelling, from script to screen.</div></div></div>
   </div>
 </div>
 
@@ -777,7 +750,7 @@
     <p>Ready to create something cinematic? Let's collaborate and bring your vision to life.</p>
     <div class="contact-links">
       <a href="https://wa.me/6281243532553" target="_blank" class="contact-link">WhatsApp</a>
-      <a href="mailto:imadepujaendra@gmail.com" class="contact-link">Email</a>
+      <a href="/cdn-cgi/l/email-protection#365f5b57525346435c57535852445776515b575f5a1855595b" class="contact-link">Email</a>
       <a href="https://instagram.com/imadevideo" target="_blank" class="contact-link">Instagram</a>
     </div>
   </div>
@@ -789,41 +762,40 @@
   <p>AI-Driven Video Editor &amp; Cinematic Storyteller © 2025</p>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* ═══════════════════════════════════════════════════════════
-   CAROUSEL CLASSES
-   FIX: Replaced IntersectionObserver (unreliable in Chrome
-   for horizontal scroll containers) with scroll-position
-   based center detection. Also replaced scrollIntoView
-   with explicit scrollTo + calculated scrollLeft.
+   CAROUSEL — FIXED FOR DESKTOP + MOBILE
+   Changes vs original:
+   1. Removed isMobile guard — JS runs on all screens
+   2. Removed innerWidth > 1024 early-return in constructors
+   3. loadYT: pointer-events:all on injected iframe
+   4. loadYT: clean URL params (no loop/playlist that breaks playback)
+   5. Added mouse drag for desktop
 ═══════════════════════════════════════════════════════════ */
 
-/* ── Shared center-detection logic — RAF loop, zero delay ─── */
+/* ── Shared center-detection logic ────────────────────────── */
 function makeCenterDetector(el, items, onActive) {
-  let lastIdx = -1;
-  let rafId   = null;
+  var lastIdx = -1;
 
-  const update = function() {
-    const mid = el.scrollLeft + el.clientWidth / 2;
-    let bestIdx = 0, bestDist = Infinity;
+  var update = function() {
+    var mid = el.scrollLeft + el.clientWidth / 2;
+    var bestIdx = 0, bestDist = Infinity;
     items.forEach(function(item, i) {
-      const dist = Math.abs((item.offsetLeft + item.offsetWidth / 2) - mid);
+      var dist = Math.abs((item.offsetLeft + item.offsetWidth / 2) - mid);
       if (dist < bestDist) { bestDist = dist; bestIdx = i; }
     });
     if (bestIdx !== lastIdx) { lastIdx = bestIdx; onActive(bestIdx); }
-    rafId = null;
   };
 
-  /* RAF-throttled scroll: runs at display refresh rate, never faster */
-  el.addEventListener('scroll', function() {
-    if (!rafId) rafId = requestAnimationFrame(update);
-  }, { passive: true });
+  var rafId = null;
+  var scheduleUpdate = function() {
+    if (!rafId) rafId = requestAnimationFrame(function() { rafId = null; update(); });
+  };
 
-  /* Final call once snapping is fully settled */
+  el.addEventListener('scroll', scheduleUpdate, { passive: true });
   el.addEventListener('scrollend', update, { passive: true });
-
-  /* Initial state */
-  setTimeout(update, 100);
+  el.addEventListener('touchend', function() { setTimeout(update, 50); }, { passive: true });
+  setTimeout(update, 80);
 }
 
 /* ── Shared goTo logic ────────────────────────────────────── */
@@ -834,34 +806,84 @@ function scrollToItem(el, items, i) {
   el.scrollTo({ left: Math.max(0, left), behavior: 'smooth' });
 }
 
+/* ── Mouse drag for desktop carousels ───────────────────── */
+function addMouseDrag(el) {
+  var isDown = false;
+  var startX = 0;
+  var scrollStart = 0;
+  var moved = false;
+  var lastX = 0;
+  var velocity = 0;
+  var lastTime = 0;
+  var momentumId = null;
+
+  function stopMomentum() {
+    if (momentumId) { cancelAnimationFrame(momentumId); momentumId = null; }
+  }
+
+  function applyMomentum() {
+    if (Math.abs(velocity) < 0.5) { stopMomentum(); return; }
+    el.scrollLeft += velocity;
+    velocity *= 0.92; /* friction */
+    momentumId = requestAnimationFrame(applyMomentum);
+  }
+
+  el.addEventListener('mousedown', function(e) {
+    stopMomentum();
+    isDown = true; moved = false;
+    startX = e.pageX; lastX = e.pageX;
+    scrollStart = el.scrollLeft;
+    velocity = 0; lastTime = Date.now();
+    el.style.cursor = 'grabbing';
+  });
+
+  document.addEventListener('mouseup', function(e) {
+    if (!isDown) return;
+    isDown = false;
+    el.style.cursor = 'grab';
+    if (moved) momentumId = requestAnimationFrame(applyMomentum);
+  });
+
+  document.addEventListener('mousemove', function(e) {
+    if (!isDown) return;
+    var dx = e.pageX - startX;
+    var now = Date.now();
+    var dt = Math.max(1, now - lastTime);
+    velocity = (lastX - e.pageX) / dt * 16; /* px per frame ~60fps */
+    lastX = e.pageX; lastTime = now;
+    if (Math.abs(dx) > 5) moved = true;
+    el.scrollLeft = scrollStart - dx;
+  });
+
+  el.addEventListener('click', function(e) {
+    if (moved) { e.stopPropagation(); e.preventDefault(); moved = false; }
+  }, true);
+
+  el.style.cursor = 'grab';
+}
+
 /* ══════════════════════════════════════════════════════════
    NativeCarousel — for .carousel-scroll (9:16 showcase rows)
 ══════════════════════════════════════════════════════════ */
 class NativeCarousel {
   constructor(scrollEl) {
-    if (window.innerWidth > 1024) {
-      this.items = []; this.n = 0; this.activeIdx = 0; this.el = scrollEl;
-      return;
-    }
     this.el    = scrollEl;
     this.items = [...scrollEl.querySelectorAll('.carousel-item')];
     this.n     = this.items.length;
     this.activeIdx = 0;
 
-    const suffix = scrollEl.id.replace('scroll-', '');
+    var suffix = scrollEl.id.replace('scroll-', '');
     this.dotsEl    = document.getElementById('dots-'    + suffix);
     this.counterEl = document.getElementById('counter-' + suffix);
 
     this._buildDots();
 
-    /* Activate first item immediately */
     if (this.items[0]) {
       this.items[0].classList.add('is-active');
       this._syncUI(0);
     }
 
-    /* Start center-detection */
-    const self = this;
+    var self = this;
     makeCenterDetector(this.el, this.items, function(idx) {
       self.items.forEach(function(el) { el.classList.remove('is-active'); });
       self.items[idx].classList.add('is-active');
@@ -871,9 +893,9 @@ class NativeCarousel {
 
   _buildDots() {
     if (!this.dotsEl) return;
-    const self = this;
+    var self = this;
     this.dots = this.items.map(function(_, i) {
-      const b = document.createElement('button');
+      var b = document.createElement('button');
       b.className = 'c-dot' + (i === 0 ? ' is-active' : '');
       b.setAttribute('aria-label', 'Item ' + (i + 1));
       b.addEventListener('click', function() { self.goTo(i); });
@@ -900,30 +922,24 @@ class NativeCarousel {
 ══════════════════════════════════════════════════════════ */
 class SecCarousel {
   constructor(scrollEl) {
-    if (window.innerWidth > 1024) {
-      this.items = []; this.n = 0; this.activeIdx = 0; this.el = scrollEl;
-      return;
-    }
     this.el    = scrollEl;
     this.items = [...scrollEl.querySelectorAll('[data-idx]')];
     if (!this.items.length) this.items = [...scrollEl.children];
     this.n     = this.items.length;
     this.activeIdx = 0;
 
-    const suffix = scrollEl.id.replace('scroll-', '');
+    var suffix = scrollEl.id.replace('scroll-', '');
     this.dotsEl    = document.getElementById('dots-'    + suffix);
     this.counterEl = document.getElementById('counter-' + suffix);
 
     this._buildDots();
 
-    /* Activate first item immediately */
     if (this.items[0]) {
       this.items[0].classList.add('is-active');
       this._syncUI(0);
     }
 
-    /* Start center-detection */
-    const self = this;
+    var self = this;
     makeCenterDetector(this.el, this.items, function(idx) {
       self.items.forEach(function(el) { el.classList.remove('is-active'); });
       self.items[idx].classList.add('is-active');
@@ -933,9 +949,9 @@ class SecCarousel {
 
   _buildDots() {
     if (!this.dotsEl) return;
-    const self = this;
+    var self = this;
     this.dots = this.items.map(function(_, i) {
-      const b = document.createElement('button');
+      var b = document.createElement('button');
       b.className = 'c-dot' + (i === 0 ? ' is-active' : '');
       b.setAttribute('aria-label', 'Item ' + (i + 1));
       b.addEventListener('click', function() { self.goTo(i); });
@@ -961,9 +977,10 @@ class SecCarousel {
 function loadYT(el) {
   var vid = el.dataset.vid;
   var iframe = document.createElement('iframe');
-  iframe.src = 'https://www.youtube.com/embed/' + vid + '?autoplay=1&mute=1&loop=1&playlist=' + vid + '&controls=1';
+  iframe.src = 'https://www.youtube.com/embed/' + vid
+    + '?autoplay=1&mute=1&loop=1&playlist=' + vid + '&controls=1&rel=0';
   iframe.allow = 'autoplay; fullscreen';
-  iframe.style.cssText = 'width:100%;height:100%;border:none;display:block;position:absolute;inset:0;';
+  iframe.style.cssText = 'width:100%;height:100%;border:none;display:block;position:absolute;inset:0;pointer-events:all;';
   el.style.position = 'relative';
   el.innerHTML = '';
   el.appendChild(iframe);
@@ -978,9 +995,6 @@ function closeMobileMenu() {
 document.addEventListener('DOMContentLoaded', function() {
   requestAnimationFrame(function() {
     requestAnimationFrame(function() {
-
-      var isMobile = window.innerWidth <= 1024;
-      if (!isMobile) return;
 
       /* Section carousels */
       var secCarousels = {};
@@ -1006,22 +1020,50 @@ document.addEventListener('DOMContentLoaded', function() {
         });
       });
 
+      /* Mouse drag — desktop only */
+      if (window.innerWidth > 1024) {
+        document.querySelectorAll(
+          '.carousel-scroll, .sec-carousel-scroll, .wide-carousel-scroll, .skill-carousel-scroll'
+        ).forEach(addMouseDrag);
+      }
+
     });
   });
 });
 
-/* ── Reveal on scroll ────────────────────────────────────── */
-const revealObs = new IntersectionObserver(function(entries) {
-  entries.forEach(function(e) {
-    if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); }
-  });
-}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-document.querySelectorAll('.reveal').forEach(function(el) { revealObs.observe(el); });
+/* ── Reveal on scroll (progressive enhancement) ─────────── */
+(function() {
+  // Only enable hide-then-reveal if IntersectionObserver is available
+  if (!window.IntersectionObserver) return;
+
+  // Mark body so CSS hides elements — only now do they start invisible
+  document.body.classList.add('js-reveal-ready');
+
+  // Immediately reveal anything already in the viewport (hero section etc.)
+  var els = document.querySelectorAll('.reveal');
+  var revealObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        revealObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
+
+  els.forEach(function(el) { revealObs.observe(el); });
+
+  // Hard safety net: after 1.5s show everything regardless
+  setTimeout(function() {
+    document.querySelectorAll('.reveal:not(.visible)').forEach(function(el) {
+      el.classList.add('visible');
+    });
+  }, 1500);
+})();
 
 /* ── Smooth anchors ──────────────────────────────────────── */
 document.querySelectorAll('a[href^="#"]').forEach(function(a) {
   a.addEventListener('click', function(e) {
-    const t = document.querySelector(a.getAttribute('href'));
+    var t = document.querySelector(a.getAttribute('href'));
     if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
   });
 });
@@ -1038,7 +1080,7 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a) {
 
 /* ── Nav ─────────────────────────────────────────────────── */
 document.getElementById('hamburger').addEventListener('click', function() {
-  document.getElementById('nav-mobile').classList.toggle('open');
+  document.getElementBygetElementById('nav-mobile').classList.toggle('open');
 });
 document.getElementById('nav-close').addEventListener('click', closeMobileMenu);
 </script>
