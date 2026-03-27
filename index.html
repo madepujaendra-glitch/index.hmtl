@@ -94,6 +94,20 @@
     .hero-desc { background: rgba(12,12,20,0.75); border: 1px solid rgba(195,255,0,0.09); border-radius: 16px; padding: 1.8rem 2.2rem; margin-bottom: 2.5rem; color: rgba(240,240,240,0.7); font-size: 0.98rem; line-height: 1.85; }
     .hero-cta { display: inline-block; background: var(--primary); color: #050505; font-weight: 700; font-size: 0.9rem; padding: 0.9rem 2.6rem; border-radius: 100px; text-decoration: none; box-shadow: 0 4px 20px rgba(195,255,0,0.28); transition: all 0.3s var(--ease); }
     .hero-cta:hover { background: #d4ff2e; transform: translateY(-4px); box-shadow: 0 10px 36px rgba(195,255,0,0.44); }
+
+    .btn-lift { transition: transform 0.25s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.25s, background 0.2s !important; }
+    .btn-lift:hover { transform: translateY(-3px) !important; box-shadow: 0 8px 28px rgba(195,255,0,0.2) !important; }
+    /* ── Universal button lift effect ── */
+    .page-btn, .c-arrow, .overlay-back, .nav-mobile-item,
+    .contact-link, .ig-link, .hero-cta-secondary,
+    a[style*="background:var(--primary)"], a[style*="background: var(--primary)"],
+    a[style*="background:rgba(195,255,0,0.1)"], a[style*="background:rgba(195,255,0,0.08)"] {
+      transition: transform 0.25s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.25s, background 0.25s, border-color 0.25s !important;
+    }
+    .page-btn:hover { transform: translateY(-3px) !important; box-shadow: 0 8px 24px rgba(195,255,0,0.15) !important; }
+    .c-arrow:hover { transform: scale(1.12) !important; }
+    .overlay-back:hover { transform: translateY(-1px) !important; }
+    .ig-link:hover { background: rgba(195,255,0,0.08) !important; }
     .hero-cta-secondary { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.9rem 2.2rem; border: 1.5px solid rgba(195,255,0,0.4); border-radius: 100px; color: var(--primary); font-weight: 700; font-size: 0.9rem; text-decoration: none; transition: all 0.3s var(--ease); white-space: nowrap; }
     .hero-cta-secondary:hover { background: rgba(195,255,0,0.08); border-color: var(--primary); transform: translateY(-4px); box-shadow: 0 8px 24px rgba(195,255,0,0.18); }
     .hero-cta-secondary svg { width: 15px; height: 15px; }
@@ -440,6 +454,7 @@
       .float-contact { bottom: 1.2rem; }
       .float-contact a { padding: 0.6rem 1.4rem; font-size: 0.72rem; }
       .contact-link-email { flex-basis: calc(50% - 0.6rem); justify-content: center; }
+      [style*="grid-template-columns:repeat(3,1fr)"] { grid-template-columns: repeat(2, 1fr) !important; }
     }
 
     @media (min-width: 1025px) {
@@ -860,7 +875,7 @@
             <span>Delivery 1–2 days/video</span>
           </div>
         </div>
-        <a href="https://wa.me/6281243532553?text=Hi%2C+I'm+interested+in+the+Starter+Bundle+%24699.99%2Fmonth" target="_blank" style="display:block;text-align:center;background:rgba(195,255,0,0.1);border:1.5px solid rgba(195,255,0,0.35);color:var(--primary);font-family:'Montserrat',sans-serif;font-size:0.8rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:0.85rem;border-radius:12px;text-decoration:none;transition:all 0.2s;">Get Starter Bundle →</a>
+        <a href="https://wa.me/6281243532553?text=Hi%2C+I'm+interested+in+the+Starter+Bundle+%24699.99%2Fmonth" target="_blank" style="display:block;text-align:center;background:rgba(195,255,0,0.1);border:1.5px solid rgba(195,255,0,0.35);color:var(--primary);font-family:'Montserrat',sans-serif;font-size:0.8rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:0.85rem;border-radius:12px;text-decoration:none;" class="btn-lift">Get Starter Bundle →</a>
       </div>
 
       <!-- GROWTH -->
@@ -891,7 +906,7 @@
             <span><strong>3 revisions</strong> per video</span>
           </div>
         </div>
-        <a href="https://wa.me/6281243532553?text=Hi%2C+I'm+interested+in+the+Growth+Bundle+%241%2C124.99%2Fmonth" target="_blank" style="display:block;text-align:center;background:var(--primary);color:#050505;font-family:'Montserrat',sans-serif;font-size:0.8rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:0.85rem;border-radius:12px;text-decoration:none;">Get Growth Bundle →</a>
+        <a href="https://wa.me/6281243532553?text=Hi%2C+I'm+interested+in+the+Growth+Bundle+%241%2C124.99%2Fmonth" target="_blank" style="display:block;text-align:center;background:var(--primary);color:#050505;font-family:'Montserrat',sans-serif;font-size:0.8rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:0.85rem;border-radius:12px;text-decoration:none;" class="btn-lift">Get Growth Bundle →</a>
       </div>
 
       <!-- ULTIMATE -->
@@ -922,14 +937,14 @@
             <span><strong>5 revisions</strong> per video</span>
           </div>
         </div>
-        <a href="https://wa.me/6281243532553?text=Hi%2C+I'm+interested+in+the+Ultimate+Bundle+%241%2C489.99%2Fmonth" target="_blank" style="display:block;text-align:center;background:rgba(195,255,0,0.1);border:1.5px solid rgba(195,255,0,0.35);color:var(--primary);font-family:'Montserrat',sans-serif;font-size:0.8rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:0.85rem;border-radius:12px;text-decoration:none;">Get Ultimate Bundle →</a>
+        <a href="https://wa.me/6281243532553?text=Hi%2C+I'm+interested+in+the+Ultimate+Bundle+%241%2C489.99%2Fmonth" target="_blank" style="display:block;text-align:center;background:rgba(195,255,0,0.1);border:1.5px solid rgba(195,255,0,0.35);color:var(--primary);font-family:'Montserrat',sans-serif;font-size:0.8rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:0.85rem;border-radius:12px;text-decoration:none;" class="btn-lift">Get Ultimate Bundle →</a>
       </div>
 
     </div>
 
     <!-- ── Individual Packages ── -->
     <div style="font-family:'Montserrat',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;">Short-Form Editing</div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;margin-bottom:2rem;">
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2rem;">
       <div style="background:rgba(12,12,20,0.5);border:1px solid rgba(255,255,255,0.05);border-radius:14px;overflow:hidden;">
         <div style="position:relative;width:100%;aspect-ratio:9/16;background:#000;overflow:hidden;cursor:pointer;" onclick="loadYT(this)" class="yt-lazy" data-vid="E2oK6z3wMII">
           <img src="https://i.ytimg.com/vi/E2oK6z3wMII/hqdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" alt="Short-Form Basic">
@@ -963,7 +978,7 @@
     </div>
 
     <div style="font-family:'Montserrat',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;">Motion Graphics</div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;margin-bottom:2rem;">
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2rem;">
       <div style="background:rgba(12,12,20,0.5);border:1px solid rgba(255,255,255,0.05);border-radius:14px;overflow:hidden;">
         <div style="position:relative;width:100%;aspect-ratio:9/16;background:#000;overflow:hidden;cursor:pointer;" onclick="loadYT(this)" class="yt-lazy" data-vid="4PY48e91FU4">
           <img src="https://i.ytimg.com/vi/4PY48e91FU4/hqdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" alt="Motion Graphics 30s">
@@ -997,7 +1012,7 @@
     </div>
 
     <div style="font-family:'Montserrat',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;">Long-Form Editing</div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;margin-bottom:2rem;">
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2rem;">
       <div style="background:rgba(12,12,20,0.5);border:1px solid rgba(255,255,255,0.05);border-radius:14px;overflow:hidden;">
         <div style="position:relative;width:100%;aspect-ratio:16/9;background:#000;overflow:hidden;cursor:pointer;" onclick="loadYT(this)" class="yt-lazy" data-vid="-k9_zr8lpjA">
           <img src="https://i.ytimg.com/vi/-k9_zr8lpjA/hqdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" alt="Long-Form Basic">
@@ -1533,6 +1548,12 @@ function openPage(id) {
   page.classList.add('is-open');
   document.body.style.overflow = 'hidden';
   window.history.pushState({ page: id }, '', '#' + id);
+  // Autoplay all yt-lazy inside this page
+  setTimeout(function() {
+    page.querySelectorAll('.yt-lazy[data-vid]').forEach(function(el) {
+      loadYT(el);
+    });
+  }, 300);
 }
 
 function closePage(id) {
