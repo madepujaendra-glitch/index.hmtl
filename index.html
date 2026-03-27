@@ -97,6 +97,8 @@
 
     .btn-lift { transition: transform 0.25s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.25s, background 0.2s !important; }
     .btn-lift:hover { transform: translateY(-3px) !important; box-shadow: 0 8px 28px rgba(195,255,0,0.2) !important; }
+    a { text-decoration: none; }
+    a:hover { text-decoration: none; }
     /* ── Universal button lift effect ── */
     .page-btn, .c-arrow, .overlay-back, .nav-mobile-item,
     .contact-link, .ig-link, .hero-cta-secondary,
@@ -845,7 +847,7 @@
     <span class="overlay-title">Pricelist</span>
   </div>
   <div class="overlay-body" style="max-width:720px;">
-    <p style="color:var(--muted);font-size:0.9rem;margin-bottom:2.5rem;line-height:1.8;">Choose a package that fits your content needs. All packages include reference videos. <a href="#" onclick="closePage('ratecard-page');openPage('terms-page');return false;" style="color:var(--primary);">Read Terms &amp; Conditions →</a></p>
+    <p style="color:var(--muted);font-size:0.9rem;margin-bottom:2.5rem;line-height:1.8;">Choose a package that fits your content needs. All packages include reference videos. <a href="#" onclick="openPage('terms-page');return false;" style="color:var(--primary);text-decoration:none;font-weight:600;">Read Terms &amp; Conditions →</a></p>
 
     <!-- ── Individual Packages ── -->
     <div style="font-family:'Montserrat',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;">Short-Form Editing</div>
@@ -860,10 +862,10 @@
           <div style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.15rem;color:var(--primary);flex-shrink:0;">$19.99</div>
         </div>
       </div>
-      <div style="background:rgba(12,12,20,0.5);border:1px solid rgba(195,255,0,0.22);border-radius:14px;overflow:hidden;">
+      <div style="background:rgba(12,12,20,0.5);border:1px solid rgba(195,255,0,0.22);border-radius:14px;position:relative;"><div style="position:absolute;top:0.6rem;right:0.6rem;z-index:10;background:var(--primary);color:#050505;font-family:'Montserrat',sans-serif;font-size:0.55rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:0.28rem 0.65rem;border-radius:100px;">POPULAR</div>
         <div style="position:relative;width:100%;aspect-ratio:9/16;background:#000;overflow:hidden;cursor:pointer;" onclick="loadYT(this)" class="yt-lazy" data-vid="1c1neNWR3Y8">
           <img src="https://i.ytimg.com/vi/1c1neNWR3Y8/hqdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" alt="Short-Form Intermediate">
-          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;"><div style="width:44px;height:44px;background:rgba(195,255,0,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-style:solid;border-width:8px 0 8px 16px;border-color:transparent transparent transparent #050505;margin-left:3px;"><div style="position:absolute;top:0.6rem;right:0.6rem;z-index:10;background:var(--primary);color:#050505;font-family:'Montserrat',sans-serif;font-size:0.55rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:0.28rem 0.65rem;border-radius:100px;">POPULAR</div></div></div></div>
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;"><div style="width:44px;height:44px;background:rgba(195,255,0,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-style:solid;border-width:8px 0 8px 16px;border-color:transparent transparent transparent #050505;margin-left:3px;"></div></div></div>
         </div>
         <div style="display:flex;align-items:center;justify-content:space-between;padding:0.9rem 1.2rem;gap:0.8rem;flex-wrap:wrap;">
           <div><div style="font-weight:700;font-size:0.88rem;color:var(--text);margin-bottom:0.2rem;">Short-Form Intermediate</div><div style="font-size:0.75rem;color:var(--muted);">30–90 sec · 3 revisions · 1–2 days</div></div>
@@ -894,10 +896,10 @@
           <div style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.15rem;color:var(--primary);flex-shrink:0;">$169.99</div>
         </div>
       </div>
-      <div style="background:rgba(12,12,20,0.5);border:1px solid rgba(195,255,0,0.22);border-radius:14px;overflow:hidden;">
+      <div style="background:rgba(12,12,20,0.5);border:1px solid rgba(195,255,0,0.22);border-radius:14px;position:relative;"><div style="position:absolute;top:0.6rem;right:0.6rem;z-index:10;background:var(--primary);color:#050505;font-family:'Montserrat',sans-serif;font-size:0.55rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:0.28rem 0.65rem;border-radius:100px;">POPULAR</div>
         <div style="position:relative;width:100%;aspect-ratio:9/16;background:#000;overflow:hidden;cursor:pointer;" onclick="loadYT(this)" class="yt-lazy" data-vid="LvDhNgPAZPs">
           <img src="https://i.ytimg.com/vi/LvDhNgPAZPs/hqdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" alt="Motion Graphics 60s">
-          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;"><div style="width:44px;height:44px;background:rgba(195,255,0,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-style:solid;border-width:8px 0 8px 16px;border-color:transparent transparent transparent #050505;margin-left:3px;"><div style="position:absolute;top:0.6rem;right:0.6rem;z-index:10;background:var(--primary);color:#050505;font-family:'Montserrat',sans-serif;font-size:0.55rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:0.28rem 0.65rem;border-radius:100px;">POPULAR</div></div></div></div>
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;"><div style="width:44px;height:44px;background:rgba(195,255,0,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-style:solid;border-width:8px 0 8px 16px;border-color:transparent transparent transparent #050505;margin-left:3px;"></div></div></div>
         </div>
         <div style="display:flex;align-items:center;justify-content:space-between;padding:0.9rem 1.2rem;gap:0.8rem;flex-wrap:wrap;">
           <div><div style="font-weight:700;font-size:0.88rem;color:var(--text);margin-bottom:0.2rem;">Motion Graphics 60s</div><div style="font-size:0.75rem;color:var(--muted);">60 sec · 2 revisions · 3 days</div></div>
@@ -928,10 +930,10 @@
           <div style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.15rem;color:var(--primary);flex-shrink:0;">$119.99</div>
         </div>
       </div>
-      <div style="background:rgba(12,12,20,0.5);border:1px solid rgba(195,255,0,0.22);border-radius:14px;overflow:hidden;">
+      <div style="background:rgba(12,12,20,0.5);border:1px solid rgba(195,255,0,0.22);border-radius:14px;position:relative;"><div style="position:absolute;top:0.6rem;right:0.6rem;z-index:10;background:var(--primary);color:#050505;font-family:'Montserrat',sans-serif;font-size:0.55rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:0.28rem 0.65rem;border-radius:100px;">POPULAR</div>
         <div style="position:relative;width:100%;aspect-ratio:16/9;background:#000;overflow:hidden;cursor:pointer;" onclick="loadYT(this)" class="yt-lazy" data-vid="MlHmBB-ezrk">
           <img src="https://i.ytimg.com/vi/MlHmBB-ezrk/hqdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" alt="Long-Form Intermediate">
-          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;"><div style="width:44px;height:44px;background:rgba(195,255,0,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-style:solid;border-width:8px 0 8px 16px;border-color:transparent transparent transparent #050505;margin-left:3px;"><div style="position:absolute;top:0.6rem;right:0.6rem;z-index:10;background:var(--primary);color:#050505;font-family:'Montserrat',sans-serif;font-size:0.55rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:0.28rem 0.65rem;border-radius:100px;">POPULAR</div></div></div></div>
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;"><div style="width:44px;height:44px;background:rgba(195,255,0,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-style:solid;border-width:8px 0 8px 16px;border-color:transparent transparent transparent #050505;margin-left:3px;"></div></div></div>
         </div>
         <div style="display:flex;align-items:center;justify-content:space-between;padding:0.9rem 1.2rem;gap:0.8rem;flex-wrap:wrap;">
           <div><div style="font-weight:700;font-size:0.88rem;color:var(--text);margin-bottom:0.2rem;">Long-Form Intermediate</div><div style="font-size:0.75rem;color:var(--muted);">5–15 min · 3 revisions · 5 days</div></div>
