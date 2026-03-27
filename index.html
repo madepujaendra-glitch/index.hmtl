@@ -97,7 +97,18 @@
     .hero-cta:hover { background: #d4ff2e; transform: translateY(-4px); box-shadow: 0 10px 36px rgba(195,255,0,0.44); }
 
     .btn-lift { transition: transform 0.25s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.25s, background 0.2s !important; }
-    .btn-lift:hover { transform: translateY(-3px) !important; box-shadow: 0 8px 28px rgba(195,255,0,0.2) !important; }
+    .btn-lift:hover, .btn-lift:active { transform: translateY(-3px) !important; box-shadow: 0 8px 28px rgba(195,255,0,0.2) !important; }
+    .btn-lift:active { transform: scale(0.96) !important; box-shadow: 0 4px 12px rgba(195,255,0,0.15) !important; }
+
+    /* ── Touch / Active states for all interactive elements ── */
+    .page-btn:active { transform: scale(0.97) !important; box-shadow: none !important; }
+    .c-arrow:active { transform: scale(0.92) !important; }
+    .contact-link:active { transform: scale(0.96) !important; box-shadow: none !important; }
+    .hero-cta:active { transform: scale(0.97) !important; box-shadow: 0 4px 12px rgba(195,255,0,0.2) !important; }
+    .hero-cta-secondary:active { transform: scale(0.97) !important; }
+    .nav-mobile-item:active { background: rgba(195,255,0,0.08) !important; }
+    .overlay-back:active { transform: scale(0.95) !important; }
+    .ig-link:active { background: rgba(195,255,0,0.1) !important; }
     a { text-decoration: none; }
     a:hover { text-decoration: none; }
     /* ── Universal button lift effect ── */
