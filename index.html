@@ -245,10 +245,21 @@
     footer { text-align: center; padding: 2.8rem 5%; background: var(--card); border-top: 1px solid rgba(195,255,0,0.05); }
     footer p { color: var(--muted); font-size: 0.84rem; line-height: 2; }
 
-    /* REVEAL — default visible; JS progressively enhances with scroll animation */
+    /* REVEAL */
     .reveal { opacity: 1; transform: none; transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1); }
     .js-reveal-ready .reveal { opacity: 0; transform: translateY(28px); }
     .js-reveal-ready .reveal.visible { opacity: 1; transform: none; }
+
+    /* ── Scroll-in animation ── */
+    [data-sr] {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1);
+    }
+    [data-sr].in {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+    }
     /* Overlay reveal — for elements inside overlay-page */
     .overlay-reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.5s cubic-bezier(0.16,1,0.3,1), transform 0.5s cubic-bezier(0.16,1,0.3,1); }
     .overlay-reveal.visible { opacity: 1; transform: none; }
@@ -1640,37 +1651,86 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-/* ── Reveal on scroll ─────────────────────────────────── */
+/* ── Scroll reveal: auto-apply to all elements ─────────── */
 (function() {
   if (!window.IntersectionObserver) return;
 
+  // Legacy .reveal
   document.body.classList.add('js-reveal-ready');
-
-  var obs = new IntersectionObserver(function(entries) {
+  var legObs = new IntersectionObserver(function(entries) {
     entries.forEach(function(e) {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        obs.unobserve(e.target);
-      }
+      if (e.isIntersecting) { e.target.classList.add('visible'); legObs.unobserve(e.target); }
     });
-  }, { threshold: 0.04, rootMargin: '0px 0px -30px 0px' });
-
+  }, { threshold: 0.04, rootMargin: '0px 0px -20px 0px' });
   document.querySelectorAll('.reveal').forEach(function(el) {
     var r = el.getBoundingClientRect();
-    // Elements already in viewport: show immediately (no animation delay)
-    if (r.top < window.innerHeight && r.bottom > 0) {
-      el.classList.add('visible');
-    } else {
-      obs.observe(el);
-    }
+    if (r.top < window.innerHeight) el.classList.add('visible');
+    else legObs.observe(el);
   });
-
-  // Safety net: 2s fallback
   setTimeout(function() {
-    document.querySelectorAll('.reveal:not(.visible)').forEach(function(el) {
-      el.classList.add('visible');
-    });
+    document.querySelectorAll('.reveal:not(.visible)').forEach(function(el) { el.classList.add('visible'); });
   }, 2000);
+
+  // ── Auto scroll-in animation ──
+  var ANIM_SEL = [
+    '.hero-eyebrow','.hero h1','.hero-desc','.hero-ctas','.hero-video',
+    '.about-card','.edu-block','.page-btn',
+    '.carousel-block','.section-full','.award-spotlight',
+    '.testi-card','.portfolio-card','.skill-card',
+    '.cert-card','.relation-photo',
+    '.contact-body','footer',
+    '.section-title','.section-sub','.relations-title','.achievements-title',
+    '.carousel-label-row','.showcase-header'
+  ].join(',');
+
+  var animObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        var d = parseFloat(e.target.getAttribute('data-sr-d') || 0);
+        setTimeout(function() { e.target.classList.add('in'); }, d);
+        animObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.07, rootMargin: '0px 0px -40px 0px' });
+
+  function initAnim(root, isOverlay) {
+    root.querySelectorAll(ANIM_SEL).forEach(function(el, i) {
+      if (el.hasAttribute('data-sr')) return;
+      el.setAttribute('data-sr', '1');
+      if (isOverlay) el.setAttribute('data-sr-d', String(Math.min(i, 6) * 60));
+      var r = el.getBoundingClientRect();
+      var inView = r.top < window.innerHeight && r.bottom > 0;
+      if (inView && !isOverlay) {
+        el.classList.add('in'); // already visible, no animation
+      } else {
+        animObs.observe(el);
+      }
+    });
+  }
+
+  setTimeout(function() { initAnim(document, false); }, 100);
+
+  // Overlay animation
+  var _origOpen = window.openPage;
+  window.openPage = function(id) {
+    _origOpen(id);
+    var page = document.getElementById(id);
+    if (!page) return;
+    setTimeout(function() {
+      page.querySelectorAll('[data-sr]').forEach(function(el) {
+        el.removeAttribute('data-sr');
+        el.classList.remove('in');
+      });
+      // Tag overlay body children
+      var OV = '.overlay-body > *, .overlay-body .edu-block, .overlay-body .relations-grid, .overlay-body .achievements-title';
+      page.querySelectorAll(OV).forEach(function(el, i) {
+        if (el.hasAttribute('data-sr')) return;
+        el.setAttribute('data-sr', '1');
+        el.setAttribute('data-sr-d', String(Math.min(i, 8) * 55));
+        animObs.observe(el);
+      });
+    }, 80);
+  };
 })();
 
 /* ── Autoplay videos when scrolled into view ─────────────── */
