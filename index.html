@@ -100,15 +100,11 @@
     .btn-lift:hover, .btn-lift:active { transform: translateY(-3px) !important; box-shadow: 0 8px 28px rgba(195,255,0,0.2) !important; }
     .btn-lift:active { transform: scale(0.96) !important; box-shadow: 0 4px 12px rgba(195,255,0,0.15) !important; }
 
-    /* ── Touch / Active states for all interactive elements ── */
-    .page-btn:active { transform: scale(0.97) !important; box-shadow: none !important; }
-    .c-arrow:active { transform: scale(0.92) !important; }
-    .contact-link:active { transform: scale(0.96) !important; box-shadow: none !important; }
-    .hero-cta:active { transform: scale(0.97) !important; box-shadow: 0 4px 12px rgba(195,255,0,0.2) !important; }
-    .hero-cta-secondary:active { transform: scale(0.97) !important; }
-    .nav-mobile-item:active { background: rgba(195,255,0,0.08) !important; }
-    .overlay-back:active { transform: scale(0.95) !important; }
-    .ig-link:active { background: rgba(195,255,0,0.1) !important; }
+    /* ── Press effect — works on touch + mouse ── */
+    .is-pressed { transform: scale(0.95) !important; opacity: 0.85 !important; transition: transform 0.08s ease-out, opacity 0.08s ease-out !important; }
+    .is-pressed-light { transform: scale(0.97) !important; transition: transform 0.08s ease-out !important; }
+    /* Fallback :active for desktop */
+    button:active, a:active { transform: scale(0.97); }
     a { text-decoration: none; }
     a:hover { text-decoration: none; }
     /* ── Universal button lift effect ── */
@@ -250,9 +246,18 @@
     footer p { color: var(--muted); font-size: 0.84rem; line-height: 2; }
 
     /* REVEAL — default visible; JS progressively enhances with scroll animation */
-    .reveal { opacity: 1; transform: none; transition: opacity 0.75s var(--ease), transform 0.75s var(--ease); }
-    .js-reveal-ready .reveal { opacity: 0; transform: translateY(36px); }
+    .reveal { opacity: 1; transform: none; transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+    .js-reveal-ready .reveal { opacity: 0; transform: translateY(28px); }
     .js-reveal-ready .reveal.visible { opacity: 1; transform: none; }
+    /* Overlay reveal — for elements inside overlay-page */
+    .overlay-reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.5s cubic-bezier(0.16,1,0.3,1), transform 0.5s cubic-bezier(0.16,1,0.3,1); }
+    .overlay-reveal.visible { opacity: 1; transform: none; }
+    .overlay-reveal-d1 { transition-delay: 0.05s; }
+    .overlay-reveal-d2 { transition-delay: 0.1s; }
+    .overlay-reveal-d3 { transition-delay: 0.15s; }
+    .overlay-reveal-d4 { transition-delay: 0.2s; }
+    .overlay-reveal-d5 { transition-delay: 0.25s; }
+    .overlay-reveal-d6 { transition-delay: 0.3s; }
 
     /* ABOUT: Education */
     .edu-block { max-width: 820px; margin: 2.5rem auto 0; display: flex; align-items: flex-start; gap: 1.4rem; background: rgba(12,12,20,0.55); border-radius: 16px; padding: 1.6rem 2rem; }
@@ -646,7 +651,7 @@
 </section>
 
 <!-- ABOUT BUTTONS -->
-<div class="section" id="about" style="padding-top:2.5rem; padding-bottom:2.5rem;">
+<div class="section reveal" id="about" style="padding-top:2.5rem; padding-bottom:2.5rem;">
   <h2 class="section-title reveal">About Me</h2>
   <p class="section-sub reveal" style="margin-bottom:2.5rem;">Get to know the editor behind the work</p>
   <div style="display:flex; gap:1.2rem; justify-content:center; flex-wrap:wrap;" class="reveal">
@@ -675,7 +680,7 @@
   <div class="overlay-body" style="max-width:680px;">
 
     <!-- Profile card -->
-    <div style="display:flex;align-items:center;gap:1.8rem;margin-bottom:2.5rem;flex-wrap:wrap;">
+    <div class="overlay-reveal overlay-reveal-d1" style="display:flex;align-items:center;gap:1.8rem;margin-bottom:2.5rem;flex-wrap:wrap;">
       <div style="flex-shrink:0;width:110px;height:110px;border-radius:16px;overflow:hidden;border:2px solid rgba(195,255,0,0.25);">
         <img src="https://res.cloudinary.com/drfokzzbf/image/upload/f_auto,q_auto/v1773777820/IMG_5487_xrmyui.jpg" alt="I Made Puja Endra" style="width:100%;height:100%;object-fit:cover;">
       </div>
@@ -687,13 +692,13 @@
     </div>
 
     <!-- Bio -->
-    <div style="background:rgba(12,12,20,0.6);border:1px solid rgba(195,255,0,0.08);border-radius:16px;padding:1.6rem 1.8rem;margin-bottom:1.8rem;">
+    <div class="overlay-reveal overlay-reveal-d2" style="background:rgba(12,12,20,0.6);border:1px solid rgba(195,255,0,0.08);border-radius:16px;padding:1.6rem 1.8rem;margin-bottom:1.8rem;">
       <p style="color:rgba(240,240,240,0.8);font-size:0.95rem;line-height:1.85;margin-bottom:0.9rem;">I'm a professional video editor for short-form and long-form content, helping creators, brands, and educational platforms turn raw footage into clear, cinematic stories.</p>
       <p style="color:rgba(240,240,240,0.8);font-size:0.95rem;line-height:1.85;margin-bottom:0;">Over the last 3+ years I've edited for 100+ clients and brands including @ruangsepri, @techpreneurboi, @victoriawong68, @createcontentclub, Rumah BUMN Jambi, Simon &amp; Sons, and more.</p>
     </div>
 
     <!-- Why work with me -->
-    <div style="margin-bottom:2rem;">
+    <div class="overlay-reveal overlay-reveal-d3" style="margin-bottom:2rem;">
       <div style="font-family:'Montserrat',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;">Why Work With Me</div>
       <div style="display:flex;flex-direction:column;gap:0.8rem;">
         <div style="display:flex;align-items:flex-start;gap:1rem;background:rgba(12,12,20,0.4);border:1px solid rgba(255,255,255,0.04);border-radius:12px;padding:1rem 1.2rem;">
@@ -716,7 +721,7 @@
     </div>
 
     <!-- Education -->
-    <div class="edu-block" style="margin-bottom:2rem;">
+    <div class="edu-block overlay-reveal overlay-reveal-d4" style="margin-bottom:2rem;">
       <div class="edu-dot"></div>
       <div class="edu-content">
         <div class="edu-degree">Bachelor's Degree in Management</div>
@@ -726,7 +731,7 @@
     </div>
 
     <!-- People -->
-    <div class="achievements-title" style="margin:0 0 1.2rem;">People I've Had the Privilege of Working With</div>
+    <div class="achievements-title overlay-reveal overlay-reveal-d5" style="margin:0 0 1.2rem;">People I've Had the Privilege of Working With</div>
     <div class="relations-grid" style="max-width:100%; margin-bottom:2.5rem;">
       <div><div class="relation-photo"><img src="https://res.cloudinary.com/drfokzzbf/image/upload/v1773751018/1c8f09cb-8f47-4fe9-a755-c52531a8e6fc_xdnqv9.jpg" alt="@samuelchrist"></div><div class="relation-caption">@samuelchrist</div></div>
       <div><div class="relation-photo"><img src="https://res.cloudinary.com/drfokzzbf/image/upload/v1773751028/f66b9035-da4f-4d7f-aec8-1489c808cd5c_2_zp9fh0.jpg" alt="@derryanshaa"></div><div class="relation-caption">@derryanshaa</div></div>
@@ -782,7 +787,7 @@
     <p style="color:var(--muted);font-size:0.9rem;line-height:1.8;margin-bottom:2rem;">Before we begin our collaboration, please read the following terms carefully to ensure a smooth and clear working process.</p>
     <div style="display:flex;flex-direction:column;gap:1rem;">
 
-      <div style="background:rgba(12,12,20,0.6);border:1px solid rgba(195,255,0,0.08);border-radius:14px;padding:1.4rem 1.6rem;">
+      <div class="overlay-reveal overlay-reveal-d1" style="background:rgba(12,12,20,0.6);border:1px solid rgba(195,255,0,0.08);border-radius:14px;padding:1.4rem 1.6rem;">
         <div style="display:flex;align-items:flex-start;gap:1rem;">
           <div style="font-family:'Montserrat',sans-serif;font-size:2rem;font-weight:800;color:rgba(195,255,0,0.15);line-height:1;flex-shrink:0;min-width:36px;">01</div>
           <div>
@@ -792,7 +797,7 @@
         </div>
       </div>
 
-      <div style="background:rgba(12,12,20,0.6);border:1px solid rgba(195,255,0,0.08);border-radius:14px;padding:1.4rem 1.6rem;">
+      <div class="overlay-reveal overlay-reveal-d2" style="background:rgba(12,12,20,0.6);border:1px solid rgba(195,255,0,0.08);border-radius:14px;padding:1.4rem 1.6rem;">
         <div style="display:flex;align-items:flex-start;gap:1rem;">
           <div style="font-family:'Montserrat',sans-serif;font-size:2rem;font-weight:800;color:rgba(195,255,0,0.15);line-height:1;flex-shrink:0;min-width:36px;">02</div>
           <div>
@@ -802,7 +807,7 @@
         </div>
       </div>
 
-      <div style="background:rgba(12,12,20,0.6);border:1px solid rgba(195,255,0,0.08);border-radius:14px;padding:1.4rem 1.6rem;">
+      <div class="overlay-reveal overlay-reveal-d3" style="background:rgba(12,12,20,0.6);border:1px solid rgba(195,255,0,0.08);border-radius:14px;padding:1.4rem 1.6rem;">
         <div style="display:flex;align-items:flex-start;gap:1rem;">
           <div style="font-family:'Montserrat',sans-serif;font-size:2rem;font-weight:800;color:rgba(195,255,0,0.15);line-height:1;flex-shrink:0;min-width:36px;">03</div>
           <div>
@@ -812,7 +817,7 @@
         </div>
       </div>
 
-      <div style="background:rgba(12,12,20,0.6);border:1px solid rgba(195,255,0,0.08);border-radius:14px;padding:1.4rem 1.6rem;">
+      <div class="overlay-reveal overlay-reveal-d4" style="background:rgba(12,12,20,0.6);border:1px solid rgba(195,255,0,0.08);border-radius:14px;padding:1.4rem 1.6rem;">
         <div style="display:flex;align-items:flex-start;gap:1rem;">
           <div style="font-family:'Montserrat',sans-serif;font-size:2rem;font-weight:800;color:rgba(195,255,0,0.15);line-height:1;flex-shrink:0;min-width:36px;">04</div>
           <div>
@@ -822,7 +827,7 @@
         </div>
       </div>
 
-      <div style="background:rgba(12,12,20,0.6);border:1px solid rgba(195,255,0,0.08);border-radius:14px;padding:1.4rem 1.6rem;">
+      <div class="overlay-reveal overlay-reveal-d5" style="background:rgba(12,12,20,0.6);border:1px solid rgba(195,255,0,0.08);border-radius:14px;padding:1.4rem 1.6rem;">
         <div style="display:flex;align-items:flex-start;gap:1rem;">
           <div style="font-family:'Montserrat',sans-serif;font-size:2rem;font-weight:800;color:rgba(195,255,0,0.15);line-height:1;flex-shrink:0;min-width:36px;">05</div>
           <div>
@@ -832,7 +837,7 @@
         </div>
       </div>
 
-      <div style="background:rgba(12,12,20,0.6);border:1px solid rgba(195,255,0,0.08);border-radius:14px;padding:1.4rem 1.6rem;">
+      <div class="overlay-reveal overlay-reveal-d6" style="background:rgba(12,12,20,0.6);border:1px solid rgba(195,255,0,0.08);border-radius:14px;padding:1.4rem 1.6rem;">
         <div style="display:flex;align-items:flex-start;gap:1rem;">
           <div style="font-family:'Montserrat',sans-serif;font-size:2rem;font-weight:800;color:rgba(195,255,0,0.15);line-height:1;flex-shrink:0;min-width:36px;">06</div>
           <div>
@@ -1068,7 +1073,7 @@
 </div>
   <div id="clients">
   <!-- creators &amp; brands -->
-  <div class="carousel-block carousel-block-framed">
+  <div class="carousel-block carousel-block-framed reveal">
     <div class="carousel-label-row"><span class="carousel-label-pill">creators &amp; brands</span></div>
     <div class="carousel-wrap">
       <div class="carousel-scroll" id="scroll-clients">
@@ -1093,7 +1098,7 @@
   </div>
 
   <!-- Row 1 -->
-  <div class="carousel-block carousel-block-framed">
+  <div class="carousel-block carousel-block-framed reveal">
     <div class="carousel-label-row"><span class="carousel-label-pill">short-form content</span></div>
     <div class="carousel-wrap">
       <div class="carousel-scroll" id="scroll-main">
@@ -1115,7 +1120,7 @@
   </div>
 
   <!-- Row 2 -->
-  <div class="carousel-block carousel-block-framed">
+  <div class="carousel-block carousel-block-framed reveal">
     <div class="carousel-label-row"><span class="carousel-label-pill">motion graphic</span></div>
     <div class="carousel-wrap">
       <div class="carousel-scroll" id="scroll-motion">
@@ -1134,7 +1139,7 @@
   </div>
 
   <!-- Row 3 -->
-  <div class="carousel-block carousel-block-framed">
+  <div class="carousel-block carousel-block-framed reveal">
     <div class="carousel-label-row"><span class="carousel-label-pill">video ads</span></div>
     <div class="carousel-wrap">
       <div class="carousel-scroll" id="scroll-ads">
@@ -1174,7 +1179,7 @@
 <!-- Long-form Education -->
 <div class="section-full" style="padding-left:0;padding-right:0;">
   <!-- long-form education -->
-  <div class="carousel-block carousel-block-framed">
+  <div class="carousel-block carousel-block-framed reveal">
     <div class="carousel-label-row"><span class="carousel-label-pill">long-form education</span></div>
     <div class="carousel-wrap">
       <div class="carousel-scroll" id="scroll-edu">
@@ -1193,7 +1198,7 @@
 <!-- Fun & BTS -->
 <div class="section-full" style="padding-left:0;padding-right:0;">
   <!-- fun &amp; behind the scene -->
-  <div class="carousel-block carousel-block-framed">
+  <div class="carousel-block carousel-block-framed reveal">
     <div class="carousel-label-row"><span class="carousel-label-pill">fun &amp; behind the scene</span></div>
     <div class="carousel-wrap">
       <div class="carousel-scroll" id="scroll-bts">
@@ -1218,7 +1223,7 @@
 </div>
 
 <!-- SKILLS -->
-<div class="section" id="skills" style="padding-left:0; padding-right:0; max-width:100%;">
+<div class="section reveal" id="skills" style="padding-left:0; padding-right:0; max-width:100%;">
   <h2 class="section-title reveal" style="padding:0 5%;">Skills &amp; Experience</h2>
   <div class="skill-carousel-wrap">
     <div class="skill-carousel-scroll" id="scroll-skills">
@@ -1236,7 +1241,7 @@
 </div>
 
 <!-- PORTFOLIO -->
-<div id="portfolio" class="portfolio-section">
+<div id="portfolio" class="portfolio-section reveal">
   <div class="portfolio-inner">
     <h2 class="section-title reveal">Full Portfolio</h2>
     <p class="section-sub reveal">Explore my complete collection across all categories</p>
@@ -1262,7 +1267,7 @@
 </div>
 
 <!-- TESTIMONIALS -->
-<div id="testimonials">
+<div id="testimonials" class="reveal">
   <div class="testimonials-inner">
     <h2 class="section-title reveal">What Clients Say</h2>
     <p class="section-sub reveal">Real words from real people I've worked with</p>
@@ -1635,33 +1640,37 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-/* ── Reveal on scroll (progressive enhancement) ─────────── */
+/* ── Reveal on scroll ─────────────────────────────────── */
 (function() {
-  // Only enable hide-then-reveal if IntersectionObserver is available
   if (!window.IntersectionObserver) return;
 
-  // Mark body so CSS hides elements, only now do they start invisible
   document.body.classList.add('js-reveal-ready');
 
-  // Immediately reveal anything already in the viewport (hero section etc.)
-  var els = document.querySelectorAll('.reveal');
-  var revealObs = new IntersectionObserver(function(entries) {
+  var obs = new IntersectionObserver(function(entries) {
     entries.forEach(function(e) {
       if (e.isIntersecting) {
         e.target.classList.add('visible');
-        revealObs.unobserve(e.target);
+        obs.unobserve(e.target);
       }
     });
-  }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
+  }, { threshold: 0.04, rootMargin: '0px 0px -30px 0px' });
 
-  els.forEach(function(el) { revealObs.observe(el); });
+  document.querySelectorAll('.reveal').forEach(function(el) {
+    var r = el.getBoundingClientRect();
+    // Elements already in viewport: show immediately (no animation delay)
+    if (r.top < window.innerHeight && r.bottom > 0) {
+      el.classList.add('visible');
+    } else {
+      obs.observe(el);
+    }
+  });
 
-  // Hard safety net: after 1.5s show everything regardless
+  // Safety net: 2s fallback
   setTimeout(function() {
     document.querySelectorAll('.reveal:not(.visible)').forEach(function(el) {
       el.classList.add('visible');
     });
-  }, 1500);
+  }, 2000);
 })();
 
 /* ── Autoplay videos when scrolled into view ─────────────── */
@@ -1706,6 +1715,52 @@ document.getElementById('hamburger').addEventListener('click', function() {
   document.body.style.overflow = isOpen ? 'hidden' : '';
 });
 document.getElementById('nav-close').addEventListener('click', closeMobileMenu);
+
+/* ── Press effect (touch + mouse) ─────────────── */
+(function() {
+  var SEL = '.hero-cta,.hero-cta-secondary,.page-btn,.btn-lift,.contact-link,.c-arrow,.overlay-back,.nav-mobile-item,.nav-mobile-footer a,.ig-link,button,[onclick]';
+  function press(el) { el.classList.add(el.classList.contains('c-arrow')||el.classList.contains('overlay-back')||el.classList.contains('nav-mobile-item') ? 'is-pressed-light' : 'is-pressed'); }
+  function release(el) { el.classList.remove('is-pressed','is-pressed-light'); }
+  document.addEventListener('touchstart', function(e) {
+    var el = e.target.closest(SEL); if (el) press(el);
+  }, { passive: true });
+  document.addEventListener('touchend', function(e) {
+    var el = e.target.closest(SEL); if (el) setTimeout(function(){ release(el); }, 160);
+  }, { passive: true });
+  document.addEventListener('touchcancel', function(e) {
+    var el = e.target.closest(SEL); if (el) release(el);
+  }, { passive: true });
+  document.addEventListener('mousedown', function(e) {
+    var el = e.target.closest(SEL); if (el) press(el);
+  });
+  document.addEventListener('mouseup', function() {
+    document.querySelectorAll('.is-pressed,.is-pressed-light').forEach(function(el){ setTimeout(function(){ release(el); }, 100); });
+  });
+})();
+
+/* ── Overlay content reveal on scroll ──────────────── */
+(function() {
+  if (!window.IntersectionObserver) return;
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.07, rootMargin: '0px 0px -20px 0px' });
+
+  function initReveal(page) {
+    page.querySelectorAll('.overlay-reveal').forEach(function(el) {
+      el.classList.remove('visible');
+      obs.observe(el);
+    });
+  }
+
+  var _origOpen = window.openPage;
+  window.openPage = function(id) {
+    _origOpen(id);
+    var page = document.getElementById(id);
+    if (page) setTimeout(function(){ initReveal(page); }, 60);
+  };
+})();
 </script>
 
 </body>
