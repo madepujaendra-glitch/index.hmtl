@@ -148,7 +148,8 @@
     .carousel-wrap { position: relative; width: 100%; }
 
     .carousel-scroll {
-      padding-inline: calc((100% - var(--item-w)) / 2);
+      padding-left: calc((100% - var(--item-w)) / 2);
+      padding-right: calc((100% - var(--item-w)) / 2);
       scroll-padding-inline: calc((100% - var(--item-w)) / 2);
       display: flex;
       align-items: center;
@@ -303,7 +304,8 @@
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none; overscroll-behavior-x: contain;
       padding-top: 2rem; padding-bottom: 4rem;
-      padding-inline: calc((100% - var(--wide-w)) / 2);
+      padding-left: calc((100% - var(--wide-w)) / 2);
+      padding-right: calc((100% - var(--wide-w)) / 2);
       scroll-padding-inline: calc((100% - var(--wide-w)) / 2);
       gap: 24px;
     }
@@ -353,7 +355,8 @@
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none; overscroll-behavior-x: contain;
       padding-top: 1rem; padding-bottom: 1rem;
-      padding-inline: calc((100% - var(--skill-w)) / 2);
+      padding-left: calc((100% - var(--skill-w)) / 2);
+      padding-right: calc((100% - var(--skill-w)) / 2);
       scroll-padding-inline: calc((100% - var(--skill-w)) / 2);
       gap: 24px;
     }
@@ -361,7 +364,8 @@
 
     .clients-scroll {
       padding-top: 1.5rem; padding-bottom: 1.5rem;
-      padding-inline: calc((100% - var(--clients-w)) / 2);
+      padding-left: calc((100% - var(--clients-w)) / 2);
+      padding-right: calc((100% - var(--clients-w)) / 2);
       scroll-padding-inline: calc((100% - var(--clients-w)) / 2);
       gap: 20px;
     }
@@ -369,7 +373,8 @@
 
     .portfolio-scroll {
       padding-top: 1.5rem; padding-bottom: 1.5rem;
-      padding-inline: calc((100% - var(--portfolio-w)) / 2);
+      padding-left: calc((100% - var(--portfolio-w)) / 2);
+      padding-right: calc((100% - var(--portfolio-w)) / 2);
       scroll-padding-inline: calc((100% - var(--portfolio-w)) / 2);
       gap: 20px;
     }
@@ -377,7 +382,8 @@
 
     .testi-scroll {
       padding-top: 1.5rem; padding-bottom: 1.5rem;
-      padding-inline: calc((100% - var(--testi-w)) / 2);
+      padding-left: calc((100% - var(--testi-w)) / 2);
+      padding-right: calc((100% - var(--testi-w)) / 2);
       scroll-padding-inline: calc((100% - var(--testi-w)) / 2);
       gap: 20px;
     }
@@ -387,13 +393,17 @@
     .portfolio-scroll { padding-inline: calc((100% - var(--portfolio-w)) / 2) !important; }
     .testi-scroll { padding-inline: calc((100% - var(--testi-w)) / 2) !important; }
     .testi-scroll .testi-card { flex: 0 0 var(--testi-w); width: var(--testi-w); scroll-snap-align: center; }
-    /* All sec-carousels: last card can reach center on iOS */
-    .sec-carousel-scroll::after, .testi-scroll::after { content: ""; flex: 0 0 calc((100% - var(--testi-w)) / 2); }
-    .clients-scroll::after { flex: 0 0 calc((100% - var(--clients-w)) / 2); }
-    .portfolio-scroll::after { flex: 0 0 calc((100% - var(--portfolio-w)) / 2); }
+    /* Last-card centering on iOS Safari — ::after spacer for all carousels */
+    .testi-scroll::after { content: ""; flex: 0 0 calc((100% - var(--testi-w)) / 2); height: 1px; }
+    .clients-scroll::after { content: ""; flex: 0 0 calc((100% - var(--clients-w)) / 2); height: 1px; }
+    .portfolio-scroll::after { content: ""; flex: 0 0 calc((100% - var(--portfolio-w)) / 2); height: 1px; }
+    .skill-carousel-scroll::after { content: ""; flex: 0 0 calc((100% - var(--skill-w)) / 2); height: 1px; }
+    .wide-carousel-scroll::after { content: ""; flex: 0 0 calc((100% - var(--wide-w)) / 2); height: 1px; }
 
     .skill-carousel-scroll {
-      padding: 1.5rem calc((100% - var(--skill-w)) / 2);
+      padding-top: 1.5rem; padding-bottom: 1.5rem;
+      padding-left: calc((100% - var(--skill-w)) / 2);
+      padding-right: calc((100% - var(--skill-w)) / 2);
       scroll-padding-inline: calc((100% - var(--skill-w)) / 2);
     }
     .skill-carousel-scroll .skill-card { flex: 0 0 var(--skill-w); width: var(--skill-w); scroll-snap-align: center; }
