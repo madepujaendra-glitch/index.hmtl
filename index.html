@@ -153,24 +153,35 @@
       max-width: 640px; margin-left: auto; margin-right: auto;
     }
 
-    /* ── Staggered card entrance for problem / what-you-get / checklist grids ── */
-    .js-reveal-ready .reveal.stagger-parent { opacity: 1; transform: none; }
-    .js-reveal-ready .stagger-parent .problem-card,
-    .js-reveal-ready .stagger-parent .wyg-card,
-    .js-reveal-ready .stagger-parent .checklist-item {
-      opacity: 0; transform: translateY(18px);
-      transition: opacity 0.55s cubic-bezier(0.16,1,0.3,1), transform 0.55s cubic-bezier(0.16,1,0.3,1);
+    /* ── Staggered card entrance for grids across the site (pop-in style) ── */
+    /* Standalone system (not tied to .js-reveal-ready) so it always animates via its own observer */
+    .stagger-parent .problem-card,
+    .stagger-parent .wyg-card,
+    .stagger-parent .checklist-item,
+    .stagger-parent .cert-card,
+    .stagger-parent .relation-item,
+    .stagger-parent .price-card,
+    .stagger-parent .bundle-card {
+      opacity: 0; transform: scale(0.82);
+      transition: opacity 0.35s ease-out, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
-    .js-reveal-ready .stagger-parent.visible .problem-card,
-    .js-reveal-ready .stagger-parent.visible .wyg-card,
-    .js-reveal-ready .stagger-parent.visible .checklist-item {
-      opacity: 1; transform: translateY(0);
+    .stagger-parent.in-view .problem-card,
+    .stagger-parent.in-view .wyg-card,
+    .stagger-parent.in-view .checklist-item,
+    .stagger-parent.in-view .cert-card,
+    .stagger-parent.in-view .relation-item,
+    .stagger-parent.in-view .price-card,
+    .stagger-parent.in-view .bundle-card {
+      opacity: 1; transform: scale(1);
     }
-    .problem-card:nth-child(1), .wyg-card:nth-child(1), .checklist-item:nth-child(1) { transition-delay: 0.04s; }
-    .problem-card:nth-child(2), .wyg-card:nth-child(2), .checklist-item:nth-child(2) { transition-delay: 0.10s; }
-    .problem-card:nth-child(3), .wyg-card:nth-child(3), .checklist-item:nth-child(3) { transition-delay: 0.16s; }
-    .problem-card:nth-child(4), .wyg-card:nth-child(4), .checklist-item:nth-child(4) { transition-delay: 0.22s; }
-    .problem-card:nth-child(5), .checklist-item:nth-child(5) { transition-delay: 0.28s; }
+    .problem-card:nth-child(1), .wyg-card:nth-child(1), .checklist-item:nth-child(1), .cert-card:nth-child(1), .relation-item:nth-child(1), .price-card:nth-child(1), .bundle-card:nth-child(1) { transition-delay: 0.04s; }
+    .problem-card:nth-child(2), .wyg-card:nth-child(2), .checklist-item:nth-child(2), .cert-card:nth-child(2), .relation-item:nth-child(2), .price-card:nth-child(2), .bundle-card:nth-child(2) { transition-delay: 0.10s; }
+    .problem-card:nth-child(3), .wyg-card:nth-child(3), .checklist-item:nth-child(3), .cert-card:nth-child(3), .relation-item:nth-child(3), .price-card:nth-child(3), .bundle-card:nth-child(3) { transition-delay: 0.16s; }
+    .problem-card:nth-child(4), .wyg-card:nth-child(4), .checklist-item:nth-child(4), .cert-card:nth-child(4), .relation-item:nth-child(4) { transition-delay: 0.22s; }
+    .problem-card:nth-child(5), .checklist-item:nth-child(5), .cert-card:nth-child(5), .relation-item:nth-child(5) { transition-delay: 0.28s; }
+    .problem-card:nth-child(6), .cert-card:nth-child(6), .relation-item:nth-child(6) { transition-delay: 0.34s; }
+    .relation-item:nth-child(7) { transition-delay: 0.40s; }
+    .relation-item:nth-child(8) { transition-delay: 0.46s; }
     .problem-card:nth-child(6), .checklist-item:nth-child(6) { transition-delay: 0.34s; }
 
     /* ── Problem / Agitation cards ── */
@@ -743,7 +754,7 @@
 <div class="section textured-section reveal" id="problem">
   <h2 class="section-title narrative-title reveal">Your content deserves more than another rushed edit.</h2>
   <p class="section-sub reveal">Sound familiar?</p>
-  <div class="problem-grid reveal stagger-parent">
+  <div class="problem-grid stagger-parent">
     <div class="problem-card"><div class="problem-x">✕</div><div class="problem-text">Endless revisions with no clear direction</div></div>
     <div class="problem-card"><div class="problem-x">✕</div><div class="problem-text">Videos that look flat, with no hook and no pacing</div></div>
     <div class="problem-card"><div class="problem-x">✕</div><div class="problem-text">Editor goes silent mid-project</div></div>
@@ -759,7 +770,7 @@
   <div style="max-width:1400px; margin:0 auto; padding:0 5%;">
     <h2 class="section-title narrative-title reveal">What You Get, Working With Me</h2>
     <p class="section-sub reveal">Not just edits, a system built around your content goals.</p>
-    <div class="wyg-grid reveal stagger-parent">
+    <div class="wyg-grid stagger-parent">
       <div class="wyg-card">
         <div class="wyg-num">01</div>
         <div class="wyg-title">Cinematic Storytelling</div>
@@ -791,7 +802,7 @@
 <!-- CHECKLIST: FIT -->
 <div class="section textured-section reveal" id="fit-checklist">
   <h2 class="section-title narrative-title reveal">This Is For You If You Want To...</h2>
-  <div class="checklist-grid reveal stagger-parent">
+  <div class="checklist-grid stagger-parent">
     <div class="checklist-item"><div class="checklist-check">✓</div><div class="checklist-text">Grow watch time &amp; retention without guessing</div></div>
     <div class="checklist-item"><div class="checklist-check">✓</div><div class="checklist-text">Stop spending hours editing your own content</div></div>
     <div class="checklist-item"><div class="checklist-check">✓</div><div class="checklist-text">Keep a consistent, branded look across videos</div></div>
@@ -883,15 +894,15 @@
 
     <!-- People -->
     <div class="achievements-title" style="margin:0 0 1.2rem;">People I've Had the Privilege of Working With</div>
-    <div class="relations-grid" style="max-width:100%; margin-bottom:2.5rem;">
-      <div><div class="relation-photo"><img src="https://res.cloudinary.com/drfokzzbf/image/upload/v1773751018/1c8f09cb-8f47-4fe9-a755-c52531a8e6fc_xdnqv9.jpg" alt="@samuelchrist"></div><div class="relation-caption">@samuelchrist</div></div>
-      <div><div class="relation-photo"><img src="https://res.cloudinary.com/drfokzzbf/image/upload/v1773751028/f66b9035-da4f-4d7f-aec8-1489c808cd5c_2_zp9fh0.jpg" alt="@derryanshaa"></div><div class="relation-caption">@derryanshaa</div></div>
-      <div><div class="relation-photo"><img src="https://res.cloudinary.com/drfokzzbf/image/upload/v1773751009/e84de3ae-53ef-46d9-a26e-a5f1ad523323_fbxgwh.jpg" alt="@edhozell"></div><div class="relation-caption">@edhozell</div></div>
-      <div><div class="relation-photo"><img src="https://res.cloudinary.com/drfokzzbf/image/upload/v1773751079/IMG_5811_qsxiq4.jpg" alt="@aldogiustino"></div><div class="relation-caption">@aldogiustino</div></div>
-      <div><div class="relation-photo"><img src="https://res.cloudinary.com/drfokzzbf/image/upload/v1773772895/IMG_3956_2_no391v.jpg" alt="@dennysantoso"></div><div class="relation-caption">@dennysantoso</div></div>
-      <div><div class="relation-photo"><img src="https://res.cloudinary.com/drfokzzbf/image/upload/v1773752496/378e4683-d15a-414f-b2ac-51921d65addb_el78ss.jpg" alt="Team"></div><div class="relation-caption">@aicreatorlabs.id</div></div>
-      <div><div class="relation-photo"><img src="https://res.cloudinary.com/drfokzzbf/image/upload/v1773752512/cf866798-08b9-49fa-86b6-09bc6e9a2968_swqlkf.jpg" alt="Achievement"></div><div class="relation-caption">Achievement</div></div>
-      <div><div class="relation-photo"><img src="https://res.cloudinary.com/drfokzzbf/image/upload/f_auto,q_auto/v1773775733/IMG_6809_dfdx4t.jpg" alt="Team"></div><div class="relation-caption">@aicreatorlabs.id Team</div></div>
+    <div class="relations-grid stagger-parent" style="max-width:100%; margin-bottom:2.5rem;">
+      <div class="relation-item"><div class="relation-photo"><img src="https://res.cloudinary.com/drfokzzbf/image/upload/v1773751018/1c8f09cb-8f47-4fe9-a755-c52531a8e6fc_xdnqv9.jpg" alt="@samuelchrist"></div><div class="relation-caption">@samuelchrist</div></div>
+      <div class="relation-item"><div class="relation-photo"><img src="https://res.cloudinary.com/drfokzzbf/image/upload/v1773751028/f66b9035-da4f-4d7f-aec8-1489c808cd5c_2_zp9fh0.jpg" alt="@derryanshaa"></div><div class="relation-caption">@derryanshaa</div></div>
+      <div class="relation-item"><div class="relation-photo"><img src="https://res.cloudinary.com/drfokzzbf/image/upload/v1773751009/e84de3ae-53ef-46d9-a26e-a5f1ad523323_fbxgwh.jpg" alt="@edhozell"></div><div class="relation-caption">@edhozell</div></div>
+      <div class="relation-item"><div class="relation-photo"><img src="https://res.cloudinary.com/drfokzzbf/image/upload/v1773751079/IMG_5811_qsxiq4.jpg" alt="@aldogiustino"></div><div class="relation-caption">@aldogiustino</div></div>
+      <div class="relation-item"><div class="relation-photo"><img src="https://res.cloudinary.com/drfokzzbf/image/upload/v1773772895/IMG_3956_2_no391v.jpg" alt="@dennysantoso"></div><div class="relation-caption">@dennysantoso</div></div>
+      <div class="relation-item"><div class="relation-photo"><img src="https://res.cloudinary.com/drfokzzbf/image/upload/v1773752496/378e4683-d15a-414f-b2ac-51921d65addb_el78ss.jpg" alt="Team"></div><div class="relation-caption">@aicreatorlabs.id</div></div>
+      <div class="relation-item"><div class="relation-photo"><img src="https://res.cloudinary.com/drfokzzbf/image/upload/v1773752512/cf866798-08b9-49fa-86b6-09bc6e9a2968_swqlkf.jpg" alt="Achievement"></div><div class="relation-caption">Achievement</div></div>
+      <div class="relation-item"><div class="relation-photo"><img src="https://res.cloudinary.com/drfokzzbf/image/upload/f_auto,q_auto/v1773775733/IMG_6809_dfdx4t.jpg" alt="Team"></div><div class="relation-caption">@aicreatorlabs.id Team</div></div>
     </div>
 
     <!-- CTA -->
@@ -912,7 +923,7 @@
     <span class="overlay-title">Awards &amp; Certificates</span>
   </div>
   <div class="overlay-body">
-    <div class="achievements-grid" style="max-width:100%; margin:0 0 2rem;">
+    <div class="achievements-grid stagger-parent" style="max-width:100%; margin:0 0 2rem;">
       <div class="cert-card"><div class="cert-img"><img src="https://res.cloudinary.com/drfokzzbf/image/upload/v1773750787/Juara_1_Creative_Video_-_I_Made_Puja_Endra_2_page-0001_x0lftc.jpg" alt="1st Place Creative Video"></div><div class="cert-label">1st Place Creative Video Competition</div></div>
       <div class="cert-card"><div class="cert-img"><img src="https://res.cloudinary.com/drfokzzbf/image/upload/v1773750766/I_Made_Puja_Endra_BPC_Demand_page-0001_eqcy2r.jpg" alt="BPC Demand 5.0"></div><div class="cert-label">1st Place BPC Demand 5.0</div></div>
       <div class="cert-card"><div class="cert-img"><img src="https://res.cloudinary.com/drfokzzbf/image/upload/v1773750727/I_MADE_PUJA_ENDRA_C1B022153_f62e4220_page-0001_my3gwo.jpg" alt="Academic Certificate"></div><div class="cert-label">Academic Achievement Certificate</div></div>
@@ -1019,8 +1030,8 @@
 
     <!-- ── Individual Packages ── -->
     <div style="font-family:'Montserrat',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;">Short-Form Editing</div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2rem;">
-      <div style="background:rgba(12,12,20,0.5);border:1px solid rgba(255,255,255,0.05);border-radius:14px;overflow:hidden;">
+    <div class="stagger-parent" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2rem;">
+      <div class="price-card" style="background:rgba(12,12,20,0.5);border:1px solid rgba(255,255,255,0.05);border-radius:14px;overflow:hidden;">
         <div style="position:relative;width:100%;aspect-ratio:9/16;background:#000;overflow:hidden;cursor:pointer;" onclick="loadYT(this)" class="yt-lazy" data-vid="E2oK6z3wMII">
           <img src="https://i.ytimg.com/vi/E2oK6z3wMII/hqdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" alt="Short-Form Basic">
           <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;"><div style="width:44px;height:44px;background:rgba(195,255,0,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-style:solid;border-width:8px 0 8px 16px;border-color:transparent transparent transparent #050505;margin-left:3px;"></div></div></div>
@@ -1030,7 +1041,7 @@
           <div style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.15rem;color:var(--primary);flex-shrink:0;">$19.99</div>
         </div>
       </div>
-      <div style="background:rgba(12,12,20,0.5);border:1px solid rgba(195,255,0,0.22);border-radius:14px;position:relative;overflow:hidden;"><div style="position:absolute;top:0.6rem;right:0.6rem;z-index:10;background:var(--primary);color:#050505;font-family:'Montserrat',sans-serif;font-size:0.55rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:0.28rem 0.65rem;border-radius:100px;">POPULAR</div>
+      <div class="price-card" style="background:rgba(12,12,20,0.5);border:1px solid rgba(195,255,0,0.22);border-radius:14px;position:relative;overflow:hidden;"><div style="position:absolute;top:0.6rem;right:0.6rem;z-index:10;background:var(--primary);color:#050505;font-family:'Montserrat',sans-serif;font-size:0.55rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:0.28rem 0.65rem;border-radius:100px;">POPULAR</div>
         <div style="position:relative;width:100%;aspect-ratio:9/16;background:#000;overflow:hidden;cursor:pointer;" onclick="loadYT(this)" class="yt-lazy" data-vid="1c1neNWR3Y8">
           <img src="https://i.ytimg.com/vi/1c1neNWR3Y8/hqdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" alt="Short-Form Intermediate">
           <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;"><div style="width:44px;height:44px;background:rgba(195,255,0,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-style:solid;border-width:8px 0 8px 16px;border-color:transparent transparent transparent #050505;margin-left:3px;"></div></div></div>
@@ -1040,7 +1051,7 @@
           <div style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.15rem;color:var(--primary);flex-shrink:0;">$39.99</div>
         </div>
       </div>
-      <div style="background:rgba(12,12,20,0.5);border:1px solid rgba(255,255,255,0.05);border-radius:14px;overflow:hidden;">
+      <div class="price-card" style="background:rgba(12,12,20,0.5);border:1px solid rgba(255,255,255,0.05);border-radius:14px;overflow:hidden;">
         <div style="position:relative;width:100%;aspect-ratio:9/16;background:#000;overflow:hidden;cursor:pointer;" onclick="loadYT(this)" class="yt-lazy" data-vid="rNZyRjAqnEc">
           <img src="https://i.ytimg.com/vi/rNZyRjAqnEc/hqdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" alt="Short-Form Advanced">
           <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;"><div style="width:44px;height:44px;background:rgba(195,255,0,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-style:solid;border-width:8px 0 8px 16px;border-color:transparent transparent transparent #050505;margin-left:3px;"></div></div></div>
@@ -1053,8 +1064,8 @@
     </div>
 
     <div style="font-family:'Montserrat',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;">Motion Graphics</div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2rem;">
-      <div style="background:rgba(12,12,20,0.5);border:1px solid rgba(255,255,255,0.05);border-radius:14px;overflow:hidden;">
+    <div class="stagger-parent" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2rem;">
+      <div class="price-card" style="background:rgba(12,12,20,0.5);border:1px solid rgba(255,255,255,0.05);border-radius:14px;overflow:hidden;">
         <div style="position:relative;width:100%;aspect-ratio:9/16;background:#000;overflow:hidden;cursor:pointer;" onclick="loadYT(this)" class="yt-lazy" data-vid="4PY48e91FU4">
           <img src="https://i.ytimg.com/vi/4PY48e91FU4/hqdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" alt="Motion Graphics 30s">
           <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;"><div style="width:44px;height:44px;background:rgba(195,255,0,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-style:solid;border-width:8px 0 8px 16px;border-color:transparent transparent transparent #050505;margin-left:3px;"></div></div></div>
@@ -1064,7 +1075,7 @@
           <div style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.15rem;color:var(--primary);flex-shrink:0;">$169.99</div>
         </div>
       </div>
-      <div style="background:rgba(12,12,20,0.5);border:1px solid rgba(195,255,0,0.22);border-radius:14px;position:relative;overflow:hidden;"><div style="position:absolute;top:0.6rem;right:0.6rem;z-index:10;background:var(--primary);color:#050505;font-family:'Montserrat',sans-serif;font-size:0.55rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:0.28rem 0.65rem;border-radius:100px;">POPULAR</div>
+      <div class="price-card" style="background:rgba(12,12,20,0.5);border:1px solid rgba(195,255,0,0.22);border-radius:14px;position:relative;overflow:hidden;"><div style="position:absolute;top:0.6rem;right:0.6rem;z-index:10;background:var(--primary);color:#050505;font-family:'Montserrat',sans-serif;font-size:0.55rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:0.28rem 0.65rem;border-radius:100px;">POPULAR</div>
         <div style="position:relative;width:100%;aspect-ratio:9/16;background:#000;overflow:hidden;cursor:pointer;" onclick="loadYT(this)" class="yt-lazy" data-vid="LvDhNgPAZPs">
           <img src="https://i.ytimg.com/vi/LvDhNgPAZPs/hqdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" alt="Motion Graphics 60s">
           <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;"><div style="width:44px;height:44px;background:rgba(195,255,0,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-style:solid;border-width:8px 0 8px 16px;border-color:transparent transparent transparent #050505;margin-left:3px;"></div></div></div>
@@ -1074,7 +1085,7 @@
           <div style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.15rem;color:var(--primary);flex-shrink:0;">$219.99</div>
         </div>
       </div>
-      <div style="background:rgba(12,12,20,0.5);border:1px solid rgba(255,255,255,0.05);border-radius:14px;overflow:hidden;">
+      <div class="price-card" style="background:rgba(12,12,20,0.5);border:1px solid rgba(255,255,255,0.05);border-radius:14px;overflow:hidden;">
         <div style="position:relative;width:100%;aspect-ratio:9/16;background:#000;overflow:hidden;cursor:pointer;" onclick="loadYT(this)" class="yt-lazy" data-vid="qif5BiRmJAA">
           <img src="https://i.ytimg.com/vi/qif5BiRmJAA/hqdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" alt="Motion Graphics 90s">
           <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;"><div style="width:44px;height:44px;background:rgba(195,255,0,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-style:solid;border-width:8px 0 8px 16px;border-color:transparent transparent transparent #050505;margin-left:3px;"></div></div></div>
@@ -1087,8 +1098,8 @@
     </div>
 
     <div style="font-family:'Montserrat',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;">Long-Form Editing</div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2rem;">
-      <div style="background:rgba(12,12,20,0.5);border:1px solid rgba(255,255,255,0.05);border-radius:14px;overflow:hidden;">
+    <div class="stagger-parent" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2rem;">
+      <div class="price-card" style="background:rgba(12,12,20,0.5);border:1px solid rgba(255,255,255,0.05);border-radius:14px;overflow:hidden;">
         <div style="position:relative;width:100%;aspect-ratio:16/9;background:#000;overflow:hidden;cursor:pointer;" onclick="loadYT(this)" class="yt-lazy" data-vid="-k9_zr8lpjA">
           <img src="https://i.ytimg.com/vi/-k9_zr8lpjA/hqdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" alt="Long-Form Basic">
           <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;"><div style="width:44px;height:44px;background:rgba(195,255,0,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-style:solid;border-width:8px 0 8px 16px;border-color:transparent transparent transparent #050505;margin-left:3px;"></div></div></div>
@@ -1098,7 +1109,7 @@
           <div style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.15rem;color:var(--primary);flex-shrink:0;">$119.99</div>
         </div>
       </div>
-      <div style="background:rgba(12,12,20,0.5);border:1px solid rgba(195,255,0,0.22);border-radius:14px;position:relative;overflow:hidden;"><div style="position:absolute;top:0.6rem;right:0.6rem;z-index:10;background:var(--primary);color:#050505;font-family:'Montserrat',sans-serif;font-size:0.55rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:0.28rem 0.65rem;border-radius:100px;">POPULAR</div>
+      <div class="price-card" style="background:rgba(12,12,20,0.5);border:1px solid rgba(195,255,0,0.22);border-radius:14px;position:relative;overflow:hidden;"><div style="position:absolute;top:0.6rem;right:0.6rem;z-index:10;background:var(--primary);color:#050505;font-family:'Montserrat',sans-serif;font-size:0.55rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:0.28rem 0.65rem;border-radius:100px;">POPULAR</div>
         <div style="position:relative;width:100%;aspect-ratio:16/9;background:#000;overflow:hidden;cursor:pointer;" onclick="loadYT(this)" class="yt-lazy" data-vid="MlHmBB-ezrk">
           <img src="https://i.ytimg.com/vi/MlHmBB-ezrk/hqdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" alt="Long-Form Intermediate">
           <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;"><div style="width:44px;height:44px;background:rgba(195,255,0,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-style:solid;border-width:8px 0 8px 16px;border-color:transparent transparent transparent #050505;margin-left:3px;"></div></div></div>
@@ -1108,7 +1119,7 @@
           <div style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.15rem;color:var(--primary);flex-shrink:0;">$169.99</div>
         </div>
       </div>
-      <div style="background:rgba(12,12,20,0.5);border:1px solid rgba(255,255,255,0.05);border-radius:14px;overflow:hidden;">
+      <div class="price-card" style="background:rgba(12,12,20,0.5);border:1px solid rgba(255,255,255,0.05);border-radius:14px;overflow:hidden;">
         <div style="position:relative;width:100%;aspect-ratio:16/9;background:#000;overflow:hidden;cursor:pointer;" onclick="loadYT(this)" class="yt-lazy" data-vid="CaceK21sxQg">
           <img src="https://i.ytimg.com/vi/CaceK21sxQg/hqdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" alt="Long-Form Advanced">
           <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;"><div style="width:44px;height:44px;background:rgba(195,255,0,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-style:solid;border-width:8px 0 8px 16px;border-color:transparent transparent transparent #050505;margin-left:3px;"></div></div></div>
@@ -1127,10 +1138,10 @@
 
     <!-- ── Bundle Packages ── -->
     <div style="font-family:'Montserrat',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:1.2rem;margin-top:2.5rem;">Bundle Packages</div>
-    <div style="display:flex;flex-direction:column;gap:1.2rem;margin-bottom:3rem;">
+    <div class="stagger-parent" style="display:flex;flex-direction:column;gap:1.2rem;margin-bottom:3rem;">
 
       <!-- STARTER -->
-      <div style="background:rgba(12,12,20,0.7);border:1px solid rgba(195,255,0,0.12);border-radius:18px;padding:1.8rem;">
+      <div class="bundle-card" style="background:rgba(12,12,20,0.7);border:1px solid rgba(195,255,0,0.12);border-radius:18px;padding:1.8rem;">
         <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:1.2rem;">
           <div>
             <div style="font-family:'Montserrat',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--primary);margin-bottom:0.4rem;">Starter Bundle</div>
@@ -1157,7 +1168,7 @@
       </div>
 
       <!-- GROWTH -->
-      <div style="background:rgba(12,12,20,0.7);border:1.5px solid rgba(195,255,0,0.35);border-radius:18px;padding:1.8rem;position:relative;box-shadow:0 0 40px rgba(195,255,0,0.06);">
+      <div class="bundle-card" style="background:rgba(12,12,20,0.7);border:1.5px solid rgba(195,255,0,0.35);border-radius:18px;padding:1.8rem;position:relative;box-shadow:0 0 40px rgba(195,255,0,0.06);">
         <div style="position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--primary);color:#050505;font-family:'Montserrat',sans-serif;font-size:0.6rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:0.28rem 1rem;border-radius:100px;">Most Popular</div>
         <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:1.2rem;">
           <div>
@@ -1188,7 +1199,7 @@
       </div>
 
       <!-- ULTIMATE -->
-      <div style="background:rgba(12,12,20,0.7);border:1px solid rgba(195,255,0,0.12);border-radius:18px;padding:1.8rem;">
+      <div class="bundle-card" style="background:rgba(12,12,20,0.7);border:1px solid rgba(195,255,0,0.12);border-radius:18px;padding:1.8rem;">
         <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:1.2rem;">
           <div>
             <div style="font-family:'Montserrat',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--primary);margin-bottom:0.4rem;">Ultimate Bundle</div>
@@ -1867,6 +1878,22 @@ document.addEventListener('DOMContentLoaded', function() {
   }, 2000);
 
 
+})();
+
+/* ── Staggered card entrance (problem / what-you-get / checklist) ──── */
+(function() {
+  if (!window.IntersectionObserver) return;
+  var staggerObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('in-view');
+        staggerObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+  document.querySelectorAll('.stagger-parent').forEach(function(el) {
+    staggerObs.observe(el);
+  });
 })();
 
 /* ── Autoplay videos when scrolled into view ─────────────── */
