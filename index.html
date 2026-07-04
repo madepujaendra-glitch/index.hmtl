@@ -140,6 +140,18 @@
     #showcase { background: var(--bg); padding: 3rem 0 2rem; }
     .showcase-header { max-width: 1400px; margin: 0 auto; padding: 0 5%; text-align: center; margin-bottom: 2rem; }
 
+    /* ── Showcase filter tabs ── */
+    .showcase-filter { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.7rem; max-width: 1400px; margin: 0 auto 2.5rem; padding: 0 5%; }
+    .filter-tab {
+      font-family: 'Montserrat', sans-serif; font-size: 0.78rem; font-weight: 700;
+      letter-spacing: 0.8px; text-transform: uppercase; color: var(--muted);
+      background: rgba(12,12,20,0.6); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 100px; padding: 0.6rem 1.5rem; cursor: pointer;
+      transition: all 0.25s var(--ease);
+    }
+    .filter-tab:hover { border-color: rgba(195,255,0,0.3); color: var(--text); }
+    .filter-tab.is-active { background: var(--primary); color: #050505; border-color: var(--primary); box-shadow: 0 6px 20px rgba(195,255,0,0.25); }
+
     .carousel-block { margin-bottom: 0.5rem; }
 
     .carousel-label-row { text-align: center; margin-bottom: 1.2rem; }
@@ -148,8 +160,7 @@
     .carousel-wrap { position: relative; width: 100%; }
 
     .carousel-scroll {
-      padding-left: calc((100% - var(--item-w)) / 2);
-      padding-right: calc((100% - var(--item-w)) / 2);
+      padding-inline: calc((100% - var(--item-w)) / 2);
       scroll-padding-inline: calc((100% - var(--item-w)) / 2);
       display: flex;
       align-items: center;
@@ -163,7 +174,7 @@
     }
     .carousel-scroll::-webkit-scrollbar { display: none; }
 
-.carousel-item {
+    .carousel-item {
       flex: 0 0 var(--item-w);
       width: var(--item-w);
       background: var(--card);
@@ -304,8 +315,7 @@
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none; overscroll-behavior-x: contain;
       padding-top: 2rem; padding-bottom: 4rem;
-      padding-left: calc((100% - var(--wide-w)) / 2);
-      padding-right: calc((100% - var(--wide-w)) / 2);
+      padding-inline: calc((100% - var(--wide-w)) / 2);
       scroll-padding-inline: calc((100% - var(--wide-w)) / 2);
       gap: 24px;
     }
@@ -355,8 +365,7 @@
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none; overscroll-behavior-x: contain;
       padding-top: 1rem; padding-bottom: 1rem;
-      padding-left: calc((100% - var(--skill-w)) / 2);
-      padding-right: calc((100% - var(--skill-w)) / 2);
+      padding-inline: calc((100% - var(--skill-w)) / 2);
       scroll-padding-inline: calc((100% - var(--skill-w)) / 2);
       gap: 24px;
     }
@@ -364,8 +373,7 @@
 
     .clients-scroll {
       padding-top: 1.5rem; padding-bottom: 1.5rem;
-      padding-left: calc((100% - var(--clients-w)) / 2);
-      padding-right: calc((100% - var(--clients-w)) / 2);
+      padding-inline: calc((100% - var(--clients-w)) / 2);
       scroll-padding-inline: calc((100% - var(--clients-w)) / 2);
       gap: 20px;
     }
@@ -373,8 +381,7 @@
 
     .portfolio-scroll {
       padding-top: 1.5rem; padding-bottom: 1.5rem;
-      padding-left: calc((100% - var(--portfolio-w)) / 2);
-      padding-right: calc((100% - var(--portfolio-w)) / 2);
+      padding-inline: calc((100% - var(--portfolio-w)) / 2);
       scroll-padding-inline: calc((100% - var(--portfolio-w)) / 2);
       gap: 20px;
     }
@@ -382,8 +389,7 @@
 
     .testi-scroll {
       padding-top: 1.5rem; padding-bottom: 1.5rem;
-      padding-left: calc((100% - var(--testi-w)) / 2);
-      padding-right: calc((100% - var(--testi-w)) / 2);
+      padding-inline: calc((100% - var(--testi-w)) / 2);
       scroll-padding-inline: calc((100% - var(--testi-w)) / 2);
       gap: 20px;
     }
@@ -393,12 +399,13 @@
     .portfolio-scroll { padding-inline: calc((100% - var(--portfolio-w)) / 2) !important; }
     .testi-scroll { padding-inline: calc((100% - var(--testi-w)) / 2) !important; }
     .testi-scroll .testi-card { flex: 0 0 var(--testi-w); width: var(--testi-w); scroll-snap-align: center; }
-
+    /* All sec-carousels: last card can reach center on iOS */
+    .sec-carousel-scroll::after, .testi-scroll::after { content: ""; flex: 0 0 calc((100% - var(--testi-w)) / 2); }
+    .clients-scroll::after { flex: 0 0 calc((100% - var(--clients-w)) / 2); }
+    .portfolio-scroll::after { flex: 0 0 calc((100% - var(--portfolio-w)) / 2); }
 
     .skill-carousel-scroll {
-      padding-top: 1.5rem; padding-bottom: 1.5rem;
-      padding-left: calc((100% - var(--skill-w)) / 2);
-      padding-right: calc((100% - var(--skill-w)) / 2);
+      padding: 1.5rem calc((100% - var(--skill-w)) / 2);
       scroll-padding-inline: calc((100% - var(--skill-w)) / 2);
     }
     .skill-carousel-scroll .skill-card { flex: 0 0 var(--skill-w); width: var(--skill-w); scroll-snap-align: center; }
@@ -1103,11 +1110,21 @@
 <div id="showcase">
   <div class="showcase-header">
     <h2 class="section-title reveal">Project Showcase</h2>
-    <p class="section-sub reveal">Swipe or drag to explore. Use the arrows to step.</p>
+    <p class="section-sub reveal">Swipe or drag to explore. Use the arrows to step, or filter by category.</p>
+  </div>
+
+  <!-- Filter tabs -->
+  <div class="showcase-filter reveal" id="showcase-filter">
+    <button class="filter-tab is-active" data-filter="all">All</button>
+    <button class="filter-tab" data-filter="shortform">Short-Form</button>
+    <button class="filter-tab" data-filter="motion">Motion Graphics</button>
+    <button class="filter-tab" data-filter="ads">Video Ads</button>
+    <button class="filter-tab" data-filter="timeline">Editing Timeline</button>
+    <button class="filter-tab" data-filter="long">Long-Form</button>
   </div>
 
   <!-- Row 1 -->
-  <div class="carousel-block carousel-block-framed reveal">
+  <div class="carousel-block carousel-block-framed reveal showcase-filter-item" data-cat="shortform">
     <div class="carousel-label-row"><span class="carousel-label-pill">short-form content</span></div>
     <div class="carousel-wrap">
       <div class="carousel-scroll" id="scroll-main">
@@ -1123,7 +1140,7 @@
   </div>
 
   <!-- Row 2 -->
-  <div class="carousel-block carousel-block-framed reveal">
+  <div class="carousel-block carousel-block-framed reveal showcase-filter-item" data-cat="motion">
     <div class="carousel-label-row"><span class="carousel-label-pill">motion graphic</span></div>
     <div class="carousel-wrap">
       <div class="carousel-scroll" id="scroll-motion">
@@ -1142,7 +1159,7 @@
   </div>
 
   <!-- Row 3 -->
-  <div class="carousel-block carousel-block-framed reveal">
+  <div class="carousel-block carousel-block-framed reveal showcase-filter-item" data-cat="ads">
     <div class="carousel-label-row"><span class="carousel-label-pill">video ads</span></div>
     <div class="carousel-wrap">
       <div class="carousel-scroll" id="scroll-ads">
@@ -1151,7 +1168,7 @@
         <div class="carousel-item" data-idx="2"><div class="item-thumb"><div class="yt-lazy" data-vid="29XywKfIhzU" onclick="loadYT(this)" style="position:relative;cursor:pointer;background:#000;width:100%;height:100%;"><img src="https://i.ytimg.com/vi/29XywKfIhzU/hqdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" alt="video"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;"><div style="width:52px;height:52px;background:rgba(195,255,0,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-style:solid;border-width:10px 0 10px 20px;border-color:transparent transparent transparent #050505;margin-left:4px;"></div></div></div></div></div><div class="item-info"><div class="item-client">Video Ads</div><h3 class="item-title">Ad Creative</h3><p class="item-desc">Dynamic visual hook optimized for engagement.</p></div></div>
         <div class="carousel-item" data-idx="3"><div class="item-thumb"><div class="yt-lazy" data-vid="neYetCz-ufc" onclick="loadYT(this)" style="position:relative;cursor:pointer;background:#000;width:100%;height:100%;"><img src="https://i.ytimg.com/vi/neYetCz-ufc/hqdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" alt="video"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;"><div style="width:52px;height:52px;background:rgba(195,255,0,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-style:solid;border-width:10px 0 10px 20px;border-color:transparent transparent transparent #050505;margin-left:4px;"></div></div></div></div></div><div class="item-info"><div class="item-client">Video Ads</div><h3 class="item-title">Ad Creative</h3><p class="item-desc">Scroll-stopping creative for paid campaigns.</p></div></div>
         <div class="carousel-item" data-idx="4"><div class="item-thumb"><div class="yt-lazy" data-vid="12rWFCWH21k" onclick="loadYT(this)" style="position:relative;cursor:pointer;background:#000;width:100%;height:100%;"><img src="https://i.ytimg.com/vi/12rWFCWH21k/hqdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" alt="video"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;"><div style="width:52px;height:52px;background:rgba(195,255,0,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-style:solid;border-width:10px 0 10px 20px;border-color:transparent transparent transparent #050505;margin-left:4px;"></div></div></div></div></div><div class="item-info"><div class="item-client">Video Ads</div><h3 class="item-title">Ad Creative</h3><p class="item-desc">Brand-forward visual with strong hook.</p></div></div>
-        <div class="carousel-item" data-idx="5"><div class="item-thumb"><div class="yt-lazy" data-vid="pJLD4QQkD98" onclick="loadYT(this)" style="position:relative;cursor:pointer;background:#000;width:100%;height:100%;"><img src="https://i.ytimg.com/vi/pJLD4QQkD98/hqdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" alt="video"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;"><div style="width:52px;height:52px;background:rgba(195,255,0,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-style:solid;border-width:10px 0 10px 20px;border-color:transparent transparent transparent #050505;margin-left:4px;"></div></div></div></div></div><div class="item-info"><div class="item-client">Video Ads</div><h3 class="item-title">Ad Creative</h3><p class="item-desc">High-impact short ad built for conversion.</p></div></div>
+        <div class="carousel-item" data-idx="5"><div class="item-thumb"><div class="yt-lazy" data-vid="pJLD4QQkD98" onclick="loadYT(this)" style="position:relative;cursor:pointer;background:#000;width:100%;height:100%;"><img src="https://i.ytimg.com/vi/pJLD4QQkD98/hqdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" alt="video"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;"><div style="width:52px;height:52px;background:rgba(195,255,0,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-style:solid;border-width:10px 0 10px 20px;border-color:transparent transparent transparent #050505;margin-left:4px;"></div></div></div></div></div><div class="item-info"><div class="item-client">Video Ads</div><h3 class="item-title">Ad Creative</h3><p class="item-desc">Engaging product storytelling for social ads.</p></div></div>
         <div class="carousel-item" data-idx="6"><div class="item-thumb"><div class="yt-lazy" data-vid="uPOtVVDQi-0" onclick="loadYT(this)" style="position:relative;cursor:pointer;background:#000;width:100%;height:100%;"><img src="https://i.ytimg.com/vi/uPOtVVDQi-0/hqdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" alt="video"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;"><div style="width:52px;height:52px;background:rgba(195,255,0,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-style:solid;border-width:10px 0 10px 20px;border-color:transparent transparent transparent #050505;margin-left:4px;"></div></div></div></div></div><div class="item-info"><div class="item-client">Video Ads</div><h3 class="item-title">Ad Creative</h3><p class="item-desc">Engaging product storytelling for social ads.</p></div></div>
         <div class="carousel-item" data-idx="7"><div class="item-thumb"><div class="yt-lazy" data-vid="DSTK-ylSf_0" onclick="loadYT(this)" style="position:relative;cursor:pointer;background:#000;width:100%;height:100%;"><img src="https://i.ytimg.com/vi/DSTK-ylSf_0/hqdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" alt="video"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;"><div style="width:52px;height:52px;background:rgba(195,255,0,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-style:solid;border-width:10px 0 10px 20px;border-color:transparent transparent transparent #050505;margin-left:4px;"></div></div></div></div></div><div class="item-info"><div class="item-client">Video Ads</div><h3 class="item-title">Ad Creative</h3><p class="item-desc">Fast-cut visual hook for maximum retention.</p></div></div>
       </div>
@@ -1166,7 +1183,7 @@
 </div>
 
 <!-- Editing Timeline -->
-<div class="carousel-block carousel-block-framed reveal" style="margin-bottom:2rem;">
+<div class="carousel-block carousel-block-framed reveal showcase-filter-item" data-cat="timeline" style="margin-bottom:2rem;">
   <div class="carousel-label-row"><span class="carousel-label-pill">editing timeline</span></div>
   <div style="text-align:center;padding:0 5% 0.5rem;max-width:600px;margin:0 auto;">
     <p style="font-size:0.82rem;color:var(--muted);line-height:1.7;">See the raw-to-final transformation. Each video shows the editing process from raw footage to polished output.</p>
@@ -1185,7 +1202,7 @@
 </div>
 
 <!-- 1st Place Creative Video -->
-<div class="section-full reveal" id="award">
+<div class="section-full reveal showcase-filter-item" data-cat="long" id="award">
   <div style="text-align:center; margin-bottom:3rem;"><span class="carousel-label-pill">1st place creative video</span></div>
   <div class="award-spotlight">
     <div class="award-video"><div class="yt-lazy autoplay-on-visible" data-vid="EzhWOluIZT8" onclick="loadYT(this)" style="position:relative;cursor:pointer;background:#000;width:100%;aspect-ratio:16/9;"><img src="https://i.ytimg.com/vi/EzhWOluIZT8/hqdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" alt="video"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;"><div style="width:52px;height:52px;background:rgba(195,255,0,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-style:solid;border-width:10px 0 10px 20px;border-color:transparent transparent transparent #050505;margin-left:4px;"></div></div></div></div></div>
@@ -1199,7 +1216,7 @@
 </div>
 
 <!-- Long-form Education -->
-<div class="section-full" style="padding-left:0;padding-right:0;">
+<div class="section-full showcase-filter-item" data-cat="long" style="padding-left:0;padding-right:0;">
   <!-- long-form education -->
   <div class="carousel-block carousel-block-framed reveal">
     <div class="carousel-label-row"><span class="carousel-label-pill">long-form education</span></div>
@@ -1218,7 +1235,7 @@
 </div>
 
 <!-- Fun & BTS -->
-<div class="section-full" style="padding-left:0;padding-right:0;">
+<div class="section-full showcase-filter-item" data-cat="long" style="padding-left:0;padding-right:0;">
   <!-- fun &amp; behind the scene -->
   <div class="carousel-block carousel-block-framed reveal">
     <div class="carousel-label-row"><span class="carousel-label-pill">fun &amp; behind the scene</span></div>
@@ -1237,7 +1254,7 @@
 </div>
 
 <!-- Company Profile -->
-<div class="section-full reveal">
+<div class="section-full reveal showcase-filter-item" data-cat="long">
   <div style="text-align:center; margin-bottom:2rem;"><span class="carousel-label-pill">company profile</span></div>
   <div class="wide-row one-col">
     <div class="wide-card"><div class="wide-card-video"><div class="yt-lazy autoplay-on-visible" data-vid="cFwFh896XRk" onclick="loadYT(this)" style="position:relative;cursor:pointer;background:#000;width:100%;aspect-ratio:16/9;"><img src="https://i.ytimg.com/vi/cFwFh896XRk/hqdefault.jpg" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" alt="video"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;"><div style="width:52px;height:52px;background:rgba(195,255,0,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;"><div style="width:0;height:0;border-style:solid;border-width:10px 0 10px 20px;border-color:transparent transparent transparent #050505;margin-left:4px;"></div></div></div></div></div><div class="wide-card-label" style="text-align:center;"><div class="wide-card-client">Client Brand</div><div class="wide-card-title">Company Profile Video</div><div class="wide-card-desc">Professional brand storytelling, from script to screen.</div></div></div>
@@ -1674,6 +1691,21 @@ document.addEventListener('DOMContentLoaded', function() {
         ).forEach(addMouseDrag);
       }
 
+      /* Showcase filter tabs (Short-Form / Long-Form / All) */
+      var filterTabs = document.querySelectorAll('#showcase-filter .filter-tab');
+      var filterItems = document.querySelectorAll('.showcase-filter-item');
+      filterTabs.forEach(function(tab) {
+        tab.addEventListener('click', function() {
+          filterTabs.forEach(function(t) { t.classList.remove('is-active'); });
+          tab.classList.add('is-active');
+          var f = tab.dataset.filter;
+          filterItems.forEach(function(it) {
+            var show = (f === 'all' || it.dataset.cat === f);
+            it.style.display = show ? '' : 'none';
+          });
+        });
+      });
+
     });
   });
 });
@@ -1788,43 +1820,6 @@ document.getElementById('nav-close').addEventListener('click', closeMobileMenu);
     var page = document.getElementById(id);
     if (page) setTimeout(function(){ initReveal(page); }, 60);
   };
-})();
-
-/* ── iOS Safari last-card centering fix ─────────────────── */
-(function() {
-  function fixLastCard() {
-    var configs = [
-      { scroll: 'scroll-main',     selector: '.carousel-item' },
-      { scroll: 'scroll-motion',   selector: '.carousel-item' },
-      { scroll: 'scroll-ads',      selector: '.carousel-item' },
-      { scroll: 'scroll-clients',  selector: '.carousel-item' },
-      { scroll: 'scroll-edu',      selector: '.carousel-item' },
-      { scroll: 'scroll-bts',      selector: '.carousel-item' },
-      { scroll: 'scroll-timeline', selector: '.carousel-item' },
-      { scroll: 'scroll-skills',   selector: '.skill-card' },
-      { scroll: 'scroll-portfolio',selector: '.portfolio-card' },
-      { scroll: 'scroll-testi',    selector: '.testi-card' },
-    ];
-    configs.forEach(function(cfg) {
-      var el = document.getElementById(cfg.scroll);
-      if (!el) return;
-      var items = el.querySelectorAll(cfg.selector);
-      if (!items.length) return;
-      var last = items[items.length - 1];
-      var containerW = el.clientWidth;
-      var cardW = last.offsetWidth;
-      var needed = Math.max(0, Math.floor((containerW - cardW) / 2));
-      last.style.marginRight = needed + 'px';
-    });
-  }
-
-  // Run after fonts/layout settle
-  setTimeout(fixLastCard, 300);
-  window.addEventListener('resize', fixLastCard);
-  // Also run after orientation change
-  window.addEventListener('orientationchange', function() {
-    setTimeout(fixLastCard, 400);
-  });
 })();
 </script>
 
