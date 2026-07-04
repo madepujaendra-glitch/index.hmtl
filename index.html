@@ -130,6 +130,45 @@
     .section-title { font-family: 'Montserrat', sans-serif; font-size: clamp(1.9rem, 4vw, 2.8rem); font-weight: 800; letter-spacing: -1.5px; text-align: center; margin-bottom: 0.6rem; }
     .section-sub { text-align: center; color: var(--muted); font-size: 0.95rem; max-width: 520px; margin: 0 auto 2rem; }
 
+    /* ── Textured background (used for problem, what-you-get, checklist sections) ── */
+    .textured-section { position: relative; overflow: hidden; }
+    .textured-section::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 0;
+      background: radial-gradient(ellipse 900px 480px at 50% -8%, rgba(195,255,0,0.05), transparent 72%);
+    }
+    .textured-section > * { position: relative; z-index: 1; }
+
+    /* ── Problem / Agitation cards ── */
+    .problem-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; max-width: 1000px; margin: 0 auto; }
+    .problem-card { display: flex; align-items: center; gap: 1rem; background: rgba(255,70,70,0.035); border: 1px solid rgba(255,90,90,0.16); border-radius: 14px; padding: 1.15rem 1.3rem; transition: transform 0.3s var(--ease), border-color 0.3s; }
+    .problem-card:hover { transform: translateY(-3px); border-color: rgba(255,90,90,0.32); }
+    .problem-x { width: 34px; height: 34px; border-radius: 50%; background: rgba(255,70,70,0.14); border: 1px solid rgba(255,90,90,0.35); display: flex; align-items: center; justify-content: center; color: #ff6b6b; font-weight: 700; font-size: 0.85rem; flex-shrink: 0; }
+    .problem-text { font-size: 0.86rem; color: rgba(240,240,240,0.85); line-height: 1.4; }
+    .problem-conclusion { text-align: center; max-width: 600px; margin: 2rem auto 0; color: rgba(240,240,240,0.78); font-size: 0.98rem; font-weight: 500; font-style: italic; font-family: 'Poppins', sans-serif; line-height: 1.6; }
+
+    /* ── What You Get cards ── */
+    .wyg-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; max-width: 1000px; margin: 0 auto; }
+    .wyg-card { background: rgba(12,12,20,0.55); border: 1px solid rgba(195,255,0,0.1); border-radius: 16px; padding: 1.8rem 2rem; transition: transform 0.4s var(--ease), border-color 0.4s, box-shadow 0.4s; }
+    .wyg-card:hover { transform: translateY(-5px); border-color: rgba(195,255,0,0.28); box-shadow: 0 16px 40px rgba(0,0,0,0.3), 0 0 24px rgba(195,255,0,0.06); }
+    .wyg-num { color: var(--primary); font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 0.78rem; letter-spacing: 1px; margin-bottom: 0.6rem; }
+    .wyg-title { font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 1.1rem; letter-spacing: normal; margin-bottom: 0.65rem; color: var(--text); }
+    .wyg-desc { color: var(--muted); font-size: 0.86rem; line-height: 1.7; margin-bottom: 1.1rem; }
+    .wyg-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .wyg-tag { font-size: 0.7rem; font-weight: 600; color: var(--primary); background: rgba(195,255,0,0.07); border: 1px solid rgba(195,255,0,0.2); border-radius: 100px; padding: 0.35rem 0.9rem; }
+
+    /* ── Checklist ── */
+    .checklist-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; max-width: 900px; margin: 0 auto; }
+    .checklist-item { display: flex; align-items: center; gap: 1rem; background: rgba(12,12,20,0.5); border: 1px solid rgba(195,255,0,0.1); border-radius: 14px; padding: 1.1rem 1.4rem; transition: transform 0.3s var(--ease), border-color 0.3s; }
+    .checklist-item:hover { transform: translateY(-3px); border-color: rgba(195,255,0,0.3); }
+    .checklist-check { width: 30px; height: 30px; border-radius: 50%; background: var(--primary); color: #050505; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-weight: 800; font-size: 0.85rem; }
+    .checklist-text { font-size: 0.88rem; color: rgba(240,240,240,0.88); line-height: 1.4; }
+
+    @media (max-width: 768px) {
+      .problem-grid { grid-template-columns: 1fr; }
+      .wyg-grid { grid-template-columns: 1fr; }
+      .checklist-grid { grid-template-columns: 1fr; }
+    }
+
     /* ABOUT */
     .about-card { max-width: 820px; margin: 0 auto; background: rgba(12,12,20,0.55); border: 1px solid rgba(255,255,255,0.04); border-radius: 20px; padding: 2.4rem 2.8rem; transition: transform 0.4s var(--ease), box-shadow 0.4s; }
     .about-card:hover { transform: translateY(-5px); box-shadow: 0 24px 60px rgba(0,0,0,0.3), 0 0 30px rgba(195,255,0,0.04); }
@@ -664,6 +703,68 @@
     </div>
   </div>
 </section>
+
+<!-- PROBLEM / AGITATION -->
+<div class="section textured-section reveal" id="problem">
+  <h2 class="section-title reveal">Your content deserves more than another rushed edit.</h2>
+  <p class="section-sub reveal">Sound familiar?</p>
+  <div class="problem-grid reveal">
+    <div class="problem-card"><div class="problem-x">✕</div><div class="problem-text">Endless revisions with no clear direction</div></div>
+    <div class="problem-card"><div class="problem-x">✕</div><div class="problem-text">Videos that look flat — no hook, no pacing</div></div>
+    <div class="problem-card"><div class="problem-x">✕</div><div class="problem-text">Editor goes silent mid-project</div></div>
+    <div class="problem-card"><div class="problem-x">✕</div><div class="problem-text">Watch time keeps dropping</div></div>
+    <div class="problem-card"><div class="problem-x">✕</div><div class="problem-text">Editing eats hours you don't have</div></div>
+    <div class="problem-card"><div class="problem-x">✕</div><div class="problem-text">Content still doesn't look "premium enough"</div></div>
+  </div>
+  <p class="problem-conclusion reveal">Most of this can be solved by working with an editor who thinks in systems — not just cuts.</p>
+</div>
+
+<!-- WHAT YOU GET -->
+<div class="section textured-section reveal" id="what-you-get" style="background:var(--bg-mid); max-width:100%; padding-top:3.5rem; padding-bottom:3.5rem;">
+  <div style="max-width:1400px; margin:0 auto; padding:0 5%;">
+    <h2 class="section-title reveal">What You Get, Working With Me</h2>
+    <p class="section-sub reveal">Not just edits — a system built around your content goals.</p>
+    <div class="wyg-grid reveal">
+      <div class="wyg-card">
+        <div class="wyg-num">01</div>
+        <div class="wyg-title">Cinematic Storytelling</div>
+        <div class="wyg-desc">Pacing, color grade, and sound design crafted to make people stop scrolling — not just cuts stitched together.</div>
+        <div class="wyg-tags"><span class="wyg-tag">Color Grading</span><span class="wyg-tag">Sound Design</span><span class="wyg-tag">Hook-First Editing</span></div>
+      </div>
+      <div class="wyg-card">
+        <div class="wyg-num">02</div>
+        <div class="wyg-title">AI-Assisted Workflow</div>
+        <div class="wyg-desc">Faster turnaround without losing quality, using AI tools built into every step of the edit.</div>
+        <div class="wyg-tags"><span class="wyg-tag">AI Captioning</span><span class="wyg-tag">Smart B-Roll</span><span class="wyg-tag">Rapid Iteration</span></div>
+      </div>
+      <div class="wyg-card">
+        <div class="wyg-num">03</div>
+        <div class="wyg-title">Built for Growth</div>
+        <div class="wyg-desc">Cuts structured around retention and watch time — not just "looking nice."</div>
+        <div class="wyg-tags"><span class="wyg-tag">Retention-Focused</span><span class="wyg-tag">Platform-Optimized</span></div>
+      </div>
+      <div class="wyg-card">
+        <div class="wyg-num">04</div>
+        <div class="wyg-title">Reliable Process</div>
+        <div class="wyg-desc">Clear briefing, fixed revisions, and on-time delivery — every single project.</div>
+        <div class="wyg-tags"><span class="wyg-tag">Fixed Timeline</span><span class="wyg-tag">Clear Revisions</span><span class="wyg-tag">Direct Communication</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CHECKLIST: FIT -->
+<div class="section textured-section reveal" id="fit-checklist">
+  <h2 class="section-title reveal">This Is For You If You Want To...</h2>
+  <div class="checklist-grid reveal">
+    <div class="checklist-item"><div class="checklist-check">✓</div><div class="checklist-text">Grow watch time &amp; retention without guessing</div></div>
+    <div class="checklist-item"><div class="checklist-check">✓</div><div class="checklist-text">Stop spending hours editing your own content</div></div>
+    <div class="checklist-item"><div class="checklist-check">✓</div><div class="checklist-text">Keep a consistent, branded look across videos</div></div>
+    <div class="checklist-item"><div class="checklist-check">✓</div><div class="checklist-text">Work with someone who gets short-form &amp; long-form</div></div>
+    <div class="checklist-item"><div class="checklist-check">✓</div><div class="checklist-text">Get revisions without back-and-forth chaos</div></div>
+    <div class="checklist-item"><div class="checklist-check">✓</div><div class="checklist-text">Scale your content without hiring a full team</div></div>
+  </div>
+</div>
 
 <!-- ABOUT BUTTONS -->
 <div class="section reveal" id="about" style="padding-top:2.5rem; padding-bottom:2.5rem;">
