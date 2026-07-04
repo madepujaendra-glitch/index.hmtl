@@ -130,13 +130,28 @@
     .section-title { font-family: 'Montserrat', sans-serif; font-size: clamp(1.9rem, 4vw, 2.8rem); font-weight: 800; letter-spacing: -1.5px; text-align: center; margin-bottom: 0.6rem; }
     .section-sub { text-align: center; color: var(--muted); font-size: 0.95rem; max-width: 520px; margin: 0 auto 2rem; }
 
-    /* ── Textured background (used for problem, what-you-get, checklist sections) ── */
+    /* ── Subtle background accent (matches the same recipe used in .hero::before) ── */
     .textured-section { position: relative; overflow: hidden; }
     .textured-section::before {
-      content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 0;
-      background: radial-gradient(ellipse 900px 480px at 50% -8%, rgba(195,255,0,0.05), transparent 72%);
+      content: ''; position: absolute; width: 600px; height: 600px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(195,255,0,0.06) 0%, transparent 70%);
+      top: -120px; left: -180px; pointer-events: none; z-index: 0;
+    }
+    .textured-section::after {
+      content: ''; position: absolute; width: 500px; height: 500px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(195,255,0,0.05) 0%, transparent 70%);
+      bottom: -140px; right: -160px; pointer-events: none; z-index: 0;
     }
     .textured-section > * { position: relative; z-index: 1; }
+
+    /* Sentence-style headlines for narrative sections — smaller than default section-title */
+    .narrative-title {
+      font-size: clamp(1.25rem, 2.6vw, 1.7rem) !important;
+      font-weight: 700 !important;
+      letter-spacing: -0.3px !important;
+      line-height: 1.35 !important;
+      max-width: 640px; margin-left: auto; margin-right: auto;
+    }
 
     /* ── Problem / Agitation cards ── */
     .problem-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; max-width: 1000px; margin: 0 auto; }
@@ -706,29 +721,29 @@
 
 <!-- PROBLEM / AGITATION -->
 <div class="section textured-section reveal" id="problem">
-  <h2 class="section-title reveal">Your content deserves more than another rushed edit.</h2>
+  <h2 class="section-title narrative-title reveal">Your content deserves more than another rushed edit.</h2>
   <p class="section-sub reveal">Sound familiar?</p>
   <div class="problem-grid reveal">
     <div class="problem-card"><div class="problem-x">✕</div><div class="problem-text">Endless revisions with no clear direction</div></div>
-    <div class="problem-card"><div class="problem-x">✕</div><div class="problem-text">Videos that look flat — no hook, no pacing</div></div>
+    <div class="problem-card"><div class="problem-x">✕</div><div class="problem-text">Videos that look flat, with no hook and no pacing</div></div>
     <div class="problem-card"><div class="problem-x">✕</div><div class="problem-text">Editor goes silent mid-project</div></div>
     <div class="problem-card"><div class="problem-x">✕</div><div class="problem-text">Watch time keeps dropping</div></div>
     <div class="problem-card"><div class="problem-x">✕</div><div class="problem-text">Editing eats hours you don't have</div></div>
     <div class="problem-card"><div class="problem-x">✕</div><div class="problem-text">Content still doesn't look "premium enough"</div></div>
   </div>
-  <p class="problem-conclusion reveal">Most of this can be solved by working with an editor who thinks in systems — not just cuts.</p>
+  <p class="problem-conclusion reveal">Most of this can be solved by working with an editor who thinks in systems, not just cuts.</p>
 </div>
 
 <!-- WHAT YOU GET -->
 <div class="section textured-section reveal" id="what-you-get" style="background:var(--bg-mid); max-width:100%; padding-top:3.5rem; padding-bottom:3.5rem;">
   <div style="max-width:1400px; margin:0 auto; padding:0 5%;">
-    <h2 class="section-title reveal">What You Get, Working With Me</h2>
-    <p class="section-sub reveal">Not just edits — a system built around your content goals.</p>
+    <h2 class="section-title narrative-title reveal">What You Get, Working With Me</h2>
+    <p class="section-sub reveal">Not just edits, a system built around your content goals.</p>
     <div class="wyg-grid reveal">
       <div class="wyg-card">
         <div class="wyg-num">01</div>
         <div class="wyg-title">Cinematic Storytelling</div>
-        <div class="wyg-desc">Pacing, color grade, and sound design crafted to make people stop scrolling — not just cuts stitched together.</div>
+        <div class="wyg-desc">Pacing, color grade, and sound design crafted to make people stop scrolling, not just cuts stitched together.</div>
         <div class="wyg-tags"><span class="wyg-tag">Color Grading</span><span class="wyg-tag">Sound Design</span><span class="wyg-tag">Hook-First Editing</span></div>
       </div>
       <div class="wyg-card">
@@ -740,13 +755,13 @@
       <div class="wyg-card">
         <div class="wyg-num">03</div>
         <div class="wyg-title">Built for Growth</div>
-        <div class="wyg-desc">Cuts structured around retention and watch time — not just "looking nice."</div>
+        <div class="wyg-desc">Cuts structured around retention and watch time, not just "looking nice."</div>
         <div class="wyg-tags"><span class="wyg-tag">Retention-Focused</span><span class="wyg-tag">Platform-Optimized</span></div>
       </div>
       <div class="wyg-card">
         <div class="wyg-num">04</div>
         <div class="wyg-title">Reliable Process</div>
-        <div class="wyg-desc">Clear briefing, fixed revisions, and on-time delivery — every single project.</div>
+        <div class="wyg-desc">Clear briefing, fixed revisions, and on-time delivery, every single project.</div>
         <div class="wyg-tags"><span class="wyg-tag">Fixed Timeline</span><span class="wyg-tag">Clear Revisions</span><span class="wyg-tag">Direct Communication</span></div>
       </div>
     </div>
@@ -755,7 +770,7 @@
 
 <!-- CHECKLIST: FIT -->
 <div class="section textured-section reveal" id="fit-checklist">
-  <h2 class="section-title reveal">This Is For You If You Want To...</h2>
+  <h2 class="section-title narrative-title reveal">This Is For You If You Want To...</h2>
   <div class="checklist-grid reveal">
     <div class="checklist-item"><div class="checklist-check">✓</div><div class="checklist-text">Grow watch time &amp; retention without guessing</div></div>
     <div class="checklist-item"><div class="checklist-check">✓</div><div class="checklist-text">Stop spending hours editing your own content</div></div>
