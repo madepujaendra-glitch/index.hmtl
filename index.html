@@ -61,7 +61,7 @@
       border-bottom: 1px solid rgba(195,255,0,0.07);
     }
     .nav-mobile-brand { font-family: 'Montserrat', sans-serif; font-size: 1.1rem; font-weight: 800; color: var(--primary); text-decoration: none; }
-    .nav-mobile-close { width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; border-radius: 50%; border: 1px solid rgba(255,255,255,0.1); color: var(--muted); cursor: pointer; background: none; font-size: 1.3rem; transition: all 0.2s; flex-shrink: 0; }
+    .nav-mobile-close { width: 38px; height: 38px; padding: 0; margin: 0; line-height: 0; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border-radius: 50%; border: 1px solid rgba(255,255,255,0.1); color: var(--muted); cursor: pointer; background: none; font-size: 1.3rem; transition: all 0.2s; flex-shrink: 0; }
     .nav-mobile-close:hover { border-color: var(--primary); color: var(--primary); }
     .nav-mobile-list { padding: 0.8rem 0 2rem; }
     .nav-mobile-item {
@@ -92,7 +92,7 @@
     .hero { min-height: 100vh; padding: 6rem 5% 3rem; background: var(--bg); position: relative; overflow: hidden; }
     .hero-inner { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1.15fr 1fr; gap: 5rem; align-items: center; position: relative; z-index: 1; }
     .hero-eyebrow { display: flex; align-items: center; gap: 0.9rem; font-size: 0.68rem; font-weight: 600; color: var(--primary); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 1.8rem; }
-    .hero-eyebrow::after { content: ''; width: 26px; height: 1px; background: var(--primary); opacity: 0.5; }
+    .hero-eyebrow::after { content: ''; width: 32px; height: 1px; background: linear-gradient(90deg, var(--primary), transparent); opacity: 0.7; }
     .hero h1 { font-family: var(--font-display); font-weight: 800; font-style: normal; font-size: clamp(2.8rem, 6.5vw, 5.4rem); line-height: 1.02; letter-spacing: -1px; white-space: nowrap; color: var(--text); }
     .hero-name-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1.6rem; flex-wrap: wrap; }
     .hero-name-avatar { display: none; width: clamp(110px, 32vw, 170px); height: clamp(110px, 32vw, 170px); border-radius: 12px; object-fit: cover; border: 1px solid var(--hairline); flex-shrink: 0; }
@@ -160,8 +160,8 @@
     .stagger-parent .relation-item,
     .stagger-parent .price-card,
     .stagger-parent .bundle-card {
-      opacity: 0; transform: scale(0.96) translateY(8px);
-      transition: opacity 0.6s ease-out, transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+      opacity: 0; transform: scale(0.85);
+      transition: opacity 0.4s ease-out, transform 0.5s cubic-bezier(0.34, 1.4, 0.64, 1);
     }
     .stagger-parent.in-view .problem-card,
     .stagger-parent.in-view .wyg-card,
@@ -170,7 +170,7 @@
     .stagger-parent.in-view .relation-item,
     .stagger-parent.in-view .price-card,
     .stagger-parent.in-view .bundle-card {
-      opacity: 1; transform: scale(1) translateY(0);
+      opacity: 1; transform: scale(1);
     }
     .problem-card:nth-child(1), .wyg-card:nth-child(1), .checklist-item:nth-child(1), .cert-card:nth-child(1), .relation-item:nth-child(1), .price-card:nth-child(1), .bundle-card:nth-child(1) { transition-delay: 0.04s; }
     .problem-card:nth-child(2), .wyg-card:nth-child(2), .checklist-item:nth-child(2), .cert-card:nth-child(2), .relation-item:nth-child(2), .price-card:nth-child(2), .bundle-card:nth-child(2) { transition-delay: 0.10s; }
@@ -350,8 +350,8 @@
     footer p { color: var(--muted); font-size: 0.84rem; line-height: 2; }
 
     /* REVEAL */
-    .reveal { opacity: 1; transform: none; transition: opacity 0.7s ease-out, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
-    .js-reveal-ready .reveal { opacity: 0; transform: scale(0.97) translateY(10px); }
+    .reveal { opacity: 1; transform: none; transition: opacity 0.45s ease-out, transform 0.55s cubic-bezier(0.34, 1.4, 0.64, 1); }
+    .js-reveal-ready .reveal { opacity: 0; transform: scale(0.88); }
     .js-reveal-ready .reveal.visible { opacity: 1; transform: scale(1); }
 
 
@@ -564,6 +564,7 @@
       .hero-desc { padding: 1.2rem 1.4rem; font-size: 0.88rem; margin-bottom: 1.5rem; }
       .hero-ctas { flex-direction: column; gap: 0.8rem; }
       .hero-cta, .hero-cta-secondary { width: 100%; text-align: center; justify-content: center; }
+      .hero-stats { justify-content: center; text-align: center; gap: 2rem; }
       .section { padding: 3rem 5%; }
       .about-card { padding: 1.4rem 1.6rem; }
       .about-card p { font-size: 0.9rem; }
@@ -687,7 +688,9 @@
 <div class="nav-mobile" id="nav-mobile">
   <div class="nav-mobile-header">
     <span class="nav-mobile-brand">imadevideo</span>
-    <button class="nav-mobile-close" id="nav-close" aria-label="Close">&#215;</button>
+    <button class="nav-mobile-close" id="nav-close" aria-label="Close">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="display:block;"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
   </div>
   <div class="nav-mobile-list">
     <button class="nav-mobile-item" onclick="closeMobileMenu(); scrollToSection('hero')">
@@ -1883,8 +1886,10 @@ document.addEventListener('DOMContentLoaded', function() {
   // Legacy .reveal
   document.body.classList.add('js-reveal-ready');
   var legObs = new IntersectionObserver(function(entries) {
-    entries.forEach(function(e) {
-      if (e.isIntersecting) { e.target.classList.add('visible'); legObs.unobserve(e.target); }
+    var visible = entries.filter(function(e) { return e.isIntersecting; });
+    visible.forEach(function(e, i) {
+      setTimeout(function() { e.target.classList.add('visible'); }, i * 110);
+      legObs.unobserve(e.target);
     });
   }, { threshold: 0.04, rootMargin: '0px 0px -20px 0px' });
   document.querySelectorAll('.reveal').forEach(function(el) {
@@ -1903,11 +1908,10 @@ document.addEventListener('DOMContentLoaded', function() {
 (function() {
   if (!window.IntersectionObserver) return;
   var staggerObs = new IntersectionObserver(function(entries) {
-    entries.forEach(function(e) {
-      if (e.isIntersecting) {
-        e.target.classList.add('in-view');
-        staggerObs.unobserve(e.target);
-      }
+    var visible = entries.filter(function(e) { return e.isIntersecting; });
+    visible.forEach(function(e, i) {
+      setTimeout(function() { e.target.classList.add('in-view'); }, i * 120);
+      staggerObs.unobserve(e.target);
     });
   }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
   document.querySelectorAll('.stagger-parent').forEach(function(el) {
