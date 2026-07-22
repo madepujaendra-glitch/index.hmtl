@@ -176,7 +176,7 @@
     .problem-card:nth-child(2), .wyg-card:nth-child(2), .checklist-item:nth-child(2), .cert-card:nth-child(2), .relation-item:nth-child(2), .price-card:nth-child(2), .bundle-card:nth-child(2) { transition-delay: 0.10s; }
     .problem-card:nth-child(3), .wyg-card:nth-child(3), .checklist-item:nth-child(3), .cert-card:nth-child(3), .relation-item:nth-child(3), .price-card:nth-child(3), .bundle-card:nth-child(3) { transition-delay: 0.16s; }
     .problem-card:nth-child(4), .wyg-card:nth-child(4), .checklist-item:nth-child(4), .cert-card:nth-child(4), .relation-item:nth-child(4) { transition-delay: 0.22s; }
-    .problem-card:nth-child(5), .checklist-item:nth-child(5), .cert-card:nth-child(5), .relation-item:nth-child(5) { transition-delay: 0.28s; }
+    .problem-card:nth-child(5), .wyg-card:nth-child(5), .checklist-item:nth-child(5), .cert-card:nth-child(5), .relation-item:nth-child(5) { transition-delay: 0.28s; }
     .problem-card:nth-child(6), .cert-card:nth-child(6), .relation-item:nth-child(6) { transition-delay: 0.34s; }
     .relation-item:nth-child(7) { transition-delay: 0.40s; }
     .relation-item:nth-child(8) { transition-delay: 0.46s; }
@@ -191,8 +191,8 @@
     .problem-conclusion { text-align: center; max-width: 600px; margin: 1.4rem auto 0; color: rgba(240,240,240,0.78); font-size: 0.98rem; font-weight: 500; font-style: italic; font-family: 'Poppins', sans-serif; line-height: 1.6; }
 
     /* ── What You Get cards ── */
-    .wyg-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; max-width: 1000px; margin: 0 auto; }
-    .wyg-card { background: rgba(12,12,20,0.55); border: 1px solid rgba(195,255,0,0.1); border-radius: 16px; padding: 1.4rem 1.6rem; transition: transform 0.4s var(--ease), border-color 0.4s, box-shadow 0.4s; }
+    .wyg-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; max-width: 1100px; margin: 0 auto; }
+    .wyg-card { flex: 1 1 300px; max-width: 350px; background: rgba(12,12,20,0.55); border: 1px solid rgba(195,255,0,0.1); border-radius: 16px; padding: 1.4rem 1.6rem; transition: transform 0.4s var(--ease), border-color 0.4s, box-shadow 0.4s; }
     .wyg-card:hover { transform: translateY(-5px); border-color: rgba(195,255,0,0.28); box-shadow: 0 16px 40px rgba(0,0,0,0.3), 0 0 24px rgba(195,255,0,0.06); }
     .wyg-num { color: var(--primary); font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 0.78rem; letter-spacing: 1px; margin-bottom: 0.6rem; }
     .wyg-title { font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 1.1rem; letter-spacing: normal; margin-bottom: 0.65rem; color: var(--text); }
@@ -210,7 +210,7 @@
     @media (max-width: 768px) {
       .problem-grid { grid-template-columns: 1fr 1fr; gap: 0.6rem; }
       .problem-card { flex-direction: column; align-items: flex-start; text-align: left; padding: 0.9rem 1rem; gap: 0.6rem; }
-      .wyg-grid { grid-template-columns: 1fr; }
+      .wyg-card { flex-basis: 100%; max-width: 100%; }
       .checklist-grid { grid-template-columns: 1fr 1fr; gap: 0.6rem; }
       .checklist-item { flex-direction: column; align-items: flex-start; text-align: left; padding: 0.9rem 1rem; gap: 0.6rem; }
     }
@@ -759,10 +759,10 @@
         </a>
       </div>
       <div class="hero-stats">
-        <div><div class="hero-stat-num">100+</div><div class="hero-stat-label">Clients</div></div>
-        <div><div class="hero-stat-num">3+</div><div class="hero-stat-label">Years</div></div>
-        <div><div class="hero-stat-num">1K+</div><div class="hero-stat-label">Videos</div></div>
-        <div><div class="hero-stat-num">1M+</div><div class="hero-stat-label">Views</div></div>
+        <div><div class="hero-stat-num" data-count-target="100">0+</div><div class="hero-stat-label">Clients</div></div>
+        <div><div class="hero-stat-num" data-count-target="3">0+</div><div class="hero-stat-label">Years</div></div>
+        <div><div class="hero-stat-num" data-count-target="1000">0+</div><div class="hero-stat-label">Videos</div></div>
+        <div><div class="hero-stat-num" data-count-target="1000000">0+</div><div class="hero-stat-label">Views</div></div>
       </div>
     </div>
     <div class="hero-video reveal">
@@ -774,48 +774,54 @@
 
 <!-- PROBLEM / AGITATION -->
 <div class="section textured-section reveal" id="problem" style="padding-top:2.2rem; padding-bottom:2.2rem;">
-  <h2 class="section-title narrative-title reveal">Your content deserves more than another rushed edit.</h2>
+  <h2 class="section-title narrative-title reveal">Your content deserves speed and consistency, not another slow, generic edit.</h2>
   <p class="section-sub reveal">Sound familiar?</p>
   <div class="problem-grid stagger-parent">
-    <div class="problem-card"><div class="problem-x">✕</div><div class="problem-text">Endless revisions with no clear direction</div></div>
-    <div class="problem-card"><div class="problem-x">✕</div><div class="problem-text">Videos that look flat, with no hook and no pacing</div></div>
-    <div class="problem-card"><div class="problem-x">✕</div><div class="problem-text">Editor goes silent mid-project</div></div>
-    <div class="problem-card"><div class="problem-x">✕</div><div class="problem-text">Watch time keeps dropping</div></div>
+    <div class="problem-card"><div class="problem-x">✕</div><div class="problem-text">Editor takes days to reply while discussing your project</div></div>
+    <div class="problem-card"><div class="problem-x">✕</div><div class="problem-text">Waiting a week or more for a simple edit</div></div>
+    <div class="problem-card"><div class="problem-x">✕</div><div class="problem-text">Every video looks different, no consistent style</div></div>
+    <div class="problem-card"><div class="problem-x">✕</div><div class="problem-text">Templates that don't feel like your brand at all</div></div>
+    <div class="problem-card"><div class="problem-x">✕</div><div class="problem-text">Revisions take forever to come back</div></div>
     <div class="problem-card"><div class="problem-x">✕</div><div class="problem-text">Editing eats hours you don't have</div></div>
-    <div class="problem-card"><div class="problem-x">✕</div><div class="problem-text">Content still doesn't look "premium enough"</div></div>
   </div>
-  <p class="problem-conclusion reveal">Most of this can be solved by working with an editor who thinks in systems, not just cuts.</p>
+  <p class="problem-conclusion reveal">Most of this comes down to speed, consistency, and an editor who actually keeps up with you.</p>
 </div>
 
 <!-- WHAT YOU GET -->
 <div class="section textured-section reveal" id="what-you-get" style="background:var(--bg-mid); max-width:100%; padding-top:2.2rem; padding-bottom:2.2rem;">
   <div style="max-width:1400px; margin:0 auto; padding:0 5%;">
     <h2 class="section-title narrative-title reveal">What You Get, Working With Me</h2>
-    <p class="section-sub reveal">Not just edits, a system built around your content goals.</p>
+    <p class="section-sub reveal">Fast, consistent, and built around how you already work.</p>
     <div class="wyg-grid stagger-parent">
       <div class="wyg-card">
         <div class="wyg-num">01</div>
-        <div class="wyg-title">Cinematic Storytelling</div>
-        <div class="wyg-desc">Pacing, color grade, and sound design crafted to make people stop scrolling, not just cuts stitched together.</div>
-        <div class="wyg-tags"><span class="wyg-tag">Color Grading</span><span class="wyg-tag">Sound Design</span><span class="wyg-tag">Hook-First Editing</span></div>
+        <div class="wyg-title">Fast Response</div>
+        <div class="wyg-desc">Quick back-and-forth while we work out the brief, no waiting days just to lock down a direction.</div>
+        <div class="wyg-tags"><span class="wyg-tag">Same-Day Reply</span><span class="wyg-tag">Clear Communication</span></div>
       </div>
       <div class="wyg-card">
         <div class="wyg-num">02</div>
-        <div class="wyg-title">AI-Assisted Workflow</div>
-        <div class="wyg-desc">Faster turnaround without losing quality, using AI tools built into every step of the edit.</div>
-        <div class="wyg-tags"><span class="wyg-tag">AI Captioning</span><span class="wyg-tag">Smart B-Roll</span><span class="wyg-tag">Rapid Iteration</span></div>
+        <div class="wyg-title">Same-Day Turnaround</div>
+        <div class="wyg-desc">Most projects can be finished and delivered in as fast as 1 day, without cutting corners on quality.</div>
+        <div class="wyg-tags"><span class="wyg-tag">1-Day Delivery</span><span class="wyg-tag">Priority Handling</span></div>
       </div>
       <div class="wyg-card">
         <div class="wyg-num">03</div>
-        <div class="wyg-title">Built for Growth</div>
-        <div class="wyg-desc">Cuts structured around retention and watch time, not just "looking nice."</div>
-        <div class="wyg-tags"><span class="wyg-tag">Retention-Focused</span><span class="wyg-tag">Platform-Optimized</span></div>
+        <div class="wyg-title">Consistent Style</div>
+        <div class="wyg-desc">Every video keeps the same pacing, color, and tone, so your channel feels like one cohesive brand.</div>
+        <div class="wyg-tags"><span class="wyg-tag">Signature Look</span><span class="wyg-tag">Repeatable Quality</span></div>
       </div>
       <div class="wyg-card">
         <div class="wyg-num">04</div>
-        <div class="wyg-title">Reliable Process</div>
-        <div class="wyg-desc">Clear briefing, fixed revisions, and on-time delivery, every single project.</div>
-        <div class="wyg-tags"><span class="wyg-tag">Fixed Timeline</span><span class="wyg-tag">Clear Revisions</span><span class="wyg-tag">Direct Communication</span></div>
+        <div class="wyg-title">Brand-Matched Editing</div>
+        <div class="wyg-desc">Colors, fonts, and pacing adjusted to fit your brand, not a generic template applied to everyone.</div>
+        <div class="wyg-tags"><span class="wyg-tag">Brand Guidelines</span><span class="wyg-tag">Custom Templates</span></div>
+      </div>
+      <div class="wyg-card">
+        <div class="wyg-num">05</div>
+        <div class="wyg-title">Fast Revisions</div>
+        <div class="wyg-desc">Revision requests get turned around quickly, so feedback never stalls your content calendar.</div>
+        <div class="wyg-tags"><span class="wyg-tag">Quick Turnaround</span><span class="wyg-tag">No Back-and-Forth Chaos</span></div>
       </div>
     </div>
   </div>
@@ -825,12 +831,12 @@
 <div class="section textured-section reveal" id="fit-checklist" style="padding-top:2.2rem; padding-bottom:2.2rem;">
   <h2 class="section-title narrative-title reveal">This Is For You If You Want To...</h2>
   <div class="checklist-grid stagger-parent">
-    <div class="checklist-item"><div class="checklist-check">✓</div><div class="checklist-text">Grow watch time &amp; retention without guessing</div></div>
-    <div class="checklist-item"><div class="checklist-check">✓</div><div class="checklist-text">Stop spending hours editing your own content</div></div>
-    <div class="checklist-item"><div class="checklist-check">✓</div><div class="checklist-text">Keep a consistent, branded look across videos</div></div>
+    <div class="checklist-item"><div class="checklist-check">✓</div><div class="checklist-text">Get fast replies while discussing your project</div></div>
+    <div class="checklist-item"><div class="checklist-check">✓</div><div class="checklist-text">Have videos delivered in as fast as 1 day</div></div>
+    <div class="checklist-item"><div class="checklist-check">✓</div><div class="checklist-text">Keep a consistent, branded look across every video</div></div>
+    <div class="checklist-item"><div class="checklist-check">✓</div><div class="checklist-text">Get edits tailored to match your brand identity</div></div>
+    <div class="checklist-item"><div class="checklist-check">✓</div><div class="checklist-text">Get revisions turned around quickly, not tomorrow</div></div>
     <div class="checklist-item"><div class="checklist-check">✓</div><div class="checklist-text">Work with someone who gets short-form &amp; long-form</div></div>
-    <div class="checklist-item"><div class="checklist-check">✓</div><div class="checklist-text">Get revisions without back-and-forth chaos</div></div>
-    <div class="checklist-item"><div class="checklist-check">✓</div><div class="checklist-text">Scale your content without hiring a full team</div></div>
   </div>
 </div>
 
@@ -1902,6 +1908,46 @@ document.addEventListener('DOMContentLoaded', function() {
   }, 2000);
 
 
+})();
+
+/* ── Hero stat count-up animation ──────────────────────── */
+(function() {
+  if (!window.IntersectionObserver) return;
+
+  function formatCount(n) {
+    if (n >= 1000000) return Math.round(n / 1000000) + 'M';
+    if (n >= 1000) return Math.round(n / 1000) + 'K';
+    return Math.round(n);
+  }
+
+  function animateCount(el, target, duration) {
+    var startTime = null;
+    function step(ts) {
+      if (!startTime) startTime = ts;
+      var progress = Math.min((ts - startTime) / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      var current = eased * target;
+      el.textContent = formatCount(current) + '+';
+      if (progress < 1) requestAnimationFrame(step);
+      else el.textContent = formatCount(target) + '+';
+    }
+    requestAnimationFrame(step);
+  }
+
+  var statsEl = document.querySelector('.hero-stats');
+  if (!statsEl) return;
+  var statObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        document.querySelectorAll('.hero-stat-num[data-count-target]').forEach(function(el, i) {
+          var target = parseInt(el.dataset.countTarget, 10);
+          setTimeout(function() { animateCount(el, target, 1300); }, i * 100);
+        });
+        statObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.4 });
+  statObs.observe(statsEl);
 })();
 
 /* ── Staggered card entrance (problem / what-you-get / checklist) ──── */
